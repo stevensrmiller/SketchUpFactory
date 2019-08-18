@@ -1,4 +1,6 @@
-﻿namespace ExLumina.SketchUp.Factory
+﻿using ExLumina.SketchUp.API;
+
+namespace ExLumina.SketchUp.Factory
 {
     public class Color
     {
@@ -6,6 +8,11 @@
         public byte green;
         public byte blue;
         public byte alpha;
+
+        public SU.Color SUColor
+        {
+            get => new SU.Color { red = red, green = green, blue = blue, alpha = alpha };
+        }
 
         public Color()
         {

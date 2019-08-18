@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactory", "SketchUpFactory\SketchUpFactory.csproj", "{0C864E60-D7AF-42E8-B12E-CF7A9AA45740}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactoryRun", "SketchUpFactoryRun\SketchUpFactoryRun.csproj", "{104B625A-13A4-4B1C-A0D5-8D284C36BE24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0C864E60-D7AF-42E8-B12E-CF7A9AA45740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C864E60-D7AF-42E8-B12E-CF7A9AA45740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C864E60-D7AF-42E8-B12E-CF7A9AA45740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104B625A-13A4-4B1C-A0D5-8D284C36BE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104B625A-13A4-4B1C-A0D5-8D284C36BE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104B625A-13A4-4B1C-A0D5-8D284C36BE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104B625A-13A4-4B1C-A0D5-8D284C36BE24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

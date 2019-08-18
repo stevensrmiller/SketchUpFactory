@@ -1,4 +1,6 @@
-﻿namespace ExLumina.SketchUp.Factory
+﻿using ExLumina.SketchUp.API;
+
+namespace ExLumina.SketchUp.Factory
 {
     /// <summary>
     /// Store a spatial value. Use for any three doubles mapped to axes.
@@ -8,6 +10,11 @@
         public double x;
         public double y;
         public double z;
+
+        public SU.Point3D SUPoint3D
+        {
+            get => new SU.Point3D { x = x, y = y, z = z };
+        }
 
         /// <summary>
         /// Create a point in space with initial values.
