@@ -1,8 +1,8 @@
 {
   "componentDefinitions": [
     {
-      "definitionName": "Short Triangle",
-      "description": "Points out along Y, lies in XY",
+      "definitionName": "First Component",
+      "description": "Two quads sharing a soft edge.",
       "geometries": [
         {
           "faces": [
@@ -10,52 +10,8 @@
               "outerLoop": {
                 "rays": [
                   {
-                    "vertex": {
-                      "x": -2,
-                      "y": 0,
-                      "z": 0
-                    }
-                  },
-                  {
-                    "vertex": {
-                      "x": 2,
-                      "y": 0,
-                      "z": 0
-                    }
-                  },
-                  {
-                    "_softEdge": true,
                     "vertex": {
                       "x": 0,
-                      "y": 2,
-                      "z": 0
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ],
-      "componentInstances": [
-        {
-          "definitionName": "Forward Triangle",
-          "instanceName": "Spire"
-        }
-      ]
-    },
-    {
-      "definitionName": "Forward Triangle",
-      "description": "Points up along Z, lies in XZ",
-      "geometries": [
-        {
-          "faces": [
-            {
-              "outerLoop": {
-                "rays": [
-                  {
-                    "vertex": {
-                      "x": -1,
                       "y": 0,
                       "z": 0
                     }
@@ -70,9 +26,51 @@
                   {
                     "_softEdge": true,
                     "vertex": {
+                      "x": 1,
+                      "y": -0.5,
+                      "z": 0.5
+                    }
+                  },
+                  {
+                    "vertex": {
+                      "x": 0,
+                      "y": -0.5,
+                      "z": 0.5
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "outerLoop": {
+                "rays": [
+                  {
+                    "_softEdge": true,
+                    "vertex": {
+                      "x": 0,
+                      "y": -0.5,
+                      "z": 0.5
+                    }
+                  },
+                  {
+                    "vertex": {
+                      "x": 1,
+                      "y": -0.5,
+                      "z": 0.5
+                    }
+                  },
+                  {
+                    "vertex": {
+                      "x": 1,
+                      "y": 0,
+                      "z": 1
+                    }
+                  },
+                  {
+                    "vertex": {
                       "x": 0,
                       "y": 0,
-                      "z": 4
+                      "z": 1
                     }
                   }
                 ]
@@ -81,6 +79,20 @@
           ]
         }
       ]
+    }
+  ],
+  "componentInstances": [
+    {
+      "definitionName": "First Component",
+      "instanceName": "First Instance",
+      "rotation": {
+        "z": 45,
+        "y": -45
+      },
+      "translation": {
+        "y": 2,
+        "z": 2
+      }
     }
   ]
 }

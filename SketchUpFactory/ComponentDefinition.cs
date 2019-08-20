@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -8,6 +9,8 @@ namespace ExLumina.SketchUp.Factory
         public string description;
         public IList<Geometry> geometries;
         public IList<ComponentInstance> componentInstances;
+
+        internal SU.ComponentDefinitionRef componentDefinitionRef;
 
         public ComponentDefinition()
         {

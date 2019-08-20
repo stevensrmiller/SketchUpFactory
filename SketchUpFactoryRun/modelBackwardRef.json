@@ -1,6 +1,44 @@
 {
   "componentDefinitions": [
     {
+      "definitionName": "Long Triangle",
+      "description": "Points up along Z, lies in XZ",
+      "geometries": [
+        {
+          "faces": [
+            {
+              "outerLoop": {
+                "rays": [
+                  {
+                    "vertex": {
+                      "x": -1,
+                      "y": 0,
+                      "z": 0
+                    }
+                  },
+                  {
+                    "vertex": {
+                      "x": 1,
+                      "y": 0,
+                      "z": 0
+                    }
+                  },
+                  {
+                    "_softEdge": true,
+                    "vertex": {
+                      "x": 0,
+                      "y": 0,
+                      "z": 4
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "definitionName": "Short Triangle",
       "description": "Points out along Y, lies in XY",
       "geometries": [
@@ -39,48 +77,24 @@
       ],
       "componentInstances": [
         {
-          "definitionName": "Forward Triangle",
+          "definitionName": "Long Triangle",
           "instanceName": "Spire"
         }
       ]
-    },
+    }
+  ],
+  "componentInstances": [
     {
-      "definitionName": "Forward Triangle",
-      "description": "Points up along Z, lies in XZ",
-      "geometries": [
-        {
-          "faces": [
-            {
-              "outerLoop": {
-                "rays": [
-                  {
-                    "vertex": {
-                      "x": -1,
-                      "y": 0,
-                      "z": 0
-                    }
-                  },
-                  {
-                    "vertex": {
-                      "x": 1,
-                      "y": 0,
-                      "z": 0
-                    }
-                  },
-                  {
-                    "_softEdge": true,
-                    "vertex": {
-                      "x": 0,
-                      "y": 0,
-                      "z": 4
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
+      "definitionName": "Long Triangle",
+      "instanceName": "First Instance",
+      "rotation": {
+        "z": 30,
+        "y": 15
+      },
+      "translation": {
+        "y": 2,
+        "z": 2
+      }
     }
   ]
 }
