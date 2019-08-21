@@ -49,6 +49,7 @@
     <Compile Include="ComponentDefinition.cs" />
     <Compile Include="ComponentInstance.cs" />
     <Compile Include="Face.cs" />
+    <Compile Include="MakeFace.cs" />
     <Compile Include="Factory\CreateComponentInstance.cs" />
     <Compile Include="Factory\CreateMaterial.cs" />
     <Compile Include="Factory\CreateGeometry.cs" />

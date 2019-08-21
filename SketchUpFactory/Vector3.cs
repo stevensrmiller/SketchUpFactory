@@ -1,4 +1,5 @@
-﻿using ExLumina.SketchUp.API;
+﻿using System;
+using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -11,7 +12,7 @@ namespace ExLumina.SketchUp.Factory
         public double y;
         public double z;
 
-        public SU.Point3D SUPoint3D
+        internal SU.Point3D SUPoint3D
         {
             get => new SU.Point3D { x = x, y = y, z = z };
         }
@@ -38,6 +39,11 @@ namespace ExLumina.SketchUp.Factory
         public Vector3() : this(0, 0, 0)
         {
 
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Vector3 = x:{0} y:{1} z:{2}", x, y, z);
         }
     }
 }

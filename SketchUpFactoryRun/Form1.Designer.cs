@@ -1,4 +1,4 @@
-﻿namespace SketchUpFactoryRun
+﻿namespace ExLumina.SketchUp.Factory.Run
 {
     partial class Form1
     {

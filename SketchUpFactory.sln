@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactory", "SketchUp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactoryRun", "SketchUpFactoryRun\SketchUpFactoryRun.csproj", "{104B625A-13A4-4B1C-A0D5-8D284C36BE24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactoryExamples", "SketchUpFactoryExamples\SketchUpFactoryExamples.csproj", "{09B48B10-6A55-4D7F-AEFB-C41DF8CCADCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{104B625A-13A4-4B1C-A0D5-8D284C36BE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{104B625A-13A4-4B1C-A0D5-8D284C36BE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{104B625A-13A4-4B1C-A0D5-8D284C36BE24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B48B10-6A55-4D7F-AEFB-C41DF8CCADCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B48B10-6A55-4D7F-AEFB-C41DF8CCADCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B48B10-6A55-4D7F-AEFB-C41DF8CCADCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B48B10-6A55-4D7F-AEFB-C41DF8CCADCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

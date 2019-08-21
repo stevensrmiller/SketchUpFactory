@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SketchUpFactoryRun
+namespace ExLumina.SketchUp.Factory.Run
 {
     public partial class Form1 : Form
     {

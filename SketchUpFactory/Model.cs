@@ -16,5 +16,10 @@ namespace ExLumina.SketchUp.Factory
             componentDefinitions = new List<ComponentDefinition>();
             componentInstances = new List<ComponentInstance>();
         }
+
+        public void Add(Geometry geometry)
+        {
+            geometries.Add(geometry);
+        }
     }
 }

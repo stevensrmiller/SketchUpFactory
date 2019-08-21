@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SketchUpFactoryRun
+namespace ExLumina.SketchUp.Factory.Run
 {
     static class Program
     {
