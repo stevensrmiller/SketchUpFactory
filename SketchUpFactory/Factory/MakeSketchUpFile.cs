@@ -1,4 +1,5 @@
-﻿using ExLumina.SketchUp.API;
+﻿using System;
+using ExLumina.SketchUp.API;
 using System.Collections.Generic;
 
 namespace ExLumina.SketchUp.Factory
@@ -19,28 +20,35 @@ namespace ExLumina.SketchUp.Factory
 
             foreach (Material material in model.materials)
             {
-                CreateMaterial(material, modelRef);
+                CreateMaterial(model, material, modelRef);
             }
 
             // Create the geometries.
 
             foreach (Geometry geometry in model.geometries)
             {
-                CreateGeometry(geometry, entitiesRef);
+                CreateGeometry(model, geometry, entitiesRef);
             }
 
             // Create the component definitions.
 
             foreach (ComponentDefinition componentDefinition in model.componentDefinitions)
             {
-                    CreateComponentDefinition(componentDefinition, modelRef);
+                CreateComponentDefinition(model, componentDefinition, modelRef);
             }
 
             // Create instances.
 
             foreach (ComponentInstance componentInstance in model.componentInstances)
             {
-                CreateComponentInstance(componentInstance, entitiesRef);
+                CreateComponentInstance(model, componentInstance, entitiesRef);
+            }
+
+            // Create groups.
+
+            foreach (Group group in model.groups)
+            {
+                CreateGroup(model, group, entitiesRef);
             }
 
             // Set style and camera, write the file, terminate.
@@ -66,7 +74,7 @@ namespace ExLumina.SketchUp.Factory
 
             // Might need to filter out those in use by a face.
 
-            foreach (Material material in materialsLib.Values)
+            foreach (Material material in model.materialsLib.Values)
             {
                 if (!material.isInUse)
                 {

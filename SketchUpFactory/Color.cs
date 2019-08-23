@@ -9,7 +9,7 @@ namespace ExLumina.SketchUp.Factory
         public byte blue;
         public byte alpha;
 
-        public SU.Color SUColor
+        internal SU.Color SUColor
         {
             get => new SU.Color { red = red, green = green, blue = blue, alpha = alpha };
         }

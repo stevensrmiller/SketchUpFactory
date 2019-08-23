@@ -16,6 +16,11 @@ namespace ExLumina.SketchUp.Factory.Examples
             new PlainQuad("Plain Quad"),
             new PlainCube("Plain Cube"),
             new PlainTorus("Plain Torus"),
+            new ThreeCubesWelded("Three Cubes Welded"),
+            new ThreeCubesApart("Three Cubes Apart (using Model.Separate)"),
+            new QuadComponent("Quad Component"),
+            new ThreePlyTree("Three Ply Tree"),
+            new GroupQuad("Group Quad"),
         };
 
         public MainForm()
@@ -139,6 +144,8 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             foreach (int index in clbList.CheckedIndices)
             {
+                
+                Console.WriteLine("Running [{0}]", clbList.Items[index].ToString());
                 ((Example)(clbList.Items[index])).Run(location);
             }
 

@@ -15,32 +15,7 @@
         /// </summary>
         public string instanceName;
 
-        /// <summary>
-        /// Scale in world or parent coordinates
-        /// </summary>
-        /// <remarks>
-        /// For Unity, x is to the right, y is up, and z is away.
-        /// For SketchUp, x is to the right, y is away, and z is up.
-        /// </remarks>
-        public Vector3 scale;
-
-        /// <summary>
-        /// Rotation individually in world or parent coordinates.
-        /// </summary>
-        /// <remarks>
-        /// For Unity, x is to the right, y is up, and z is away.
-        /// For SketchUp, x is to the right, y is away, and z is up.
-        /// </remarks>
-        public Vector3 rotation;
-
-        /// <summary>
-        /// Translation along world or parent coordinates.
-        /// </summary>
-        /// <remarks>
-        /// For Unity, x is to the right, y is up, and z is away.
-        /// For SketchUp, x is to the right, y is away, and z is up.
-        /// </remarks>
-        public Vector3 translation;
+        public Transform transform;
 
         /// <summary>
         /// Create an instance with no rotation or translation, scale of one.
@@ -50,9 +25,7 @@
             instanceName = "<ComponentInstance instanceName unset>";
             definitionName = "<ComponentInstance definitionName unset>";
 
-            scale = new Vector3(1, 1, 1);
-            rotation = new Vector3();
-            translation = new Vector3();
+            transform = new Transform();
         }
     }
 }

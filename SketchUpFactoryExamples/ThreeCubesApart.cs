@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace ExLumina.SketchUp.Factory.Examples
 {
-    class PlainCube : Example
+    class ThreeCubesApart : Example
     {
-        public PlainCube(string display) : base(display)
+        public ThreeCubesApart(string display) : base(display)
         {
 
         }
@@ -49,7 +49,41 @@ namespace ExLumina.SketchUp.Factory.Examples
             };
             Model model = new Model();
 
-            Geometry geometry = new Geometry();
+            for (int f = 0; f < coords.Length / (perFace * 3); ++f)
+            {
+                IList<Vector3> corners = new List<Vector3>();
+
+                for (int c = 0; c < perFace; ++c)
+                {
+                    int offset = (f * perFace + c) * 3;
+
+                    corners.Add(new Vector3(coords[offset] + 2,
+                                            coords[offset + 1],
+                                            coords[offset + 2]));
+                }
+
+                model.Add(corners);
+            }
+
+            model.Separate();
+
+            for (int f = 0; f < coords.Length / (perFace * 3); ++f)
+            {
+                IList<Vector3> corners = new List<Vector3>();
+
+                for (int c = 0; c < perFace; ++c)
+                {
+                    int offset = (f * perFace + c) * 3;
+
+                    corners.Add(new Vector3(coords[offset],
+                                            coords[offset + 1] + 2,
+                                            coords[offset + 2]));
+                }
+
+                model.Add(corners);
+            }
+
+            model.Separate();
 
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
@@ -61,17 +95,13 @@ namespace ExLumina.SketchUp.Factory.Examples
 
                     corners.Add(new Vector3(coords[offset],
                                             coords[offset + 1],
-                                            coords[offset + 2]));
+                                            coords[offset + 2] + 2));
                 }
 
-                Face face = MakeFace.From(corners);
-                Console.WriteLine("ADDING A FACE");
-                geometry.Add(face);
+                model.Add(corners);
             }
 
-            model.Add(geometry);
-
-            Factory.MakeSketchUpFile(model, path + @"\PlainCube.skp");
+            model.MakeSketchUpFile(path + @"\ThreeCubesApart.skp");
         }
     }
 }

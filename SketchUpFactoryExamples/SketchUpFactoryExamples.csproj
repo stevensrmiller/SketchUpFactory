@@ -55,6 +55,11 @@
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GroupQuad.cs" />
+    <Compile Include="ThreePlyTree.cs" />
+    <Compile Include="QuadComponent.cs" />
+    <Compile Include="ThreeCubesWelded.cs" />
+    <Compile Include="ThreeCubesApart.cs" />
     <Compile Include="PlainTorus.cs" />
     <Compile Include="PlainCube.cs" />
     <Compile Include="PlainQuad.cs" />

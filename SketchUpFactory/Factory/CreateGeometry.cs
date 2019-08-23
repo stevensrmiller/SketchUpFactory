@@ -4,7 +4,10 @@ namespace ExLumina.SketchUp.Factory
 {
     public static partial class Factory
     {
-        static void CreateGeometry(Geometry geometry, SU.EntitiesRef entitiesRef)
+        static void CreateGeometry(
+            Model model,
+            Geometry geometry,
+            SU.EntitiesRef entitiesRef)
         {
             SU.GeometryInputRef geometryInputRef = new SU.GeometryInputRef();
             SU.GeometryInputCreate(geometryInputRef);
@@ -13,7 +16,7 @@ namespace ExLumina.SketchUp.Factory
 
             foreach (Face face in geometry.faces)
             {
-                CreateFace(face, geometryInputRef,ref vertexIndex);
+                CreateFace(model, face, geometryInputRef,ref vertexIndex);
             }
 
             SU.EntitiesFill(entitiesRef, geometryInputRef, true);

@@ -1,23 +1,32 @@
-﻿using System.Collections.Generic;
-using ExLumina.SketchUp.API;
+﻿using ExLumina.SketchUp.API;
+using System;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class ComponentDefinition
+    public class ComponentDefinition : Entities, IDisposable
     {
-        public string definitionName;
-        public string description;
-        public IList<Geometry> geometries;
-        public IList<ComponentInstance> componentInstances;
-
         internal SU.ComponentDefinitionRef componentDefinitionRef;
 
-        public ComponentDefinition()
+        public ComponentDefinition() : this(null)
         {
-            definitionName = "<ComponentDefinition definitionName unset>";
-            description = "<ComponentDefinition description unset>";
-            geometries = new List<Geometry>();
-            componentInstances = new List<ComponentInstance>();
+
+        }
+
+        public ComponentDefinition(Model parent, string name, string description)
+            : base(name, description)
+        {
+            parent?.componentDefinitions.Add(this);
+        }
+
+        public ComponentDefinition(Model parent)
+            : this(parent, "<Group name unset>", "<Group description unset>")
+        {
+
+        }
+
+        public void Dispose()
+        {
+            Separate();
         }
     }
 }

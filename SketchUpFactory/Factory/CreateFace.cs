@@ -6,6 +6,7 @@ namespace ExLumina.SketchUp.Factory
     public static partial class Factory
     {
         static void CreateFace(
+            Model model,
             Face face,
             SU.GeometryInputRef geometryInputRef,
             ref int vertexIndex)
@@ -91,7 +92,7 @@ namespace ExLumina.SketchUp.Factory
 
                 try
                 {
-                    material = materialsLib[face.materialName];
+                    material = model.materialsLib[face.materialName];
                 } catch (Exception e)
                 {
                     string msg = "\nCould not find a material named " + face.materialName;

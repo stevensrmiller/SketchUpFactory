@@ -4,7 +4,7 @@ namespace ExLumina.SketchUp.Factory
 {
     public static partial class Factory
     {
-        static void CreateMaterial(Material material, SU.ModelRef modelRef)
+        static void CreateMaterial(Model model, Material material, SU.ModelRef modelRef)
         {
             SU.MaterialRef materialRef = new SU.MaterialRef();
             SU.MaterialCreate(materialRef);
@@ -27,7 +27,7 @@ namespace ExLumina.SketchUp.Factory
             SU.ModelAddMaterials(modelRef, 1, mats);
 
             material.materialRef = materialRef;
-            materialsLib.Add(material.name, material);
+            model.materialsLib.Add(material.name, material);
             material.isInUse = true;
         }
     }

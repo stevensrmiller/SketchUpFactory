@@ -2,24 +2,33 @@
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class Model
+    public class Model : Entities
     {
         public IList<Material> materials;
-        public IList<Geometry> geometries;
         public IList<ComponentDefinition> componentDefinitions;
-        public IList<ComponentInstance> componentInstances;
 
-        public Model()
+        internal IDictionary<string, Material> materialsLib;
+        internal IDictionary<string, ComponentDefinition> componentDefinitionsLib;
+
+        public Model():this("<model name unset>", "<model description unset>")
+        {
+
+        }
+
+        public Model(string name, string description) : base(name, description)
         {
             materials = new List<Material>();
-            geometries = new List<Geometry>();
             componentDefinitions = new List<ComponentDefinition>();
-            componentInstances = new List<ComponentInstance>();
+            materialsLib = new Dictionary<string, Material>();
+            componentDefinitionsLib = new Dictionary<string, ComponentDefinition>();
         }
 
-        public void Add(Geometry geometry)
+        public void MakeSketchUpFile(string path)
         {
-            geometries.Add(geometry);
+            Separate();
+
+            Factory.MakeSketchUpFile(this, path);
         }
+
     }
 }
