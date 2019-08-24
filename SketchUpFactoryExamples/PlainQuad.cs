@@ -14,7 +14,7 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            Face face = MakeFace.From(
+            Face face = new Face(
                 new Vector3(-1, 0, -1),
                 new Vector3(1, 0, -1),
                 new Vector3(1, 0, 1),
@@ -26,7 +26,7 @@ namespace ExLumina.SketchUp.Factory.Examples
             //Console.WriteLine(JsonConvert.SerializeObject(model,
             //                    Newtonsoft.Json.Formatting.Indented));
 
-            Factory.MakeSketchUpFile(model, path + @"\PlainQuad.skp");
+            model.MakeSketchUpFile(path + @"\PlainQuad.skp");
         }
     }
 }

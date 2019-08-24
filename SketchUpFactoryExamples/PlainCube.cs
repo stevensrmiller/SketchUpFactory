@@ -64,14 +64,14 @@ namespace ExLumina.SketchUp.Factory.Examples
                                             coords[offset + 2]));
                 }
 
-                Face face = MakeFace.From(corners);
-                Console.WriteLine("ADDING A FACE");
+                Face face =  new Face(corners);
+
                 geometry.Add(face);
             }
 
             model.Add(geometry);
 
-            Factory.MakeSketchUpFile(model, path + @"\PlainCube.skp");
+            model.MakeSketchUpFile(path + @"\PlainCube.skp");
         }
     }
 }

@@ -1,4 +1,0 @@
-﻿namespace ExLumina.SketchUp.Factory
-{
-
-}

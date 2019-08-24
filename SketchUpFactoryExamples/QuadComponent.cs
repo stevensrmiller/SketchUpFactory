@@ -55,7 +55,7 @@ namespace ExLumina.SketchUp.Factory.Examples
             //Console.WriteLine(JsonConvert.SerializeObject(model,
             //                    Newtonsoft.Json.Formatting.Indented));
 
-            Factory.MakeSketchUpFile(model, path + @"\QuadComponent.skp");
+            model.MakeSketchUpFile(path + @"\QuadComponent.skp");
         }
     }
 }

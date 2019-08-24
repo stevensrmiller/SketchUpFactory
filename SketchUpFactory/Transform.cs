@@ -39,6 +39,16 @@ namespace ExLumina.SketchUp.Factory
             translation = new Vector3(0, 0, 0);
         }
 
+        public Transform(
+            Vector3 scale,
+            Vector3 rotation,
+            Vector3 translation)
+        {
+            this.scale       = scale.Clone();
+            this.rotation    = rotation.Clone();
+            this.translation = translation.Clone();
+        }
+
         internal SU.Transformation SUTransformation
         {
             get

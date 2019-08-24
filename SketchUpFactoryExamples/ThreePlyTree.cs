@@ -106,7 +106,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                     new Vector3(-.2, 0, 1));
             }
 
-                Factory.MakeSketchUpFile(model, path + @"\ThreePlyTree.skp");
+                model.MakeSketchUpFile(path + @"\ThreePlyTree.skp");
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ExLumina.SketchUp.Factory
 
         public void Add(IList<Vector3> vectorList)
         {
-            currentGeometry.Add(MakeFace.From(vectorList));
+            currentGeometry.Add(new Face(vectorList));
 
             currentGeometryIsDirty = true;
         }

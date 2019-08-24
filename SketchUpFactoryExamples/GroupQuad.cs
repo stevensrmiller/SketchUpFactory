@@ -16,7 +16,7 @@ namespace ExLumina.SketchUp.Factory.Examples
 
             using (Group group = new Group(model, "I am a group name", "I am not used"))
             {
-                Face face = MakeFace.From(
+                Face face = new Face(
                 new Vector3(-1, 0, -1),
                 new Vector3(1, 0, -1),
                 new Vector3(1, 0, 1),
@@ -29,7 +29,7 @@ namespace ExLumina.SketchUp.Factory.Examples
             //Console.WriteLine(JsonConvert.SerializeObject(model,
             //                    Newtonsoft.Json.Formatting.Indented));
 
-            Factory.MakeSketchUpFile(model, path + @"\GroupQuad.skp");
+            model.MakeSketchUpFile(path + @"\GroupQuad.skp");
         }
     }
 }

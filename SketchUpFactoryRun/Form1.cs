@@ -21,7 +21,7 @@ namespace ExLumina.SketchUp.Factory.Run
 
             try
             {
-                Factory.MakeSketchUpFile(model, "model.skp");
+                model.MakeSketchUpFile("model.skp");
                 MessageBox.Show("Nobody died.", "Pretty Good Night");
             }
             catch (Exception ex)

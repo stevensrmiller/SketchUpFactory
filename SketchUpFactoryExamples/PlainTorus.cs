@@ -107,7 +107,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                     corners.Add(new Ray(x2, y2, z2, true));
                     corners.Add(new Ray(x3, y3, z3, true));
 
-                    Face face = MakeFace.From(corners);
+                    Face face =  new Face(corners);
                     geometry.Add(face);
 
                     corners.Clear();
@@ -115,12 +115,12 @@ namespace ExLumina.SketchUp.Factory.Examples
                     corners.Add(new Ray(x1, y1, z1, true));
                     corners.Add(new Ray(x3, y3, z3, true));
 
-                    face = MakeFace.From(corners);
+                    face = new Face(corners);
                     geometry.Add(face);
                 }
             }
 
-            Factory.MakeSketchUpFile(model, path + @"\PlainTorus.skp");
+            model.MakeSketchUpFile(path + @"\PlainTorus.skp");
         }
 
         void RingMod(
