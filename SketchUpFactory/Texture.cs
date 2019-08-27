@@ -4,9 +4,14 @@
     {
         public string filename;
 
-        public Texture()
+        public Texture() : this ("<texture filename unset>")
         {
-            filename = "<Texture filename unset>";
+
+        }
+
+        public Texture(string filename)
+        {
+            this.filename = filename;
         }
     }
 }

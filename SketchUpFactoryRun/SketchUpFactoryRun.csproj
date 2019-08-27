@@ -56,7 +56,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="model.json">
+    <Content Include="modelForwardRef.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SketchUpAPI.dll">
@@ -82,6 +82,9 @@
     <Content Include="modelSoftEdge.json" />
     <Content Include="modelInstance.json" />
     <Content Include="modelBackwardRef.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="model.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\Settings.settings">

@@ -62,7 +62,7 @@ namespace ExLumina.SketchUp.Factory
             currentGeometry.Add(faces);
         }
 
-        public void Add(Ray[] rays)
+        public void Add(params Ray[] rays)
         {
             currentGeometry.Add(new Face(rays));
         }

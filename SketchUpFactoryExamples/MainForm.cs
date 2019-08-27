@@ -21,6 +21,7 @@ namespace ExLumina.SketchUp.Factory.Examples
             new QuadComponent("Quad Component"),
             new ThreePlyTree("Three Ply Tree"),
             new GroupQuad("Group Quad"),
+            new TexturedQuad("Textured Quad"),
         };
 
         public MainForm()

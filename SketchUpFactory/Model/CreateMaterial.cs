@@ -26,7 +26,7 @@ namespace ExLumina.SketchUp.Factory
             mats[0] = materialRef;
             SU.ModelAddMaterials(modelRef, 1, mats);
 
-            material.materialRef = materialRef;
+            //material.SUmaterialRef = materialRef;
             materialsLib.Add(material.name, material);
             material.isInUse = true;
         }

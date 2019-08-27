@@ -35,5 +35,12 @@ namespace ExLumina.SketchUp.Factory
         {
             ReadSketchUpFile(path);
         }
+
+        public void Add(Material material)
+        {
+            materials.Add(material);
+
+            materialsLib.Add(material.name, material);
+        }
     }
 }

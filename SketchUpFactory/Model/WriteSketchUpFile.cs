@@ -18,10 +18,14 @@ namespace ExLumina.SketchUp.Factory
 
             // Create the materials.
 
-            foreach (Material material in materials)
+            SU.MaterialRef[] materialRefs = new SU.MaterialRef[materials.Count];
+
+            for (int i = 0; i < materials.Count; ++i)
             {
-                CreateMaterial(material, modelRef);
+                materialRefs[i] = materials[i].SUmaterialRef;
             }
+
+            SU.ModelAddMaterials(modelRef, materials.Count, materialRefs);
 
             // Create the geometries.
 
@@ -71,16 +75,6 @@ namespace ExLumina.SketchUp.Factory
                 new SU.Vector3D(0, 0, 1));
             
             SU.ModelSaveToFileWithVersion(modelRef, path, SU.ModelVersion_SU2017);
-
-            // Might need to filter out those in use by a face.
-
-            foreach (Material material in materialsLib.Values)
-            {
-                if (!material.isInUse)
-                {
-                    SU.MaterialRelease(material.materialRef);
-                }
-            }
 
             SU.ModelRelease(modelRef);
 

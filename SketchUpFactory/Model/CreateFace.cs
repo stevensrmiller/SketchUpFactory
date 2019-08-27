@@ -110,7 +110,7 @@ namespace ExLumina.SketchUp.Factory
                     materialInput.vertexIndices[i] = indices[i];
                 }
 
-                materialInput.materialRef = material.materialRef;
+                materialInput.materialRef = material.SUmaterialRef;
 
                 SU.GeometryInputFaceSetFrontMaterial(
                     geometryInputRef,
