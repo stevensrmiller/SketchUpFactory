@@ -4,12 +4,10 @@ using System.Collections.Generic;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model : Entities
+    public partial class Model
     {
-        public void MakeSketchUpFile(string path)
+        public void WriteSketchUpFile(string path)
         {
-            Separate();
-
             // Init and open a model structure.
 
             SU.Initialize();
@@ -27,7 +25,7 @@ namespace ExLumina.SketchUp.Factory
 
             // Create the geometries.
 
-            foreach (Geometry geometry in geometries)
+            foreach (Geometry geometry in entities.geometries)
             {
                 CreateGeometry(geometry, entitiesRef);
             }
@@ -41,14 +39,14 @@ namespace ExLumina.SketchUp.Factory
 
             // Create instances.
 
-            foreach (ComponentInstance componentInstance in componentInstances)
+            foreach (ComponentInstance componentInstance in entities.componentInstances)
             {
                 CreateComponentInstance(componentInstance, entitiesRef);
             }
 
             // Create groups.
 
-            foreach (Group group in groups)
+            foreach (Group group in entities.groups)
             {
                 CreateGroup(group, entitiesRef);
             }

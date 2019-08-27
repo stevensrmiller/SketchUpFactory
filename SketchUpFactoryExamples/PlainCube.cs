@@ -47,31 +47,35 @@ namespace ExLumina.SketchUp.Factory.Examples
                 -1, 1, 1,
                 1, 1, 1
             };
+
             Model model = new Model();
 
-            Geometry geometry = new Geometry();
-
-            for (int f = 0; f < coords.Length / (perFace * 3); ++f)
+            using (Entities entities = model.entities)
             {
-                IList<Vector3> corners = new List<Vector3>();
+                Geometry geometry = new Geometry();
 
-                for (int c = 0; c < perFace; ++c)
+                for (int f = 0; f < coords.Length / (perFace * 3); ++f)
                 {
-                    int offset = (f * perFace + c) * 3;
+                    IList<Vector3> corners = new List<Vector3>();
 
-                    corners.Add(new Vector3(coords[offset],
-                                            coords[offset + 1],
-                                            coords[offset + 2]));
+                    for (int c = 0; c < perFace; ++c)
+                    {
+                        int offset = (f * perFace + c) * 3;
+
+                        corners.Add(new Vector3(coords[offset],
+                                                coords[offset + 1],
+                                                coords[offset + 2]));
+                    }
+
+                    Face face = new Face(corners);
+
+                    geometry.Add(face);
                 }
 
-                Face face =  new Face(corners);
-
-                geometry.Add(face);
+                entities.Add(geometry);
             }
 
-            model.Add(geometry);
-
-            model.MakeSketchUpFile(path + @"\PlainCube.skp");
+            model.WriteSketchUpFile(path + @"\PlainCube.skp");
         }
     }
 }

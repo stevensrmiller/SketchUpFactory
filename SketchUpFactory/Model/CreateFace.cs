@@ -3,7 +3,7 @@ using System;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model : Entities
+    public partial class Model
     {
         public void CreateFace(
             Face face,
@@ -24,7 +24,7 @@ namespace ExLumina.SketchUp.Factory
                 SU.GeometryInputAddVertex(geometryInputRef, ray.vertex.SUPoint3D);
                 SU.LoopInputAddVertexIndex(loopInputRef, vertexIndex);
 
-                if (ray.softEdge)
+                if (ray.isSmooth)
                 {
                     SU.LoopInputEdgeSetSmooth(loopInputRef, edgeIndex, true);
                     SU.LoopInputEdgeSetSoft(loopInputRef, edgeIndex, true);

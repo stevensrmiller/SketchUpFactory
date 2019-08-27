@@ -14,10 +14,14 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            using (ComponentDefinition def = new ComponentDefinition(
-                model, "Flat", "A Square"))
+            ComponentDefinition flat = new ComponentDefinition(
+                model, 
+                "Flat",
+                "A Square");
+
+            using (Entities entities = flat.entities)
             {
-                def.Add(
+                entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(1, 0, 1),
@@ -32,7 +36,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci2.transform.translation.y = 1;
                 ci2.transform.rotation.z = -20;
 
-                def.Add(ci2);
+                entities.Add(ci2);
             }
 
             ComponentInstance ci = new ComponentInstance
@@ -41,12 +45,16 @@ namespace ExLumina.SketchUp.Factory.Examples
                 instanceName = "Quad the First"
             };
 
-            model.Add(ci);
+            model.entities.Add(ci);
 
-            using (ComponentDefinition def = new ComponentDefinition(
-                model, "Pointy", "A Triangle"))
+            ComponentDefinition pointy = new ComponentDefinition(
+                model, 
+                "Pointy",
+                "A Triangle");
+
+            using (Entities entities = pointy.entities)
             {
-                def.Add(
+                entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(0, 0, 1));
@@ -55,7 +63,7 @@ namespace ExLumina.SketchUp.Factory.Examples
             //Console.WriteLine(JsonConvert.SerializeObject(model,
             //                    Newtonsoft.Json.Formatting.Indented));
 
-            model.MakeSketchUpFile(path + @"\QuadComponent.skp");
+            model.WriteSketchUpFile(path + @"\QuadComponent.skp");
         }
     }
 }

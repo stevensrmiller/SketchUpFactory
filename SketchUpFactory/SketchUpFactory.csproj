@@ -46,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Color.cs" />
+    <Compile Include="Model\ReadSketchUpFile.cs" />
+    <Compile Include="Model\ReadFaces.cs" />
     <Compile Include="Model\CreateGroup.cs" />
+    <Compile Include="RayList.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="ComponentDefinition.cs" />
@@ -57,7 +60,7 @@
     <Compile Include="Model\CreateGeometry.cs" />
     <Compile Include="Model\CreateFace.cs" />
     <Compile Include="Model\CreateComponentDefinition.cs" />
-    <Compile Include="Model\MakeSketchUpFile.cs" />
+    <Compile Include="Model\WriteSketchUpFile.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="Loop.cs" />
     <Compile Include="Material.cs" />
@@ -66,6 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ray.cs" />
     <Compile Include="Texture.cs" />
+    <Compile Include="UVHelper.cs" />
     <Compile Include="Vector2.cs" />
     <Compile Include="Vector3.cs" />
   </ItemGroup>

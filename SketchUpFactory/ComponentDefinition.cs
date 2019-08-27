@@ -3,8 +3,13 @@ using System;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class ComponentDefinition : Entities, IDisposable
+    public class ComponentDefinition
     {
+        public string name;
+        public string description;
+
+        public Entities entities;
+
         internal SU.ComponentDefinitionRef componentDefinitionRef;
 
         public ComponentDefinition() : this(null)
@@ -13,20 +18,18 @@ namespace ExLumina.SketchUp.Factory
         }
 
         public ComponentDefinition(Model parent, string name, string description)
-            : base(name, description)
         {
             parent?.componentDefinitions.Add(this);
+
+            this.name = name;
+            this.description = description;
+            entities = new Entities();
         }
 
         public ComponentDefinition(Model parent)
             : this(parent, "<Group name unset>", "<Group description unset>")
         {
 
-        }
-
-        public void Dispose()
-        {
-            Separate();
         }
     }
 }

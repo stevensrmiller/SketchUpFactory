@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ExLumina.SketchUp.API;
+using System.Collections.Generic;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -36,6 +37,25 @@ namespace ExLumina.SketchUp.Factory
         public Face(IList<Ray> rays) : this()
         {
             AddRays(rays);
+        }
+
+        /// <summary>
+        /// Construct a Face equivalent to a SketchUp face.
+        /// </summary>
+        /// <param name="faceRef"></param>
+        public Face(SU.FaceRef faceRef) : this()
+        {
+            // Get its UVHelper for texture-mapping coordinates.
+
+            UVHelper uvh = new UVHelper(faceRef);
+
+            // Get the outer edge descriptions.
+
+            RayList rayList = new RayList(faceRef);
+
+            uvh.Assign(rayList);
+
+            outerLoop = new Loop(rayList.rays);
         }
 
         void AddPoints(IEnumerable<Vector3> points)

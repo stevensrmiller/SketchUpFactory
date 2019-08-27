@@ -18,10 +18,14 @@ namespace ExLumina.SketchUp.Factory.Examples
 
             // Define the root level.
 
-            using (ComponentDefinition def = new ComponentDefinition(
-                model, "Flat", "A Square"))
+            ComponentDefinition def = new ComponentDefinition(
+                model, 
+                "Flat",
+                "A Square");
+
+            using (Entities entities = def.entities)
             {
-                def.Add(
+                entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(1, 0, 1),
@@ -38,7 +42,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = 3;
                 ci.transform.translation.z = 3;
 
-                def.Add(ci);
+                entities.Add(ci);
 
                 ci = new ComponentInstance
                 {
@@ -49,7 +53,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = -3;
                 ci.transform.translation.z = 3;
 
-                def.Add(ci);
+                entities.Add(ci);
             }
 
             ci = new ComponentInstance
@@ -58,12 +62,16 @@ namespace ExLumina.SketchUp.Factory.Examples
                 instanceName = "At the origin."
             };
 
-            model.Add(ci);
+            model.entities.Add(ci);
 
-            using (ComponentDefinition def = new ComponentDefinition(
-                model, "Pointy", "A Triangle"))
+            ComponentDefinition pointy = new ComponentDefinition(
+                model,
+                "Pointy", 
+                "A Triangle");
+
+            using (Entities entities = pointy.entities)
             {
-                def.Add(
+                entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(0, 0, 1));
@@ -79,7 +87,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = 3;
                 ci.transform.translation.z = 3;
 
-                def.Add(ci);
+                entities.Add(ci);
 
                 ci = new ComponentInstance
                 {
@@ -90,23 +98,27 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = -3;
                 ci.transform.translation.z = 3;
 
-                def.Add(ci);
+                entities.Add(ci);
             }
 
             //Console.WriteLine(JsonConvert.SerializeObject(model,
             //                    Newtonsoft.Json.Formatting.Indented));
 
-            using (ComponentDefinition def = new ComponentDefinition(
-                model, "Skinny", "A Slim Quad"))
+            ComponentDefinition skinny = new ComponentDefinition(
+                model,
+                "Skinny",
+                "A Slim Quad");
+
+            using (Entities entities = skinny.entities)
             {
-                def.Add(
+                entities.Add(
                     new Vector3(-.2, 0, -1),
                     new Vector3(.2, 0, -1),
                     new Vector3(.2, 0, 1),
                     new Vector3(-.2, 0, 1));
             }
 
-                model.MakeSketchUpFile(path + @"\ThreePlyTree.skp");
+            model.WriteSketchUpFile(path + @"\ThreePlyTree.skp");
         }
     }
 }

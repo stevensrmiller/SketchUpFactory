@@ -1,4 +1,6 @@
-﻿namespace ExLumina.SketchUp.Factory
+﻿using ExLumina.SketchUp.API;
+
+namespace ExLumina.SketchUp.Factory
 {
     /// <summary>
     /// Defines an edge in a Loop.
@@ -11,9 +13,9 @@
         public Vector3 vertex;
 
         /// <summary>
-        /// Marks the edge for soft (curved) rendering.
+        /// Marks the edge for smooth (curved) rendering.
         /// </summary>
-        public bool softEdge;
+        public bool isSmooth;
 
         /// <summary>
         /// Index into a Material Texture, or null.
@@ -32,9 +34,9 @@
             vertex.z = z;
         }
 
-        public Ray(double x, double y, double z, bool softEdge) : this(x, y, z)
+        public Ray(double x, double y, double z, bool isSmooth) : this(x, y, z)
         {
-            this.softEdge = softEdge;
+            this.isSmooth = isSmooth;
         }
 
         public Ray(
@@ -58,11 +60,22 @@
 
         }
 
+        public Ray(SU.EdgeRef edgeRef, SU.VertexRef vertexRef)
+        {
+            SU.EdgeGetSmooth(edgeRef, out isSmooth);
+
+            SU.Point3D point = new SU.Point3D();
+
+            SU.VertexGetPosition(vertexRef, ref point);
+
+            vertex = new Vector3(point);
+        }
+
         public Ray Clone()
         {
             Ray ray = new Ray(vertex.x, vertex.y, vertex.z);
 
-            ray.softEdge = softEdge;
+            ray.isSmooth = isSmooth;
 
             if (uvCoords != null)
             {

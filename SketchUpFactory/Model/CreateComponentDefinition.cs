@@ -3,7 +3,7 @@ using System;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model : Entities
+    public partial class Model
     {
         public void CreateComponentDefinition(
             ComponentDefinition componentDefinition,
@@ -73,9 +73,11 @@ namespace ExLumina.SketchUp.Factory
                 componentDefinitionRef,
                 entitiesRef);
 
+            Entities entities = componentDefinition.entities;
+
             // Create the definition's geometry.
 
-            foreach (Geometry geometry in componentDefinition.geometries)
+            foreach (Geometry geometry in entities.geometries)
             {
                 CreateGeometry(geometry, entitiesRef);
             }
@@ -83,14 +85,14 @@ namespace ExLumina.SketchUp.Factory
             // Create the defintion's instances.
 
             foreach (ComponentInstance componentInstance
-                in componentDefinition.componentInstances)
+                in entities.componentInstances)
             {
                 CreateComponentInstance(componentInstance, entitiesRef);
             }
 
             // Create the definition's groups.
 
-            foreach (Group group in componentDefinition.groups)
+            foreach (Group group in entities.groups)
             {
                 CreateGroup(group, entitiesRef);
             }

@@ -6,6 +6,9 @@ namespace SketchUp.Factory.Reader
 {
     public partial class MainForm : Form
     {
+        string startingDirectory =
+            System.Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
         public MainForm()
         {
             InitializeComponent();
@@ -16,9 +19,7 @@ namespace SketchUp.Factory.Reader
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Title = "SketchUp Factory Reader";
-                openFileDialog.InitialDirectory = 
-                    System.Environment.GetFolderPath(
-                        Environment.SpecialFolder.UserProfile);
+                openFileDialog.InitialDirectory = startingDirectory;
                 openFileDialog.Filter = "SketchUp files (*.skp)|*.skp|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
@@ -33,13 +34,11 @@ namespace SketchUp.Factory.Reader
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
 
-            Model model = Reader.Read(ofd.FileName);
+            startingDirectory = ofd.FileName;
 
-            //MessageBox.Show(
-            //    "\"" + ofd.FileName + "\"",
-            //    "File Path",
-            //    MessageBoxButtons.OK,
-            //    MessageBoxIcon.Information);
+            Model model = new Model(ofd.FileName);
+
+            model.WriteSketchUpFile(@"C:\users\smiller\Factory Output\dupe.skp");
         }
     }
 }

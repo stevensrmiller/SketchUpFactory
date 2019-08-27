@@ -14,22 +14,21 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            using (Group group = new Group(model, "I am a group name", "I am not used"))
-            {
-                Face face = new Face(
-                new Vector3(-1, 0, -1),
-                new Vector3(1, 0, -1),
-                new Vector3(1, 0, 1),
-                new Vector3(-1, 0, 1));
+            Group group = new Group(model.entities, "I am a group name");
 
-                Geometry geometry = new Geometry(face);
-                group.Add(geometry);
+            using (Entities entities = group.entities)
+            {
+                entities.Add(
+                    new Vector3(-1, 0, -1),
+                    new Vector3(1, 0, -1),
+                    new Vector3(1, 0, 1),
+                    new Vector3(-1, 0, 1));
             }
 
             //Console.WriteLine(JsonConvert.SerializeObject(model,
             //                    Newtonsoft.Json.Formatting.Indented));
 
-            model.MakeSketchUpFile(path + @"\GroupQuad.skp");
+            model.WriteSketchUpFile(path + @"\GroupQuad.skp");
         }
     }
 }

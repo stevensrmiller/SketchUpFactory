@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -8,37 +9,25 @@ namespace ExLumina.SketchUp.Factory
     /// <remarks>
     /// Holds lists of geometries, groups, and component instances.
     /// </remarks>
-    public abstract class Entities
+    public class Entities : IDisposable
     {
-        public string name;
-        public string description;
         public IList<Geometry> geometries;
         public IList<Group> groups;
         public IList<ComponentInstance> componentInstances;
 
         internal Geometry currentGeometry;
-        internal bool currentGeometryIsDirty;
 
         public Entities()
         {
             geometries = new List<Geometry>();
             groups = new List<Group>();
             componentInstances = new List<ComponentInstance>();
-
-            Separate();
-        }
-
-        public Entities(string name, string description) : this()
-        {
-            this.name = name;
-            this.description = description;
+            currentGeometry = new Geometry();
         }
 
         public void Add(IList<Vector3> vectorList)
         {
             currentGeometry.Add(new Face(vectorList));
-
-            currentGeometryIsDirty = true;
         }
 
         public void Add(params Vector3[] vectors)
@@ -63,16 +52,34 @@ namespace ExLumina.SketchUp.Factory
             componentInstances.Add(instance);
         }
 
-        public void Separate()
+        public void Add(params Face[] faces)
         {
-            if (currentGeometryIsDirty)
+            currentGeometry.Add(faces);
+        }
+
+        public void Add(IList<Face> faces)
+        {
+            currentGeometry.Add(faces);
+        }
+
+        public void Add(Ray[] rays)
+        {
+            currentGeometry.Add(new Face(rays));
+        }
+
+        public void Add(IList<Ray> rays)
+        {
+            currentGeometry.Add(new Face(rays));
+        }
+
+        public void Dispose()
+        {
+            if (currentGeometry.isDirty)
             {
                 geometries.Add(currentGeometry);
             }
 
             currentGeometry = new Geometry();
-
-            currentGeometryIsDirty = false;
         }
     }
 }

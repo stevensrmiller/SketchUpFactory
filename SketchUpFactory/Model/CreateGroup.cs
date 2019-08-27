@@ -2,7 +2,7 @@
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model : Entities
+    public partial class Model
     {
         public void CreateGroup(Group group, SU.EntitiesRef entitiesRef)
         {
@@ -28,23 +28,25 @@ namespace ExLumina.SketchUp.Factory
 
             SU.EntitiesAddGroup(entitiesRef, groupRef);
 
+            Entities entities = group.entities;
+
             // Create the group's geometries.
 
-            foreach (Geometry geometry in group.geometries)
+            foreach (Geometry geometry in entities.geometries)
             {
                 CreateGeometry(geometry, groupEntitiesRef);
             }
 
             // Create the group's instances.
 
-            foreach (ComponentInstance componentInstance in group.componentInstances)
+            foreach (ComponentInstance componentInstance in entities.componentInstances)
             {
                 CreateComponentInstance(componentInstance, groupEntitiesRef);
             }
 
             // Create the group's groups.
 
-            foreach (Group subGroup in group.groups)
+            foreach (Group subGroup in entities.groups)
             {
                 CreateGroup(subGroup, groupEntitiesRef);
             }
@@ -58,10 +60,6 @@ namespace ExLumina.SketchUp.Factory
             SU.GroupSetName(
                 groupRef,
                 group.name);
-
-            SU.GroupSetDescription(
-                groupRef,
-                group.description);
         }
     }
 }

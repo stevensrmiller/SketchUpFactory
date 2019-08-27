@@ -19,5 +19,10 @@ namespace ExLumina.SketchUp.Factory
         {
             rays = new List<Ray>();
         }
+
+        public Loop(IList<Ray> rays)
+        {
+            this.rays = rays;
+        }
     }
 }

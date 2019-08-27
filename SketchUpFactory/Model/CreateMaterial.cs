@@ -2,7 +2,7 @@
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model : Entities
+    public partial class Model
     {
         public void CreateMaterial(Material material, SU.ModelRef modelRef)
         {

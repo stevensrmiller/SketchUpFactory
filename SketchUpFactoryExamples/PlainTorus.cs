@@ -38,89 +38,86 @@ namespace ExLumina.SketchUp.Factory.Examples
 
             Model model = new Model();
 
-            Geometry geometry = new Geometry();
-
-            model.Add(geometry);
-
-            // Compute the pie.
-
-            for (int pieStep = 0; pieStep < pieSteps; ++pieStep)
+            using (Entities entities = model.entities)
             {
-                double theta0 = pieStep * 2 * Math.PI / pieSteps;
-                double theta1 = (((pieStep + 1)) % pieSteps) * 2 * Math.PI / pieSteps;
+                // Compute the pie.
 
-                for (int ringStep = 0; ringStep < ringSteps; ++ringStep)
+                for (int pieStep = 0; pieStep < pieSteps; ++pieStep)
                 {
-                    //Ray[] corners = new Ray[3];
-                    //Vector3[] corners = new Vector3[3];
-                    IList<Ray> corners = new List<Ray>();
+                    double theta0 = pieStep * 2 * Math.PI / pieSteps;
+                    double theta1 = (((pieStep + 1)) % pieSteps) * 2 * Math.PI / pieSteps;
 
-                    double x = ring[ringStep].x;
-                    double y = ring[ringStep].y;
-                    double z = ring[ringStep].z;
+                    for (int ringStep = 0; ringStep < ringSteps; ++ringStep)
+                    {
+                        //Ray[] corners = new Ray[3];
+                        //Vector3[] corners = new Vector3[3];
+                        IList<Ray> corners = new List<Ray>();
 
-                    double xNext = ring[((ringStep + 1) % ringSteps)].x;
-                    double yNext = ring[((ringStep + 1) % ringSteps)].y;
-                    double zNext = ring[((ringStep + 1) % ringSteps)].z;
+                        double x = ring[ringStep].x;
+                        double y = ring[ringStep].y;
+                        double z = ring[ringStep].z;
 
-                    double xMod;
-                    double yMod;
-                    double zMod;
+                        double xNext = ring[((ringStep + 1) % ringSteps)].x;
+                        double yNext = ring[((ringStep + 1) % ringSteps)].y;
+                        double zNext = ring[((ringStep + 1) % ringSteps)].z;
 
-                    RingMod(
-                        ringFreq, ringAmp, theta1,
-                        x, y, z,
-                        out xMod, out yMod, out zMod);
+                        double xMod;
+                        double yMod;
+                        double zMod;
 
-                    double x0 = xMod * Math.Cos(theta1) - yMod * Math.Sin(theta1);
-                    double y0 = xMod * Math.Sin(theta1) + yMod * Math.Cos(theta1);
-                    double z0 = zMod;
+                        RingMod(
+                            ringFreq, ringAmp, theta1,
+                            x, y, z,
+                            out xMod, out yMod, out zMod);
 
-                    RingMod(
-                        ringFreq, ringAmp, theta1,
-                        xNext, yNext, zNext,
-                        out xMod, out yMod, out zMod);
+                        double x0 = xMod * Math.Cos(theta1) - yMod * Math.Sin(theta1);
+                        double y0 = xMod * Math.Sin(theta1) + yMod * Math.Cos(theta1);
+                        double z0 = zMod;
 
-                    double x1 = xMod * Math.Cos(theta1) - yMod * Math.Sin(theta1);
-                    double y1 = xMod * Math.Sin(theta1) + yMod * Math.Cos(theta1);
-                    double z1 = zMod;
+                        RingMod(
+                            ringFreq, ringAmp, theta1,
+                            xNext, yNext, zNext,
+                            out xMod, out yMod, out zMod);
 
-                    RingMod(
-                        ringFreq, ringAmp, theta0,
-                        xNext, yNext, zNext,
-                        out xMod, out yMod, out zMod);
+                        double x1 = xMod * Math.Cos(theta1) - yMod * Math.Sin(theta1);
+                        double y1 = xMod * Math.Sin(theta1) + yMod * Math.Cos(theta1);
+                        double z1 = zMod;
 
-                    double x2 = xMod * Math.Cos(theta0) - yMod * Math.Sin(theta0);
-                    double y2 = xMod * Math.Sin(theta0) + yMod * Math.Cos(theta0);
-                    double z2 = zMod;
+                        RingMod(
+                            ringFreq, ringAmp, theta0,
+                            xNext, yNext, zNext,
+                            out xMod, out yMod, out zMod);
 
-                    RingMod(
-                        ringFreq, ringAmp, theta0,
-                        x, y, z,
-                        out xMod, out yMod, out zMod);
+                        double x2 = xMod * Math.Cos(theta0) - yMod * Math.Sin(theta0);
+                        double y2 = xMod * Math.Sin(theta0) + yMod * Math.Cos(theta0);
+                        double z2 = zMod;
 
-                    double x3 = xMod * Math.Cos(theta0) - yMod * Math.Sin(theta0);
-                    double y3 = xMod * Math.Sin(theta0) + yMod * Math.Cos(theta0);
-                    double z3 = zMod;
+                        RingMod(
+                            ringFreq, ringAmp, theta0,
+                            x, y, z,
+                            out xMod, out yMod, out zMod);
 
-                    corners.Add(new Ray(x1, y1, z1, true));
-                    corners.Add(new Ray(x2, y2, z2, true));
-                    corners.Add(new Ray(x3, y3, z3, true));
+                        double x3 = xMod * Math.Cos(theta0) - yMod * Math.Sin(theta0);
+                        double y3 = xMod * Math.Sin(theta0) + yMod * Math.Cos(theta0);
+                        double z3 = zMod;
 
-                    Face face =  new Face(corners);
-                    geometry.Add(face);
+                        corners.Add(new Ray(x1, y1, z1, true));
+                        corners.Add(new Ray(x2, y2, z2, true));
+                        corners.Add(new Ray(x3, y3, z3, true));
 
-                    corners.Clear();
-                    corners.Add(new Ray(x0, y0, z0, true));
-                    corners.Add(new Ray(x1, y1, z1, true));
-                    corners.Add(new Ray(x3, y3, z3, true));
+                        entities.Add(corners);
 
-                    face = new Face(corners);
-                    geometry.Add(face);
+                        corners.Clear();
+                        corners.Add(new Ray(x0, y0, z0, true));
+                        corners.Add(new Ray(x1, y1, z1, true));
+                        corners.Add(new Ray(x3, y3, z3, true));
+
+                        entities.Add(corners);
+                    }
                 }
             }
 
-            model.MakeSketchUpFile(path + @"\PlainTorus.skp");
+            model.WriteSketchUpFile(path + @"\PlainTorus.skp");
         }
 
         void RingMod(

@@ -14,19 +14,19 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            Face face = new Face(
-                new Vector3(-1, 0, -1),
-                new Vector3(1, 0, -1),
-                new Vector3(1, 0, 1),
-                new Vector3(-1, 0, 1));
-
-            Geometry geometry = new Geometry(face);
-            model.Add(geometry);
-
+            using (Entities entities = model.entities)
+            {
+                entities.Add(
+                    new Vector3(-1, 0, -1),
+                    new Vector3(1, 0, -1),
+                    new Vector3(1, 0, 1),
+                    new Vector3(-1, 0, 1));
+            }
+            
             //Console.WriteLine(JsonConvert.SerializeObject(model,
             //                    Newtonsoft.Json.Formatting.Indented));
 
-            model.MakeSketchUpFile(path + @"\PlainQuad.skp");
+            model.WriteSketchUpFile(path + @"\PlainQuad.skp");
         }
     }
 }

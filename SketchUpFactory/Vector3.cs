@@ -56,6 +56,15 @@ namespace ExLumina.SketchUp.Factory
         }
 
         /// <summary>
+        /// Create a Vector3 from a SketchUp point.
+        /// </summary>
+        /// <param name="p"></param>
+        public Vector3(SU.Point3D p) : this (p.x, p.y, p.z)
+        {
+
+        }
+
+        /// <summary>
         /// Creates a new Vector3 object identical to itself.
         /// </summary>
         /// <returns></returns>
