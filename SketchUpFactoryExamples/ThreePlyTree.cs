@@ -14,18 +14,16 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             ComponentInstance ci;
 
-            Model model = new Model();
-
-            // Define the root level.
-
-            ComponentDefinition def = new ComponentDefinition(
-                model, 
-                "Flat",
-                "A Square");
-
-            using (Entities entities = def.entities)
+            using (Model model = new Model())
             {
-                entities.Add(
+                // Define the root level.
+
+                ComponentDefinition def = new ComponentDefinition(
+                    model,
+                    "Flat",
+                    "A Square");
+
+                def.entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(1, 0, 1),
@@ -42,7 +40,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = 3;
                 ci.transform.translation.z = 3;
 
-                entities.Add(ci);
+                def.entities.Add(ci);
 
                 ci = new ComponentInstance
                 {
@@ -53,25 +51,22 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = -3;
                 ci.transform.translation.z = 3;
 
-                entities.Add(ci);
-            }
+                def.entities.Add(ci);
 
-            ci = new ComponentInstance
-            {
-                definitionName = "Flat",
-                instanceName = "At the origin."
-            };
+                ci = new ComponentInstance
+                {
+                    definitionName = "Flat",
+                    instanceName = "At the origin."
+                };
 
-            model.entities.Add(ci);
+                model.entities.Add(ci);
 
-            ComponentDefinition pointy = new ComponentDefinition(
-                model,
-                "Pointy", 
-                "A Triangle");
+                ComponentDefinition pointy = new ComponentDefinition(
+                    model,
+                    "Pointy",
+                    "A Triangle");
 
-            using (Entities entities = pointy.entities)
-            {
-                entities.Add(
+                pointy.entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(0, 0, 1));
@@ -87,7 +82,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = 3;
                 ci.transform.translation.z = 3;
 
-                entities.Add(ci);
+                pointy.entities.Add(ci);
 
                 ci = new ComponentInstance
                 {
@@ -98,27 +93,24 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci.transform.translation.x = -3;
                 ci.transform.translation.z = 3;
 
-                entities.Add(ci);
-            }
+                pointy.entities.Add(ci);
 
-            //Console.WriteLine(JsonConvert.SerializeObject(model,
-            //                    Newtonsoft.Json.Formatting.Indented));
+                //Console.WriteLine(JsonConvert.SerializeObject(model,
+                //                    Newtonsoft.Json.Formatting.Indented));
 
-            ComponentDefinition skinny = new ComponentDefinition(
-                model,
-                "Skinny",
-                "A Slim Quad");
+                ComponentDefinition skinny = new ComponentDefinition(
+                    model,
+                    "Skinny",
+                    "A Slim Quad");
 
-            using (Entities entities = skinny.entities)
-            {
-                entities.Add(
+                skinny.entities.Add(
                     new Vector3(-.2, 0, -1),
                     new Vector3(.2, 0, -1),
                     new Vector3(.2, 0, 1),
                     new Vector3(-.2, 0, 1));
-            }
 
-            model.WriteSketchUpFile(path + @"\ThreePlyTree.skp");
+                model.WriteSketchUpFile(path + @"\ThreePlyTree.skp");
+            }
         }
     }
 }

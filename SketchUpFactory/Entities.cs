@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -7,27 +8,27 @@ namespace ExLumina.SketchUp.Factory
     /// Container for use by models, component definitions, and groups.
     /// </summary>
     /// <remarks>
-    /// Holds lists of geometries, groups, and component instances.
+    /// Holds lists of faces, groups, and component instances.
     /// </remarks>
-    public class Entities : IDisposable
+    public class Entities
     {
-        public IList<Geometry> geometries;
+        public IList<Face> faces;
         public IList<Group> groups;
         public IList<ComponentInstance> componentInstances;
 
-        internal Geometry currentGeometry;
+        IEntitiesParent parent;
 
-        public Entities()
+        public Entities(IEntitiesParent parent)
         {
-            geometries = new List<Geometry>();
+            this.parent = parent;
+            faces = new List<Face>();
             groups = new List<Group>();
             componentInstances = new List<ComponentInstance>();
-            currentGeometry = new Geometry();
         }
 
         public void Add(IList<Vector3> vectorList)
         {
-            currentGeometry.Add(new Face(vectorList));
+            faces.Add(new Face(vectorList));
         }
 
         public void Add(params Vector3[] vectors)
@@ -42,11 +43,6 @@ namespace ExLumina.SketchUp.Factory
             Add(vectorList);
         }
 
-        public void Add(Geometry geometry)
-        {
-            geometries.Add(geometry);
-        }
-
         public void Add(ComponentInstance instance)
         {
             componentInstances.Add(instance);
@@ -54,32 +50,51 @@ namespace ExLumina.SketchUp.Factory
 
         public void Add(params Face[] faces)
         {
-            currentGeometry.Add(faces);
+            foreach (Face face in faces)
+            {
+                this.faces.Add(face);
+            }
         }
 
         public void Add(IList<Face> faces)
         {
-            currentGeometry.Add(faces);
+            foreach (Face face in faces)
+            {
+                this.faces.Add(face);
+            }
         }
 
         public void Add(params Ray[] rays)
         {
-            currentGeometry.Add(new Face(rays));
+            faces.Add(new Face(rays));
         }
 
         public void Add(IList<Ray> rays)
         {
-            currentGeometry.Add(new Face(rays));
+            faces.Add(new Face(rays));
         }
 
-        public void Dispose()
+        public void SULoad(Model model)
         {
-            if (currentGeometry.isDirty)
+            SU.EntitiesRef entitiesRef = parent.SUEntitiesRef;
+
+            // Faces
+
+            Face.SULoad(model, entitiesRef, faces);
+
+            // Groups
+
+            foreach (Group group in groups)
             {
-                geometries.Add(currentGeometry);
+                group.SULoad(model, entitiesRef);
             }
 
-            currentGeometry = new Geometry();
+            // Component instances
+
+            foreach (ComponentInstance componentInstance in componentInstances)
+            {
+                componentInstance.SULoad(model, entitiesRef);
+            }
         }
     }
 }

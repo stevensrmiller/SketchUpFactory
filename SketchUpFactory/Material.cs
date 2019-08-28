@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ExLumina.SketchUp.API;
+﻿using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -18,59 +13,48 @@ namespace ExLumina.SketchUp.Factory
         /// </summary>
         public Texture texture;
 
-        private SU.MaterialRef materialRef;
+        SU.MaterialRef suMaterialRef;
 
-        public SU.MaterialRef SUmaterialRef
+        public SU.MaterialRef SUMaterialRef
         {
             get
             {
-                if (materialRef == null)
+                if (suMaterialRef == null)
                 {
-
-                    materialRef = new SU.MaterialRef();
-                    SU.MaterialCreate(materialRef);
-                    SU.MaterialSetName(materialRef, name);
-                    SU.MaterialSetColor(materialRef, color.SUColor);
-
-                    if (texture != null)
-                    {
-                        SU.TextureRef textureRef = new SU.TextureRef();
-                        SU.TextureCreateFromFile(
-                            textureRef,
-                            texture.filename,
-                            SU.MetersToInches,
-                            SU.MetersToInches);
-                        SU.MaterialSetTexture(materialRef, textureRef);
-                    }
+                    suMaterialRef = new SU.MaterialRef();
+                    SU.MaterialCreate(suMaterialRef);
                 }
 
-                return materialRef;
+                return suMaterialRef;
             }
         }
 
-
-        internal bool isInUse;
+        Model parentModel;
 
         // Optional parameters would help avoid all these constructors, but
         // one of the parameters calls for the creation of a Color, which
         // isn't a value type, so can't be a default.
 
-        public Material() : this("<material name unset>", new Color(), null)
+        public Material()
+            : this("<material name unset>", new Color(), null)
         {
 
         }
 
-        public Material(string name) : this(name, new Color(), null)
+        public Material(string name)
+            : this(name, new Color(), null)
         {
 
         }
         
-        public Material(string name, Color color) : this (name, color, null)
+        public Material(string name, Color color)
+            : this (name, color, null)
         {
 
         }
 
-        public Material(string name, string textureFileName) : this (name, new Color(), textureFileName)
+        public Material(string name, string textureFileName)
+            : this (name, new Color(), textureFileName)
         {
 
         }
@@ -84,6 +68,32 @@ namespace ExLumina.SketchUp.Factory
             {
                 texture = new Texture(textureFileName);
             }
+        }
+
+        public void SULoad(Model model)
+        {
+            SU.MaterialSetName(SUMaterialRef, name);
+
+            SU.MaterialSetColor(SUMaterialRef, color.SUColor);
+
+            if (texture != null)
+            {
+                SU.TextureRef suTextureRef = new SU.TextureRef();
+
+                SU.TextureCreateFromFile(
+                    suTextureRef,
+                    texture.filename,
+                    SU.MetersToInches,
+                    SU.MetersToInches);
+
+                SU.MaterialSetTexture(SUMaterialRef, suTextureRef);
+            }
+
+            SU.MaterialRef[] suMaterialRefs = new SU.MaterialRef[1];
+
+            suMaterialRefs[0] = SUMaterialRef;
+
+            SU.ModelAddMaterials(model.SUModelRef, 1, suMaterialRefs);
         }
     }
 }

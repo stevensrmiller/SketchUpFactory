@@ -46,22 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Color.cs" />
+    <Compile Include="IEntitiesParent.cs" />
     <Compile Include="Model\ReadSketchUpFile.cs" />
     <Compile Include="Model\ReadFaces.cs" />
-    <Compile Include="Model\CreateGroup.cs" />
     <Compile Include="RayList.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="ComponentDefinition.cs" />
     <Compile Include="ComponentInstance.cs" />
-    <Compile Include="Face.cs" />
-    <Compile Include="Model\CreateComponentInstance.cs" />
-    <Compile Include="Model\CreateMaterial.cs" />
-    <Compile Include="Model\CreateGeometry.cs" />
-    <Compile Include="Model\CreateFace.cs" />
-    <Compile Include="Model\CreateComponentDefinition.cs" />
+    <Compile Include="Face\Face.cs" />
+    <Compile Include="Face\CreateFace.cs" />
     <Compile Include="Model\WriteSketchUpFile.cs" />
-    <Compile Include="Geometry.cs" />
     <Compile Include="Loop.cs" />
     <Compile Include="Material.cs" />
     <Compile Include="Entities.cs" />

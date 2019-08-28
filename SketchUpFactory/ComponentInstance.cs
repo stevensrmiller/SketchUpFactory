@@ -1,4 +1,6 @@
-﻿namespace ExLumina.SketchUp.Factory
+﻿using ExLumina.SketchUp.API;
+
+namespace ExLumina.SketchUp.Factory
 {
     /// <summary>
     /// Instance created from a ComponentDefinition.
@@ -26,6 +28,35 @@
             definitionName = "<ComponentInstance definitionName unset>";
 
             transform = new Transform();
+        }
+
+        public void SULoad(Model model, SU.EntitiesRef entitiesRef)
+        {
+            ComponentDefinition componentDefinition = 
+                model.componentDefinitions[definitionName];
+
+            SU.ComponentDefinitionRef componentDefinitionRef =
+                componentDefinition.SUComponentDefinitionRef;
+
+            SU.ComponentInstanceRef componentInstanceRef =
+                new SU.ComponentInstanceRef();
+
+            SU.ComponentDefinitionCreateInstance(
+                componentDefinitionRef,
+                componentInstanceRef);
+
+            SU.EntitiesAddInstance(
+                entitiesRef,
+                componentInstanceRef,
+                null);
+
+            SU.ComponentInstanceSetName(
+                componentInstanceRef,
+                instanceName);
+
+            SU.ComponentInstanceSetTransform(
+                componentInstanceRef,
+                transform.SUTransformation);
         }
     }
 }

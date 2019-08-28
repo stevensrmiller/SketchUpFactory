@@ -3,9 +3,10 @@ using System;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model
+    public partial class Face
     {
-        public void CreateFace(
+        public static void CreateFace(
+            Model model,
             Face face,
             SU.GeometryInputRef geometryInputRef,
             ref int vertexIndex)
@@ -91,8 +92,9 @@ namespace ExLumina.SketchUp.Factory
 
                 try
                 {
-                    material = materialsLib[face.materialName];
-                } catch (Exception e)
+                    material = model.materials[face.materialName];
+                }
+                catch (Exception e)
                 {
                     string msg = "\nCould not find a material named " + face.materialName;
                     throw new Exception(e.Message + msg);
@@ -110,7 +112,7 @@ namespace ExLumina.SketchUp.Factory
                     materialInput.vertexIndices[i] = indices[i];
                 }
 
-                materialInput.materialRef = material.SUmaterialRef;
+                materialInput.materialRef = material.SUMaterialRef;
 
                 SU.GeometryInputFaceSetFrontMaterial(
                     geometryInputRef,

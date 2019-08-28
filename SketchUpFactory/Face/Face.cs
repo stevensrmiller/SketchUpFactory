@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class Face
+    public partial class Face
     {
         public Loop outerLoop;
         public IList<Loop> innerLoops;
@@ -56,6 +56,26 @@ namespace ExLumina.SketchUp.Factory
             uvh.Assign(rayList);
 
             outerLoop = new Loop(rayList.rays);
+        }
+
+        public static void SULoad(Model model, SU.EntitiesRef SUEntitiesRef, IList<Face> faces)
+        {
+            SU.GeometryInputRef geometryInputRef = new SU.GeometryInputRef();
+            SU.GeometryInputCreate(geometryInputRef);
+
+            int vertexIndex = 0;
+
+            foreach (Face face in faces)
+            {
+                CreateFace(model, face, geometryInputRef, ref vertexIndex);
+            }
+
+            if (faces.Count > 0)
+            {
+                SU.EntitiesFill(SUEntitiesRef, geometryInputRef, true);
+            }
+
+            SU.GeometryInputRelease(geometryInputRef);
         }
 
         void AddPoints(IEnumerable<Vector3> points)

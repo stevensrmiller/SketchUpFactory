@@ -45,12 +45,12 @@ namespace ExLumina.SketchUp.Factory.Examples
                 -1, 1, 1,
                 1, 1, 1
             };
-            Model model = new Model();
 
-            Entities entities = model.entities;
-
-            using (entities)
+            using (Model model = new Model())
             {
+                Entities entities = model.entities;
+
+
                 for (int f = 0; f < coords.Length / (perFace * 3); ++f)
                 {
                     IList<Vector3> corners = new List<Vector3>();
@@ -66,10 +66,8 @@ namespace ExLumina.SketchUp.Factory.Examples
 
                     entities.Add(corners);
                 }
-            }
 
-            using (entities)
-            {
+
                 for (int f = 0; f < coords.Length / (perFace * 3); ++f)
                 {
                     IList<Vector3> corners = new List<Vector3>();
@@ -85,10 +83,9 @@ namespace ExLumina.SketchUp.Factory.Examples
 
                     entities.Add(corners);
                 }
-            }
 
-            using (entities)
-            {
+
+
                 for (int f = 0; f < coords.Length / (perFace * 3); ++f)
                 {
                     IList<Vector3> corners = new List<Vector3>();
@@ -104,9 +101,10 @@ namespace ExLumina.SketchUp.Factory.Examples
 
                     entities.Add(corners);
                 }
-            }
 
-            model.WriteSketchUpFile(path + @"\ThreeCubesApart.skp");
+
+                model.WriteSketchUpFile(path + @"\ThreeCubesApart.skp");
+            }
         }
     }
 }

@@ -48,12 +48,8 @@ namespace ExLumina.SketchUp.Factory.Examples
                 1, 1, 1
             };
 
-            Model model = new Model();
-
-            using (Entities entities = model.entities)
+            using (Model model = new Model())
             {
-                Geometry geometry = new Geometry();
-
                 for (int f = 0; f < coords.Length / (perFace * 3); ++f)
                 {
                     IList<Vector3> corners = new List<Vector3>();
@@ -69,13 +65,11 @@ namespace ExLumina.SketchUp.Factory.Examples
 
                     Face face = new Face(corners);
 
-                    geometry.Add(face);
+                    model.entities.Add(face);
                 }
 
-                entities.Add(geometry);
+                model.WriteSketchUpFile(path + @"\PlainCube.skp");
             }
-
-            model.WriteSketchUpFile(path + @"\PlainCube.skp");
         }
     }
 }

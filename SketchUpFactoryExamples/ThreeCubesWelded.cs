@@ -47,9 +47,8 @@ namespace ExLumina.SketchUp.Factory.Examples
                 -1, 1, 1,
                 1, 1, 1
             };
-            Model model = new Model();
 
-            using (Entities entities = model.entities)
+            using (Model model = new Model())
             {
                 for (int f = 0; f < coords.Length / (perFace * 3); ++f)
                 {
@@ -64,7 +63,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                                                 coords[offset + 2]));
                     }
 
-                    entities.Add(corners);
+                    model.entities.Add(corners);
                 }
 
                 for (int f = 0; f < coords.Length / (perFace * 3); ++f)
@@ -80,7 +79,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                                                 coords[offset + 2]));
                     }
 
-                    entities.Add(corners);
+                    model.entities.Add(corners);
                 }
 
                 for (int f = 0; f < coords.Length / (perFace * 3); ++f)
@@ -96,11 +95,11 @@ namespace ExLumina.SketchUp.Factory.Examples
                                                 coords[offset + 2] + 2));
                     }
 
-                    entities.Add(corners);
+                    model.entities.Add(corners);
                 }
-            }
 
-            model.WriteSketchUpFile(path + @"\ThreeCubesWelded.skp");
+                model.WriteSketchUpFile(path + @"\ThreeCubesWelded.skp");
+            }
         }
     }
 }

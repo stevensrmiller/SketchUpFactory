@@ -12,11 +12,9 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            Model model = new Model();
-
-            using (Entities entities = model.entities)
+            using (Model model = new Model())
             {
-                Face face =  new Face(
+                Face face = new Face(
                     new Ray(-1, 0, -1, false, 0, 0),
                     new Ray(1, 0, -1, false, 1, 0),
                     new Ray(1, 0, 1, false, 1, 1),
@@ -24,16 +22,16 @@ namespace ExLumina.SketchUp.Factory.Examples
 
                 face.materialName = "Place Holder";
 
-                entities.Add(face);
-                   
+                model.entities.Add(face);
+
+
+                model.Add(new Material("Place Holder", "PlaceHolderRGBY.png"));
+
+                //Console.WriteLine(JsonConvert.SerializeObject(model,
+                //                    Newtonsoft.Json.Formatting.Indented));
+
+                model.WriteSketchUpFile(path + @"\TexturedQuad.skp");
             }
-
-            model.Add(new Material("Place Holder", "PlaceHolderRGBY.png"));
-
-            //Console.WriteLine(JsonConvert.SerializeObject(model,
-            //                    Newtonsoft.Json.Formatting.Indented));
-
-            model.WriteSketchUpFile(path + @"\TexturedQuad.skp");
         }
     }
 }

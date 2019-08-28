@@ -11,7 +11,7 @@ namespace ExLumina.SketchUp.Factory.Examples
         const double ringRadius = 1;
         const double pieRadius = 4;
         const int ringFreq = 17;
-        const double ringAmp = ringRadius /2; 
+        const double ringAmp = ringRadius / 2;
 
         public PlainTorus(string display) : base(display)
         {
@@ -36,9 +36,7 @@ namespace ExLumina.SketchUp.Factory.Examples
 
             // Open the model.
 
-            Model model = new Model();
-
-            using (Entities entities = model.entities)
+            using (Model model = new Model())
             {
                 // Compute the pie.
 
@@ -105,19 +103,19 @@ namespace ExLumina.SketchUp.Factory.Examples
                         corners.Add(new Ray(x2, y2, z2, true));
                         corners.Add(new Ray(x3, y3, z3, true));
 
-                        entities.Add(corners);
+                        model.entities.Add(corners);
 
                         corners.Clear();
                         corners.Add(new Ray(x0, y0, z0, true));
                         corners.Add(new Ray(x1, y1, z1, true));
                         corners.Add(new Ray(x3, y3, z3, true));
 
-                        entities.Add(corners);
+                        model.entities.Add(corners);
                     }
                 }
-            }
 
-            model.WriteSketchUpFile(path + @"\PlainTorus.skp");
+                model.WriteSketchUpFile(path + @"\PlainTorus.skp");
+            }
         }
 
         void RingMod(

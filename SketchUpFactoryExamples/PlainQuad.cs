@@ -12,21 +12,19 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            Model model = new Model();
-
-            using (Entities entities = model.entities)
+            using (Model model = new Model())
             {
-                entities.Add(
+                model.entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(1, 0, 1),
                     new Vector3(-1, 0, 1));
-            }
-            
-            //Console.WriteLine(JsonConvert.SerializeObject(model,
-            //                    Newtonsoft.Json.Formatting.Indented));
 
-            model.WriteSketchUpFile(path + @"\PlainQuad.skp");
+                //Console.WriteLine(JsonConvert.SerializeObject(model,
+                //                    Newtonsoft.Json.Formatting.Indented));
+
+                model.WriteSketchUpFile(path + @"\PlainQuad.skp");
+            }
         }
     }
 }

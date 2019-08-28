@@ -12,23 +12,21 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            Model model = new Model();
-
-            Group group = new Group(model.entities, "I am a group name");
-
-            using (Entities entities = group.entities)
+            using (Model model = new Model())
             {
-                entities.Add(
+                Group group = new Group(model.entities, "I am a group name");
+
+                group.entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(1, 0, 1),
                     new Vector3(-1, 0, 1));
+
+                //Console.WriteLine(JsonConvert.SerializeObject(model,
+                //                    Newtonsoft.Json.Formatting.Indented));
+
+                model.WriteSketchUpFile(path + @"\GroupQuad.skp");
             }
-
-            //Console.WriteLine(JsonConvert.SerializeObject(model,
-            //                    Newtonsoft.Json.Formatting.Indented));
-
-            model.WriteSketchUpFile(path + @"\GroupQuad.skp");
         }
     }
 }

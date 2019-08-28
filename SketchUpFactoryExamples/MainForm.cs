@@ -13,12 +13,14 @@ namespace ExLumina.SketchUp.Factory.Examples
         private Button btnExit;
         Example[] examples =
         {
+            new EmptyModel("Empty Model"),
             new PlainQuad("Plain Quad"),
             new PlainCube("Plain Cube"),
             new PlainTorus("Plain Torus"),
             new ThreeCubesWelded("Three Cubes Welded"),
-            new ThreeCubesApart("Three Cubes Apart (using Model.Separate)"),
-            new QuadComponent("Quad Component"),
+            new ThreeCubesApart("Three Cubes Apart"),
+            new BackwardComponent("Backward Component"),
+            new ForwardComponent("Forward Component"),
             new ThreePlyTree("Three Ply Tree"),
             new GroupQuad("Group Quad"),
             new TexturedQuad("Textured Quad"),
@@ -137,6 +139,7 @@ namespace ExLumina.SketchUp.Factory.Examples
             this.Controls.Add(this.btnSetLocation);
             this.Name = "MainForm";
             this.Text = "SkecthUpFactory Examples";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -160,6 +163,11 @@ namespace ExLumina.SketchUp.Factory.Examples
         private void btnExit_Click_1(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

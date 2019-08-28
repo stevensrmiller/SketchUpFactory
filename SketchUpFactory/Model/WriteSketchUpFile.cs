@@ -1,6 +1,4 @@
-﻿using System;
-using ExLumina.SketchUp.API;
-using System.Collections.Generic;
+﻿using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -8,62 +6,33 @@ namespace ExLumina.SketchUp.Factory
     {
         public void WriteSketchUpFile(string path)
         {
-            // Init and open a model structure.
+            // Load the SketchUp structores for our materials.
 
-            SU.Initialize();
-            SU.ModelRef modelRef = new SU.ModelRef();
-            SU.ModelCreate(modelRef);
-            SU.EntitiesRef entitiesRef = new SU.EntitiesRef();
-            SU.ModelGetEntities(modelRef, entitiesRef);
-
-            // Create the materials.
-
-            SU.MaterialRef[] materialRefs = new SU.MaterialRef[materials.Count];
-
-            for (int i = 0; i < materials.Count; ++i)
+            foreach (Material material in materials.Values)
             {
-                materialRefs[i] = materials[i].SUmaterialRef;
+                material.SULoad(this);
             }
 
-            SU.ModelAddMaterials(modelRef, materials.Count, materialRefs);
+            // Load the SketchUp structures for our component definitions.
 
-            // Create the geometries.
-
-            foreach (Geometry geometry in entities.geometries)
+            foreach (ComponentDefinition componentDefinition in componentDefinitions.Values)
             {
-                CreateGeometry(geometry, entitiesRef);
+                componentDefinition.SULoad(this);
             }
 
-            // Create the component definitions.
+            // Load the SketchUp structures for our entities.
 
-            foreach (ComponentDefinition componentDefinition in componentDefinitions)
-            {
-                CreateComponentDefinition(componentDefinition, modelRef);
-            }
+            entities.SULoad(this);
 
-            // Create instances.
-
-            foreach (ComponentInstance componentInstance in entities.componentInstances)
-            {
-                CreateComponentInstance(componentInstance, entitiesRef);
-            }
-
-            // Create groups.
-
-            foreach (Group group in entities.groups)
-            {
-                CreateGroup(group, entitiesRef);
-            }
-
-            // Set style and camera, write the file, terminate.
+            // Set style and camera.
 
             SU.StylesRef stylesRef = new SU.StylesRef();
-            SU.ModelGetStyles(modelRef, stylesRef);
+            SU.ModelGetStyles(suModelRef, stylesRef);
             SU.StylesAddStyle(stylesRef, "base.style", true);
 
             SU.CameraRef cameraRef = new SU.CameraRef();
 
-            SU.ModelGetCamera(modelRef, cameraRef);
+            SU.ModelGetCamera(suModelRef, cameraRef);
 
             SU.CameraSetOrientation(
                 cameraRef,
@@ -73,12 +42,8 @@ namespace ExLumina.SketchUp.Factory
                      10),// * SU.MetersToInches),
                 new SU.Point3D(0, 0, 0),
                 new SU.Vector3D(0, 0, 1));
-            
-            SU.ModelSaveToFileWithVersion(modelRef, path, SU.ModelVersion_SU2017);
 
-            SU.ModelRelease(modelRef);
-
-            SU.Terminate();
+            SU.ModelSaveToFileWithVersion(SUModelRef, path, SU.ModelVersion_SU2017);
         }
     }
 }
