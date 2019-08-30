@@ -13,10 +13,11 @@ namespace ExLumina.SketchUp.Factory
         /// </summary>
         public string materialName;
 
-        public Face()
+        public Face(IHasEntities owner = null)
         {
             outerLoop = new Loop();
             innerLoops = new List<Loop>();
+            owner?.Entities.Add(this);
         }
 
         public Face(params Vector3[] points) : this()
@@ -42,23 +43,34 @@ namespace ExLumina.SketchUp.Factory
         /// <summary>
         /// Construct a Face equivalent to a SketchUp face.
         /// </summary>
-        /// <param name="faceRef"></param>
-        public Face(SU.FaceRef faceRef) : this()
+        /// <param name="suFaceRef"></param>
+        public Face(SU.FaceRef suFaceRef) : this()
         {
             // Get its UVHelper for texture-mapping coordinates.
 
-            UVHelper uvh = new UVHelper(faceRef);
+            UVHelper uvh = new UVHelper(suFaceRef);
 
             // Get the outer edge descriptions.
 
-            RayList rayList = new RayList(faceRef);
+            RayList rayList = new RayList(suFaceRef);
 
             uvh.Assign(rayList);
 
             outerLoop = new Loop(rayList.rays);
+
+            SU.MaterialRef suMaterialRef = new SU.MaterialRef();
+
+            SU.FaceGetFrontMaterial(suFaceRef, suMaterialRef);
+
+            SU.StringRef suStringRef = new SU.StringRef();
+            SU.StringCreate(suStringRef);
+
+            SU.MaterialGetNameLegacyBehavior(suMaterialRef, suStringRef);
+
+            materialName = Convert.ToStringAndRelease(suStringRef);
         }
 
-        public static void SULoad(Model model, SU.EntitiesRef SUEntitiesRef, IList<Face> faces)
+        public static void Pack(Model model, SU.EntitiesRef SUEntitiesRef, IList<Face> faces)
         {
             SU.GeometryInputRef geometryInputRef = new SU.GeometryInputRef();
             SU.GeometryInputCreate(geometryInputRef);
@@ -67,7 +79,7 @@ namespace ExLumina.SketchUp.Factory
 
             foreach (Face face in faces)
             {
-                CreateFace(model, face, geometryInputRef, ref vertexIndex);
+                face.Pack(model, geometryInputRef, ref vertexIndex);
             }
 
             if (faces.Count > 0)

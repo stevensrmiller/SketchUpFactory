@@ -3,63 +3,57 @@ using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class Group : IEntitiesParent
+    public class Group : IHasEntities
     {
         public string name;
         public Transform transform;
-        public Entities entities;
+        public Entities Entities { get; set; }
 
-        SU.GroupRef suGroupRef;
-
-        public SU.GroupRef SUGroupRef
+        public Group(
+            Model model,
+            string name = "<group name unset>",
+            Entities owner = null)
         {
-            get
-            {
-                if (suGroupRef == null)
-                {
-                    suGroupRef = new SU.GroupRef();
-                    SU.GroupCreate(suGroupRef);
-                }
-
-                return suGroupRef;
-            }
-        }
-
-        SU.EntitiesRef suEntitiesRef;
-
-        public SU.EntitiesRef SUEntitiesRef
-        {
-            get
-            {
-                if (suEntitiesRef == null)
-                {
-                    suEntitiesRef = new SU.EntitiesRef();
-                    SU.GroupGetEntities(SUGroupRef, suEntitiesRef);
-                }
-
-                return suEntitiesRef;
-            }
-        }
-        public Group() : this(null)
-        {
-
-        }
-
-        public Group(Entities parent, string name)
-        {
+            Entities = new Entities(model);
             this.name = name;
             transform = new Transform();
-            entities = new Entities(this);
-            parent?.groups.Add(this);
+            owner?.Add(this);
         }
 
-        public Group(Entities parent) 
-            : this(parent, "<Group name unset>")
+        public Group(
+            Model model,
+            SU.GroupRef suGroupRef,
+            Entities owner)
         {
+            // Get the transform.
 
+            SU.Transformation suTransformation = new SU.Transformation();
+
+            SU.GroupGetTransform(suGroupRef, out suTransformation);
+
+            transform = new Transform(suTransformation);
+
+            // Get the name.
+
+            SU.StringRef suStringRef = new SU.StringRef();
+            SU.StringCreate(suStringRef);
+
+            SU.GroupGetName(suGroupRef, suStringRef);
+
+            name = Convert.ToStringAndRelease(suStringRef);
+
+            // Get the entities.
+
+            SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
+
+            SU.GroupGetEntities(suGroupRef, suEntitiesRef);
+
+            Entities = new Entities(model, suEntitiesRef);
+
+            owner.Add(this);
         }
 
-        public void SULoad(Model model, SU.EntitiesRef SUEntitiesRef)
+        public void Pack(SU.EntitiesRef suEntitiesRef)
         {
             // The SketchUp API appears to add a "persistent ID" to vertices,
             // edges, and faces, as they are added to definitions and groups.
@@ -77,19 +71,26 @@ namespace ExLumina.SketchUp.Factory
             //
             // To prevent all this from happening, we add the reference first.
 
-            SU.EntitiesAddGroup(SUEntitiesRef, SUGroupRef);
+            SU.GroupRef suGroupRef = new SU.GroupRef();
+            SU.GroupCreate(suGroupRef);
 
-            entities.SULoad(model);
+            SU.EntitiesAddGroup(suEntitiesRef, suGroupRef);
 
-            // Set the group's transformation, name, and description.
+            SU.EntitiesRef suMyEntitiesRef = new SU.EntitiesRef();
 
-            SU.GroupSetTransform(
-                SUGroupRef,
-                transform.SUTransformation);
+            SU.GroupGetEntities(suGroupRef, suMyEntitiesRef);
+
+            Entities.Pack(suMyEntitiesRef);
+
+            // Set the group's name and transformation..
 
             SU.GroupSetName(
-                SUGroupRef,
+                suGroupRef,
                 name);
+
+            SU.GroupSetTransform(
+                suGroupRef,
+                transform.SUTransformation);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using ExLumina.SketchUp.API;
+using System;
 
 namespace ExLumina.SketchUp.Factory
 {
     public class Material
     {
-        private static readonly Color blank = new Color();
         public string name;
         public Color color;
 
@@ -13,87 +13,136 @@ namespace ExLumina.SketchUp.Factory
         /// </summary>
         public Texture texture;
 
-        SU.MaterialRef suMaterialRef;
+        // Used when packing Faces.
 
-        public SU.MaterialRef SUMaterialRef
-        {
-            get
-            {
-                if (suMaterialRef == null)
-                {
-                    suMaterialRef = new SU.MaterialRef();
-                    SU.MaterialCreate(suMaterialRef);
-                }
+        internal SU.MaterialRef suMaterialRef;
 
-                return suMaterialRef;
-            }
-        }
-
-        Model parentModel;
-
-        // Optional parameters would help avoid all these constructors, but
-        // one of the parameters calls for the creation of a Color, which
-        // isn't a value type, so can't be a default.
-
-        public Material()
-            : this("<material name unset>", new Color(), null)
-        {
-
-        }
+        int suMaterialType;
+        int suMaterialColorizeType;
 
         public Material(string name)
-            : this(name, new Color(), null)
-        {
-
-        }
-        
-        public Material(string name, Color color)
-            : this (name, color, null)
-        {
-
-        }
-
-        public Material(string name, string textureFileName)
-            : this (name, new Color(), textureFileName)
-        {
-
-        }
-
-        public Material(string name, Color color, string textureFileName)
         {
             this.name = name;
-            this.color = color;
+            this.color = new Color();
+            this.texture = null;
 
-            if (textureFileName != null)
+            suMaterialType = SU.MaterialType_Colored;
+            suMaterialColorizeType = SU.MaterialColorizeType_Shift;
+        }
+
+        public Material(string name, Texture texture) : this(name)
+        {
+            this.texture = texture;
+            suMaterialType = SU.MaterialType_Textured;
+        }
+
+        public Material(string name, Color color) : this(name)
+        {
+            this.color = color;
+        }
+
+        public Material(SU.MaterialRef suMaterialRef)
+        {
+            // Get the name.
+
+            SU.StringRef suStringRef = new SU.StringRef();
+            SU.StringCreate(suStringRef);
+
+            SU.MaterialGetNameLegacyBehavior(suMaterialRef, suStringRef);
+
+            name = Convert.ToStringAndRelease(suStringRef);
+
+            // Get the types.
+
+            SU.MaterialGetType(suMaterialRef, out suMaterialType);
+            SU.MaterialGetColorizeType(suMaterialRef, out suMaterialColorizeType);
+
+            // Get the color and/or texture.
+
+            SU.Color suColor;
+            SU.TextureRef suTextureRef;
+
+            switch (suMaterialType)
             {
-                texture = new Texture(textureFileName);
+                case SU.MaterialType_Colored:
+
+                    SU.MaterialGetColor(suMaterialRef, out suColor);
+
+                    color = new Color(suColor);
+
+                    break;
+
+                case SU.MaterialType_Textured:
+
+                    suTextureRef = new SU.TextureRef();
+
+                    SU.MaterialGetTexture(suMaterialRef, suTextureRef);
+
+                    texture = new Texture(suTextureRef);
+
+                    break;
+
+                case SU.MaterialType_ColorizedTexture:
+
+                    SU.MaterialGetColor(suMaterialRef, out suColor);
+
+                    color = new Color(suColor);
+
+                    suTextureRef = new SU.TextureRef();
+
+                    SU.MaterialGetTexture(suMaterialRef, suTextureRef);
+
+                    texture = new Texture(suTextureRef);
+
+                    break;
+
+                default:
+                    throw new Exception($"Unknown material type = {suMaterialType}");
             }
         }
 
-        public void SULoad(Model model)
+        public void Pack(SU.ModelRef suModelRef)
         {
-            SU.MaterialSetName(SUMaterialRef, name);
 
-            SU.MaterialSetColor(SUMaterialRef, color.SUColor);
+            suMaterialRef = new SU.MaterialRef();
+            SU.MaterialCreate(suMaterialRef);
 
-            if (texture != null)
+            SU.MaterialSetName(suMaterialRef, name);
+
+            switch (suMaterialType)
             {
-                SU.TextureRef suTextureRef = new SU.TextureRef();
+                case SU.MaterialType_Colored:
 
-                SU.TextureCreateFromFile(
-                    suTextureRef,
-                    texture.filename,
-                    SU.MetersToInches,
-                    SU.MetersToInches);
+                    SU.MaterialSetColor(suMaterialRef, color.SUColor);
 
-                SU.MaterialSetTexture(SUMaterialRef, suTextureRef);
+                    break;
+
+                case SU.MaterialType_Textured:
+
+                    texture.Pack();
+                    SU.MaterialSetTexture(suMaterialRef, texture.suTextureRef);
+
+                    break;
+
+                case SU.MaterialType_ColorizedTexture:
+
+                    SU.MaterialSetColor(suMaterialRef, color.SUColor);
+                    SU.MaterialSetColorizeType(suMaterialRef, suMaterialColorizeType);
+
+                    texture.Pack();
+                    SU.MaterialSetTexture(suMaterialRef, texture.suTextureRef);
+
+                    break;
+
+                default:
+                    throw new Exception($"Unknown material type = {suMaterialType}");
             }
 
             SU.MaterialRef[] suMaterialRefs = new SU.MaterialRef[1];
 
-            suMaterialRefs[0] = SUMaterialRef;
+            suMaterialRefs[0] = suMaterialRef;
 
-            SU.ModelAddMaterials(model.SUModelRef, 1, suMaterialRefs);
+            SU.ModelAddMaterials(suModelRef, 1, suMaterialRefs);
         }
     }
 }

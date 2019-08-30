@@ -12,52 +12,50 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            using (Model model = new Model())
+            Model model = new Model();
+
+            ComponentDefinition flat = new ComponentDefinition(
+                model,
+                "Flat",
+                "A Square");
+
+            flat.Entities.Add(
+                new Vector3(-1, 0, -1),
+                new Vector3(1, 0, -1),
+                new Vector3(1, 0, 1),
+                new Vector3(-1, 0, 1));
+
+            ComponentInstance ci2 = new ComponentInstance
             {
+                definitionName = "Pointy",
+                instanceName = "Tri the Angle"
+            };
 
-                ComponentDefinition flat = new ComponentDefinition(
-                    model,
-                    "Flat",
-                    "A Square");
+            ci2.transform.translation.y = 1;
+            ci2.transform.rotation.z = -20;
 
-                flat.entities.Add(
-                    new Vector3(-1, 0, -1),
-                    new Vector3(1, 0, -1),
-                    new Vector3(1, 0, 1),
-                    new Vector3(-1, 0, 1));
-
-                ComponentInstance ci2 = new ComponentInstance
-                {
-                    definitionName = "Pointy",
-                    instanceName = "Tri the Angle"
-                };
-
-                ci2.transform.translation.y = 1;
-                ci2.transform.rotation.z = -20;
-
-                flat.entities.Add(ci2);
+            flat.Entities.Add(ci2);
 
 
-                ComponentInstance ci = new ComponentInstance
-                {
-                    definitionName = "Flat",
-                    instanceName = "Quad the First"
-                };
+            ComponentInstance ci = new ComponentInstance
+            {
+                definitionName = "Flat",
+                instanceName = "Quad the First"
+            };
 
-                model.entities.Add(ci);
+            model.Entities.Add(ci);
 
-                ComponentDefinition pointy = new ComponentDefinition(
-                    model,
-                    "Pointy",
-                    "A Triangle");
+            ComponentDefinition pointy = new ComponentDefinition(
+                model,
+                "Pointy",
+                "A Triangle");
 
-                pointy.entities.Add(
-                    new Vector3(-1, 0, -1),
-                    new Vector3(1, 0, -1),
-                    new Vector3(0, 0, 1));
+            pointy.Entities.Add(
+                new Vector3(-1, 0, -1),
+                new Vector3(1, 0, -1),
+                new Vector3(0, 0, 1));
 
-                model.WriteSketchUpFile(path + @"\ForwardComponent.skp");
-            }
+            model.WriteSketchUpFile(path + @"\ForwardComponent.skp");
         }
     }
 }

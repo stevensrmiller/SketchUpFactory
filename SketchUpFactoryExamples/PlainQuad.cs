@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace ExLumina.SketchUp.Factory.Examples
+﻿namespace ExLumina.SketchUp.Factory.Examples
 {
     class PlainQuad : Example
     {
@@ -12,19 +9,15 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            using (Model model = new Model())
-            {
-                model.entities.Add(
-                    new Vector3(-1, 0, -1),
-                    new Vector3(1, 0, -1),
-                    new Vector3(1, 0, 1),
-                    new Vector3(-1, 0, 1));
+            Model model = new Model();
+            
+            model.Entities.Add(
+                new Vector3(-1, 0, -1),
+                new Vector3(1, 0, -1),
+                new Vector3(1, 0, 1),
+                new Vector3(-1, 0, 1));
 
-                //Console.WriteLine(JsonConvert.SerializeObject(model,
-                //                    Newtonsoft.Json.Formatting.Indented));
-
-                model.WriteSketchUpFile(path + @"\PlainQuad.skp");
-            }
+            model.WriteSketchUpFile(path + @"\PlainQuad.skp");
         }
     }
 }

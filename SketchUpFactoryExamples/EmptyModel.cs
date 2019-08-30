@@ -12,10 +12,9 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            using (Model model = new Model())
-            {
-                model.WriteSketchUpFile(path + @"\EmptyModel.skp");
-            }
+            Model model = new Model();
+
+            model.WriteSketchUpFile(path + @"\EmptyModel.skp");
         }
     }
 }

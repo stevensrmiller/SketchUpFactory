@@ -14,103 +14,103 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             ComponentInstance ci;
 
-            using (Model model = new Model())
+            Model model = new Model();
+
+            // Define the root level.
+
+            ComponentDefinition def = new ComponentDefinition(
+                model,
+                "Flat",
+                "A Square");
+
+            def.Entities.Add(
+                new Vector3(-1, 0, -1),
+                new Vector3(1, 0, -1),
+                new Vector3(1, 0, 1),
+                new Vector3(-1, 0, 1));
+
+            // Two branches.
+
+            ci = new ComponentInstance
             {
-                // Define the root level.
+                definitionName = "Pointy",
+                instanceName = "On the right."
+            };
 
-                ComponentDefinition def = new ComponentDefinition(
-                    model,
-                    "Flat",
-                    "A Square");
+            ci.transform.translation.x = 3;
+            ci.transform.translation.z = 3;
 
-                def.entities.Add(
-                    new Vector3(-1, 0, -1),
-                    new Vector3(1, 0, -1),
-                    new Vector3(1, 0, 1),
-                    new Vector3(-1, 0, 1));
+            def.Entities.Add(ci);
 
-                // Two branches.
+            ci = new ComponentInstance
+            {
+                definitionName = "Pointy",
+                instanceName = "On the left."
+            };
 
-                ci = new ComponentInstance
-                {
-                    definitionName = "Pointy",
-                    instanceName = "On the right."
-                };
+            ci.transform.translation.x = -3;
+            ci.transform.translation.z = 3;
 
-                ci.transform.translation.x = 3;
-                ci.transform.translation.z = 3;
+            def.Entities.Add(ci);
 
-                def.entities.Add(ci);
+            ci = new ComponentInstance
+            {
+                definitionName = "Flat",
+                instanceName = "At the origin."
+            };
 
-                ci = new ComponentInstance
-                {
-                    definitionName = "Pointy",
-                    instanceName = "On the left."
-                };
+            model.Entities.Add(ci);
 
-                ci.transform.translation.x = -3;
-                ci.transform.translation.z = 3;
+            ComponentDefinition pointy = new ComponentDefinition(
+                model,
+                "Pointy",
+                "A Triangle");
 
-                def.entities.Add(ci);
+            pointy.Entities.Add(
+                new Vector3(-1, 0, -1),
+                new Vector3(1, 0, -1),
+                new Vector3(0, 0, 1));
 
-                ci = new ComponentInstance
-                {
-                    definitionName = "Flat",
-                    instanceName = "At the origin."
-                };
+            // Two branches of its own.
 
-                model.entities.Add(ci);
+            ci = new ComponentInstance
+            {
+                definitionName = "Skinny",
+                instanceName = "On the far upper right."
+            };
 
-                ComponentDefinition pointy = new ComponentDefinition(
-                    model,
-                    "Pointy",
-                    "A Triangle");
+            ci.transform.translation.x = 3;
+            ci.transform.translation.z = 3;
 
-                pointy.entities.Add(
-                    new Vector3(-1, 0, -1),
-                    new Vector3(1, 0, -1),
-                    new Vector3(0, 0, 1));
+            pointy.Entities.Add(ci);
 
-                // Two branches of its own.
+            ci = new ComponentInstance
+            {
+                definitionName = "Skinny",
+                instanceName = "On the far upper left."
+            };
 
-                ci = new ComponentInstance
-                {
-                    definitionName = "Skinny",
-                    instanceName = "On the far upper right."
-                };
+            ci.transform.translation.x = -3;
+            ci.transform.translation.z = 3;
 
-                ci.transform.translation.x = 3;
-                ci.transform.translation.z = 3;
+            pointy.Entities.Add(ci);
 
-                pointy.entities.Add(ci);
+            //Console.WriteLine(JsonConvert.SerializeObject(model,
+            //                    Newtonsoft.Json.Formatting.Indented));
 
-                ci = new ComponentInstance
-                {
-                    definitionName = "Skinny",
-                    instanceName = "On the far upper left."
-                };
+            ComponentDefinition skinny = new ComponentDefinition(
+                model,
+                "Skinny",
+                "A Slim Quad");
 
-                ci.transform.translation.x = -3;
-                ci.transform.translation.z = 3;
+            skinny.Entities.Add(
+                new Vector3(-.2, 0, -1),
+                new Vector3(.2, 0, -1),
+                new Vector3(.2, 0, 1),
+                new Vector3(-.2, 0, 1));
 
-                pointy.entities.Add(ci);
+            model.WriteSketchUpFile(path + @"\ThreePlyTree.skp");
 
-                //Console.WriteLine(JsonConvert.SerializeObject(model,
-                //                    Newtonsoft.Json.Formatting.Indented));
-
-                ComponentDefinition skinny = new ComponentDefinition(
-                    model,
-                    "Skinny",
-                    "A Slim Quad");
-
-                skinny.entities.Add(
-                    new Vector3(-.2, 0, -1),
-                    new Vector3(.2, 0, -1),
-                    new Vector3(.2, 0, 1),
-                    new Vector3(-.2, 0, 1));
-
-                model.WriteSketchUpFile(path + @"\ThreePlyTree.skp");
-            }
         }
     }
 }

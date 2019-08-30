@@ -5,9 +5,8 @@ namespace ExLumina.SketchUp.Factory
 {
     public partial class Face
     {
-        public static void CreateFace(
+        public void Pack(
             Model model,
-            Face face,
             SU.GeometryInputRef geometryInputRef,
             ref int vertexIndex)
         {
@@ -18,9 +17,12 @@ namespace ExLumina.SketchUp.Factory
             int[] indices = new int[maxUVcoords];
             int numUVcoords = 0;
 
-            int edgeIndex = 0; // There are other ways, but this is so simple.
+            // There are other ways to count foreach iterations,
+            // but this is so simple.
 
-            foreach (Ray ray in face.outerLoop.rays)
+            int edgeIndex = 0;
+
+            foreach (Ray ray in outerLoop.rays)
             {
                 SU.GeometryInputAddVertex(geometryInputRef, ray.vertex.SUPoint3D);
                 SU.LoopInputAddVertexIndex(loopInputRef, vertexIndex);
@@ -57,7 +59,7 @@ namespace ExLumina.SketchUp.Factory
                 throw;
             }
 
-            foreach (Loop loop in face.innerLoops)
+            foreach (Loop loop in innerLoops)
             {
                 loopInputRef = new SU.LoopInputRef();
                 SU.LoopInputCreate(loopInputRef);
@@ -86,17 +88,17 @@ namespace ExLumina.SketchUp.Factory
                 }
             }
 
-            if (face.materialName != null)
+            if (materialName != null)
             {
                 Material material = null;
 
                 try
                 {
-                    material = model.materials[face.materialName];
+                    material = model.materials[materialName];
                 }
                 catch (Exception e)
                 {
-                    string msg = "\nCould not find a material named " + face.materialName;
+                    string msg = "\nCould not find a material named " + materialName;
                     throw new Exception(e.Message + msg);
                 }
 
@@ -112,7 +114,7 @@ namespace ExLumina.SketchUp.Factory
                     materialInput.vertexIndices[i] = indices[i];
                 }
 
-                materialInput.materialRef = material.SUMaterialRef;
+                materialInput.materialRef = material.suMaterialRef;
 
                 SU.GeometryInputFaceSetFrontMaterial(
                     geometryInputRef,

@@ -4,48 +4,14 @@ using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model : IDisposable, IEntitiesParent
+    public partial class Model : IHasEntities
     {
-        private static int modelCount;
-
         public string name;
         public string description;
-        public Entities entities;
+        public Entities Entities { get; set; }
 
         internal IDictionary<string, ComponentDefinition> componentDefinitions;
         internal IDictionary<string, Material> materials;
-
-        private SU.ModelRef suModelRef;
-
-        public SU.ModelRef SUModelRef
-        {
-            get
-            {
-                if (suModelRef == null)
-                {
-                    suModelRef = new SU.ModelRef();
-                    SU.ModelCreate(suModelRef);
-                }
-
-                return this.suModelRef;
-            }
-        }
-
-        private SU.EntitiesRef suEntitiesRef;
-
-        public SU.EntitiesRef SUEntitiesRef
-        {
-            get
-            {
-                if (suEntitiesRef == null)
-                {
-                    suEntitiesRef = new SU.EntitiesRef();
-                    SU.ModelGetEntities(SUModelRef, suEntitiesRef);
-                }
-
-                return suEntitiesRef;
-            }
-        }
 
         public Model() : this("<model name unset>", "<model description unset>")
         {
@@ -56,26 +22,35 @@ namespace ExLumina.SketchUp.Factory
         {
             this.name = name;
             this.description = description;
-            entities = new Entities(this);
+            Entities = new Entities(this);
             materials = new Dictionary<string, Material>();
             componentDefinitions = new Dictionary<string, ComponentDefinition>();
-
-            if (modelCount == 0)
-            {
-                SU.Initialize();
-
-                modelCount = modelCount + 1;
-            }
         }
 
-        public Model(string path) : this()
+        /// <summary>
+        /// Construct a Model from a SketchUp file.
+        /// </summary>
+        /// <param name="path">SketchUp file path.</param>
+        public Model(string path)
         {
-            ReadSketchUpFile(path);
-        }
+            SU.Initialize();
 
-        public void Dispose()
-        {
-            modelCount = modelCount - 1;
+            // Creating this as a local variable insures it won't survive
+            // beyond this method.
+
+            SU.ModelRef suModelRef = new SU.ModelRef();
+
+            SU.ModelCreateFromFile(suModelRef, path);
+
+            materials = UnPackMaterials(suModelRef);
+
+            componentDefinitions = UnPackComponentDefinitions(this, suModelRef);
+
+            SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
+
+            SU.ModelGetEntities(suModelRef, suEntitiesRef);
+
+            Entities = new Entities(this, suEntitiesRef);
 
             SU.Terminate();
         }

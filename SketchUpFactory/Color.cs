@@ -18,5 +18,13 @@ namespace ExLumina.SketchUp.Factory
         {
             alpha = 0xFF;
         }
+
+        public Color(SU.Color suColor)
+        {
+            red = suColor.red;
+            green = suColor.green;
+            blue = suColor.blue;
+            alpha = suColor.alpha;
+        }
     }
 }

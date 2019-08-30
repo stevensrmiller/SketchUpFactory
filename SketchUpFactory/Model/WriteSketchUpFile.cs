@@ -6,23 +6,32 @@ namespace ExLumina.SketchUp.Factory
     {
         public void WriteSketchUpFile(string path)
         {
-            // Load the SketchUp structores for our materials.
+            SU.Initialize();
+
+            SU.ModelRef suModelRef = new SU.ModelRef();
+            SU.ModelCreate(suModelRef);
+
+            // Load the SketchUp structures for our materials.
 
             foreach (Material material in materials.Values)
             {
-                material.SULoad(this);
+                material.Pack(suModelRef);
             }
 
             // Load the SketchUp structures for our component definitions.
 
             foreach (ComponentDefinition componentDefinition in componentDefinitions.Values)
             {
-                componentDefinition.SULoad(this);
+                componentDefinition.Pack(suModelRef);
             }
 
             // Load the SketchUp structures for our entities.
 
-            entities.SULoad(this);
+            SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
+
+            SU.ModelGetEntities(suModelRef, suEntitiesRef);
+
+            Entities.Pack(suEntitiesRef);
 
             // Set style and camera.
 
@@ -43,7 +52,23 @@ namespace ExLumina.SketchUp.Factory
                 new SU.Point3D(0, 0, 0),
                 new SU.Vector3D(0, 0, 1));
 
-            SU.ModelSaveToFileWithVersion(SUModelRef, path, SU.ModelVersion_SU2017);
+            SU.ModelSaveToFileWithVersion(suModelRef, path, SU.ModelVersion_SU2017);
+
+            SU.ModelRelease(suModelRef);
+
+            SU.Terminate();
+
+            // Mop up left-over references.
+
+            foreach (Material material in materials.Values)
+            {
+                material.suMaterialRef = null;
+            }
+
+            foreach (ComponentDefinition componentDefinition in componentDefinitions.Values)
+            {
+                componentDefinition.suComponentDefinitionRef = null;
+            }
         }
     }
 }

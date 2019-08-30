@@ -12,14 +12,14 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            using (Model model = new Model())
-            {
+            Model model = new Model();
+            
                 ComponentDefinition pointy = new ComponentDefinition(
                     model,
                     "Pointy",
                     "A Triangle");
 
-                pointy.entities.Add(
+                pointy.Entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(0, 0, 1));
@@ -29,7 +29,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                     "Flat",
                     "A Square");
 
-                flat.entities.Add(
+                flat.Entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
                     new Vector3(1, 0, 1),
@@ -44,7 +44,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 ci2.transform.translation.y = 1;
                 ci2.transform.rotation.z = -20;
 
-                flat.entities.Add(ci2);
+                flat.Entities.Add(ci2);
 
                 ComponentInstance ci = new ComponentInstance
                 {
@@ -52,10 +52,9 @@ namespace ExLumina.SketchUp.Factory.Examples
                     instanceName = "Quad the First"
                 };
 
-                model.entities.Add(ci);
+                model.Entities.Add(ci);
 
                 model.WriteSketchUpFile(path + @"\BackwardComponent.skp");
-            }
         }
     }
 }

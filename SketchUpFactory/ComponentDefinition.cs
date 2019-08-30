@@ -3,72 +3,60 @@ using System;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class ComponentDefinition : IEntitiesParent
+    public class ComponentDefinition : IHasEntities
     {
         public string name;
         public string description;
 
-        public Entities entities;
+        public Entities Entities { get; set; }
 
-        SU.ComponentDefinitionRef suComponentDefinitionRef;
+        // Used when packing ComponentInstances.
 
-        public SU.ComponentDefinitionRef SUComponentDefinitionRef
+        internal SU.ComponentDefinitionRef suComponentDefinitionRef;
+
+        public ComponentDefinition(
+            Model model,
+            string name = "<component definition name unset>",
+            string description = "<component definition description unset>")
         {
-            get
-            {
-                if (suComponentDefinitionRef == null)
-                {
-                    suComponentDefinitionRef = new SU.ComponentDefinitionRef();
-                    SU.ComponentDefinitionCreate(suComponentDefinitionRef);
-                }
-
-                return suComponentDefinitionRef;
-            }
-        }
-
-        SU.EntitiesRef suEntitiesRef;
-
-        public SU.EntitiesRef SUEntitiesRef
-        {
-            get
-            {
-                if (suEntitiesRef == null)
-                {
-                    suEntitiesRef = new SU.EntitiesRef();
-                    SU.ComponentDefinitionGetEntities(SUComponentDefinitionRef, suEntitiesRef);
-                }
-
-                return suEntitiesRef;
-            }
-        }
-
-        public ComponentDefinition(Model model, string name, string description)
-        {
-            // Did a forward reference (an instance of this definition that
-            // is part of some other definition that has already been loaded)
-            // create a placeholder?
-
-            //if (model.componentDefinitions.ContainsKey(name))
-            //{
-            //    ComponentDefinition ph = model.componentDefinitions[name];
-            //    suComponentDefinitionRef = ph.SUComponentDefinitionRef;
-            //    model.componentDefinitions.Remove(name);
-            //}
-
             model.componentDefinitions.Add(name, this);
-
             this.name = name;
             this.description = description;
-            entities = new Entities(this);
+            Entities = new Entities(model);
         }
 
-        public ComponentDefinition(Model parent)
-            : this(parent, "<Group name unset>", "<Group description unset>")
+        public ComponentDefinition(
+            Model model,
+            SU.ComponentDefinitionRef suComponentDefinitionRef)
         {
+            // Get the name.
 
+            SU.StringRef suStringRef = new SU.StringRef();
+            SU.StringCreate(suStringRef);
+
+            SU.ComponentDefinitionGetName(suComponentDefinitionRef, suStringRef);
+
+            name = Convert.ToStringAndRelease(suStringRef);
+
+            // Get the description.
+
+            suStringRef = new SU.StringRef();
+            SU.StringCreate(suStringRef);
+
+            SU.ComponentDefinitionGetDescription(suComponentDefinitionRef, suStringRef);
+
+            description = Convert.ToStringAndRelease(suStringRef);
+            
+            // Get the entities.
+
+            SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
+            
+            SU.ComponentDefinitionGetEntities(suComponentDefinitionRef, suEntitiesRef);
+
+            Entities = new Entities(model, suEntitiesRef);
         }
 
-        public void SULoad(Model model)
+        public void Pack(SU.ModelRef suModelRef)
         {
             // The SketchUp API appears to add a "persistent ID" to vertices,
             // edges, and faces, as they are added to definitions and groups.
@@ -86,25 +74,42 @@ namespace ExLumina.SketchUp.Factory
             //
             // To prevent all this from happening, we add the reference first.
 
+            GuaranteeReference();
+
             SU.ComponentDefinitionRef[] componentDefinitionsArray =
                 new SU.ComponentDefinitionRef[1];
 
-            componentDefinitionsArray[0] = SUComponentDefinitionRef;
+            componentDefinitionsArray[0] = suComponentDefinitionRef;
 
             SU.ModelAddComponentDefinitions(
-                model.SUModelRef,
+                suModelRef,
                 1,
                 componentDefinitionsArray);
 
             SU.ComponentDefinitionSetName(
-                SUComponentDefinitionRef,
+                suComponentDefinitionRef,
                 name);
 
             SU.ComponentDefinitionSetDescription(
-                SUComponentDefinitionRef,
+                suComponentDefinitionRef,
                 description);
 
-            entities.SULoad(model);
+            SU.EntitiesRef suMyEntitiesRef = new SU.EntitiesRef();
+
+            SU.ComponentDefinitionGetEntities(suComponentDefinitionRef, suMyEntitiesRef);
+
+            Entities.Pack(suMyEntitiesRef);
+        }
+
+        internal void GuaranteeReference()
+        {
+            if (suComponentDefinitionRef == null)
+            {
+                suComponentDefinitionRef =
+                    new SU.ComponentDefinitionRef();
+
+                SU.ComponentDefinitionCreate(suComponentDefinitionRef);
+            }
         }
     }
 }

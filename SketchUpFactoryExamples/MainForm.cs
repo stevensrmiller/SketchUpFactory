@@ -24,6 +24,8 @@ namespace ExLumina.SketchUp.Factory.Examples
             new ThreePlyTree("Three Ply Tree"),
             new GroupQuad("Group Quad"),
             new TexturedQuad("Textured Quad"),
+            new TexturedQuadSynth("Textured Quad Synth"),
+            new CopyModel("Copy a Model"),
         };
 
         public MainForm()
@@ -37,7 +39,7 @@ namespace ExLumina.SketchUp.Factory.Examples
 
             for (int index = 0; index < clbList.Items.Count; ++index)
             {
-                clbList.SetItemChecked(index, true);
+                clbList.SetItemChecked(index, false);
             }
         }
 

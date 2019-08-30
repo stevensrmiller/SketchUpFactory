@@ -20,7 +20,7 @@ namespace ExLumina.SketchUp.Factory
 
             for (int face = 0; face < numFaces; ++face)
             {
-                entities.Add(new Face(faceRefs[face]));
+                //entities.Add(new Face(faceRefs[face]));
             }
         }
     }

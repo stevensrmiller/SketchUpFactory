@@ -48,58 +48,57 @@ namespace ExLumina.SketchUp.Factory.Examples
                 1, 1, 1
             };
 
-            using (Model model = new Model())
+            Model model = new Model();
+
+            for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
-                for (int f = 0; f < coords.Length / (perFace * 3); ++f)
+                IList<Vector3> corners = new List<Vector3>();
+
+                for (int c = 0; c < perFace; ++c)
                 {
-                    IList<Vector3> corners = new List<Vector3>();
+                    int offset = (f * perFace + c) * 3;
 
-                    for (int c = 0; c < perFace; ++c)
-                    {
-                        int offset = (f * perFace + c) * 3;
-
-                        corners.Add(new Vector3(coords[offset] + 2,
-                                                coords[offset + 1],
-                                                coords[offset + 2]));
-                    }
-
-                    model.entities.Add(corners);
+                    corners.Add(new Vector3(coords[offset] + 2,
+                                            coords[offset + 1],
+                                            coords[offset + 2]));
                 }
 
-                for (int f = 0; f < coords.Length / (perFace * 3); ++f)
-                {
-                    IList<Vector3> corners = new List<Vector3>();
-
-                    for (int c = 0; c < perFace; ++c)
-                    {
-                        int offset = (f * perFace + c) * 3;
-
-                        corners.Add(new Vector3(coords[offset],
-                                                coords[offset + 1] + 2,
-                                                coords[offset + 2]));
-                    }
-
-                    model.entities.Add(corners);
-                }
-
-                for (int f = 0; f < coords.Length / (perFace * 3); ++f)
-                {
-                    IList<Vector3> corners = new List<Vector3>();
-
-                    for (int c = 0; c < perFace; ++c)
-                    {
-                        int offset = (f * perFace + c) * 3;
-
-                        corners.Add(new Vector3(coords[offset],
-                                                coords[offset + 1],
-                                                coords[offset + 2] + 2));
-                    }
-
-                    model.entities.Add(corners);
-                }
-
-                model.WriteSketchUpFile(path + @"\ThreeCubesWelded.skp");
+                model.Entities.Add(corners);
             }
+
+            for (int f = 0; f < coords.Length / (perFace * 3); ++f)
+            {
+                IList<Vector3> corners = new List<Vector3>();
+
+                for (int c = 0; c < perFace; ++c)
+                {
+                    int offset = (f * perFace + c) * 3;
+
+                    corners.Add(new Vector3(coords[offset],
+                                            coords[offset + 1] + 2,
+                                            coords[offset + 2]));
+                }
+
+                model.Entities.Add(corners);
+            }
+
+            for (int f = 0; f < coords.Length / (perFace * 3); ++f)
+            {
+                IList<Vector3> corners = new List<Vector3>();
+
+                for (int c = 0; c < perFace; ++c)
+                {
+                    int offset = (f * perFace + c) * 3;
+
+                    corners.Add(new Vector3(coords[offset],
+                                            coords[offset + 1],
+                                            coords[offset + 2] + 2));
+                }
+
+                model.Entities.Add(corners);
+            }
+
+            model.WriteSketchUpFile(path + @"\ThreeCubesWelded.skp");
         }
     }
 }

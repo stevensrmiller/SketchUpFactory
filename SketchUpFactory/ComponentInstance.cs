@@ -18,6 +18,12 @@ namespace ExLumina.SketchUp.Factory
         public string instanceName;
 
         public Transform transform;
+        
+        // Note that a ComponentInstance can upcast into a DrawingElement.
+        // As such, it can have an instance-wide Material set for it that
+        // SketchUp will use on any Faces that use the defalt Material.
+        // But you cannot set the ComponentInstance's material; you must
+        // upcast first.
 
         /// <summary>
         /// Create an instance with no rotation or translation, scale of one.
@@ -30,13 +36,18 @@ namespace ExLumina.SketchUp.Factory
             transform = new Transform();
         }
 
-        public void SULoad(Model model, SU.EntitiesRef entitiesRef)
+        public void Pack(Model model, SU.EntitiesRef entitiesRef)
         {
-            ComponentDefinition componentDefinition = 
+            ComponentDefinition componentDefinition =
                 model.componentDefinitions[definitionName];
 
+            // We might be making a forward reference, so guarantee
+            // that the ComponentDefinition has a SketchUp pointer.
+
+            componentDefinition.GuaranteeReference();
+
             SU.ComponentDefinitionRef componentDefinitionRef =
-                componentDefinition.SUComponentDefinitionRef;
+                componentDefinition.suComponentDefinitionRef;
 
             SU.ComponentInstanceRef componentInstanceRef =
                 new SU.ComponentInstanceRef();

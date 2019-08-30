@@ -46,16 +46,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Color.cs" />
-    <Compile Include="IEntitiesParent.cs" />
+    <Compile Include="IHasEntities.cs" />
+    <Compile Include="ImageBuffer.cs" />
+    <Compile Include="Model\UnPackComponentDefinitions.cs" />
+    <Compile Include="Model\UnPackMaterials.cs" />
     <Compile Include="Model\ReadSketchUpFile.cs" />
     <Compile Include="Model\ReadFaces.cs" />
+    <Compile Include="Pixel.cs" />
     <Compile Include="RayList.cs" />
+    <Compile Include="Convert.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="ComponentDefinition.cs" />
     <Compile Include="ComponentInstance.cs" />
     <Compile Include="Face\Face.cs" />
-    <Compile Include="Face\CreateFace.cs" />
+    <Compile Include="Face\Pack.cs" />
     <Compile Include="Model\WriteSketchUpFile.cs" />
     <Compile Include="Loop.cs" />
     <Compile Include="Material.cs" />

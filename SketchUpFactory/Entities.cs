@@ -16,14 +16,54 @@ namespace ExLumina.SketchUp.Factory
         public IList<Group> groups;
         public IList<ComponentInstance> componentInstances;
 
-        IEntitiesParent parent;
+        Model model;
 
-        public Entities(IEntitiesParent parent)
+        public Entities(Model model)
         {
-            this.parent = parent;
+            this.model = model;
             faces = new List<Face>();
             groups = new List<Group>();
             componentInstances = new List<ComponentInstance>();
+        }
+
+        public Entities(Model model, SU.EntitiesRef suEntitiesRef) : this(model)
+        {
+            // Get the Faces.
+
+            long count;
+
+            SU.EntitiesGetNumFaces(suEntitiesRef, out count);
+
+            SU.FaceRef[] faceRefs = new SU.FaceRef[count];
+
+            long len = count;
+
+            SU.EntitiesGetFaces(suEntitiesRef, len, faceRefs, out count);
+
+            foreach (SU.FaceRef faceRef in faceRefs)
+            {
+                faces.Add(new Face(faceRef));
+            }
+
+            // Get the groups.
+
+            SU.EntitiesGetNumGroups(suEntitiesRef, out count);
+
+            SU.GroupRef[] groupRefs = new SU.GroupRef[count];
+
+            len = count;
+
+            SU.EntitiesGetGroups(suEntitiesRef, len, groupRefs, out count);
+
+            foreach (SU.GroupRef groupRef in groupRefs)
+            {
+                groups.Add(new Group(model, this, groupRef));
+            }
+        }
+
+        public void Add(Group group)
+        {
+            groups.Add(group);
         }
 
         public void Add(IList<Vector3> vectorList)
@@ -74,26 +114,24 @@ namespace ExLumina.SketchUp.Factory
             faces.Add(new Face(rays));
         }
 
-        public void SULoad(Model model)
+        public void Pack(SU.EntitiesRef suEntitiesRef)
         {
-            SU.EntitiesRef entitiesRef = parent.SUEntitiesRef;
-
             // Faces
 
-            Face.SULoad(model, entitiesRef, faces);
+            Face.Pack(model, suEntitiesRef, faces);
 
             // Groups
 
             foreach (Group group in groups)
             {
-                group.SULoad(model, entitiesRef);
+                group.Pack(suEntitiesRef);
             }
 
             // Component instances
 
             foreach (ComponentInstance componentInstance in componentInstances)
             {
-                componentInstance.SULoad(model, entitiesRef);
+                componentInstance.Pack(model, suEntitiesRef);
             }
         }
     }

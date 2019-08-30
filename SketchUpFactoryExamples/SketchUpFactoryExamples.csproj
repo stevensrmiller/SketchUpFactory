@@ -59,7 +59,9 @@
     </Compile>
     <Compile Include="GroupQuad.cs" />
     <Compile Include="EmptyModel.cs" />
-    <Compile Include="Textured Quad.cs" />
+    <Compile Include="CopyModel.cs" />
+    <Compile Include="TexturedQuadSynth.cs" />
+    <Compile Include="TexturedQuad.cs" />
     <Compile Include="ThreePlyTree.cs" />
     <Compile Include="ThreeCubesWelded.cs" />
     <Compile Include="ThreeCubesApart.cs" />

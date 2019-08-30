@@ -49,6 +49,11 @@ namespace ExLumina.SketchUp.Factory
             this.translation = translation.Clone();
         }
 
+        public Transform(SU.Transformation suTransformation)
+        {
+
+        }
+
         internal SU.Transformation SUTransformation
         {
             get
