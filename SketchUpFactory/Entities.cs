@@ -16,6 +16,9 @@ namespace ExLumina.SketchUp.Factory
         public IList<Group> groups;
         public IList<ComponentInstance> componentInstances;
 
+        // This should be passed to Pack, and then on down,
+        // rather than saved here.
+
         Model model;
 
         public Entities(Model model)
@@ -28,7 +31,7 @@ namespace ExLumina.SketchUp.Factory
 
         public Entities(Model model, SU.EntitiesRef suEntitiesRef) : this(model)
         {
-            // Get the Faces.
+            // Get the faces.
 
             long count;
 
@@ -57,7 +60,22 @@ namespace ExLumina.SketchUp.Factory
 
             foreach (SU.GroupRef groupRef in groupRefs)
             {
-                groups.Add(new Group(model, this, groupRef));
+                groups.Add(new Group(model, groupRef));
+            }
+
+            // Get the instances.
+
+            SU.EntitiesGetNumInstances(suEntitiesRef, out count);
+
+            SU.ComponentInstanceRef[] instanceRefs = new SU.ComponentInstanceRef[count];
+
+            len = count;
+
+            SU.EntitiesGetInstances(suEntitiesRef, len, instanceRefs, out count);
+
+            foreach (SU.ComponentInstanceRef instanceRef in instanceRefs)
+            {
+                componentInstances.Add(new ComponentInstance(instanceRef));
             }
         }
 

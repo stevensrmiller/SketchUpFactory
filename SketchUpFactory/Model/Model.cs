@@ -42,15 +42,17 @@ namespace ExLumina.SketchUp.Factory
 
             SU.ModelCreateFromFile(suModelRef, path);
 
-            materials = UnPackMaterials(suModelRef);
+            materials = UnpackMaterials(suModelRef);
 
-            componentDefinitions = UnPackComponentDefinitions(this, suModelRef);
+            componentDefinitions = UnpackComponentDefinitions(this, suModelRef);
 
             SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
 
             SU.ModelGetEntities(suModelRef, suEntitiesRef);
 
             Entities = new Entities(this, suEntitiesRef);
+
+            SU.ModelRelease(suModelRef);
 
             SU.Terminate();
         }

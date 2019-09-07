@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactoryExamples", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactoryReader", "SketchUpFactoryReader\SketchUpFactoryReader.csproj", "{E010E3DB-6E8C-4294-ACD5-77CF02E9190D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SketchUpFactoryTransform", "SketchUpFactoryTransform\SketchUpFactoryTransform.csproj", "{30975180-3DC7-4A42-BDC7-C549CCFFB57D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E010E3DB-6E8C-4294-ACD5-77CF02E9190D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E010E3DB-6E8C-4294-ACD5-77CF02E9190D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E010E3DB-6E8C-4294-ACD5-77CF02E9190D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30975180-3DC7-4A42-BDC7-C549CCFFB57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30975180-3DC7-4A42-BDC7-C549CCFFB57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30975180-3DC7-4A42-BDC7-C549CCFFB57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30975180-3DC7-4A42-BDC7-C549CCFFB57D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

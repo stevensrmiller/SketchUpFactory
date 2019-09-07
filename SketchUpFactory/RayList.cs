@@ -9,7 +9,7 @@ namespace ExLumina.SketchUp.Factory
 {
     public class RayList
     {
-        internal IList<Ray> rays;
+        IList<Ray> rays;
 
         public IList<Ray> Rays { get => rays; }
 
@@ -23,6 +23,16 @@ namespace ExLumina.SketchUp.Factory
 
             SU.FaceGetOuterLoop(faceRef, loopRef);
 
+            RaysFromLoop(loopRef);
+        }
+
+        public RayList(SU.LoopRef loopRef)
+        {
+            RaysFromLoop(loopRef);
+        }
+
+        void RaysFromLoop(SU.LoopRef loopRef)
+        {
             long count;
 
             SU.LoopGetNumVertices(loopRef, out count);

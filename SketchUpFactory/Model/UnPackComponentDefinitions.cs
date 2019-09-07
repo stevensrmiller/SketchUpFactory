@@ -5,7 +5,7 @@ namespace ExLumina.SketchUp.Factory
 {
     public partial class Model
     {
-        static IDictionary<string, ComponentDefinition> UnPackComponentDefinitions(
+        static IDictionary<string, ComponentDefinition> UnpackComponentDefinitions(
             Model model, SU.ModelRef suModelRef)
         {
             //return new Dictionary<string, ComponentDefinition>();

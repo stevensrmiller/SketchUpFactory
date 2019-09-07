@@ -36,6 +36,39 @@ namespace ExLumina.SketchUp.Factory
             transform = new Transform();
         }
 
+        public ComponentInstance(SU.ComponentInstanceRef suInstanceRef)
+        {
+            // Get the transform.
+
+            SU.Transformation suTransformation = new SU.Transformation();
+
+            SU.ComponentInstanceGetTransform(suInstanceRef, out suTransformation);
+
+            transform = new Transform(suTransformation);
+
+            // Get the instance name.
+
+            SU.StringRef suStringRef = new SU.StringRef();
+            SU.StringCreate(suStringRef);
+
+            SU.ComponentInstanceGetName(suInstanceRef, suStringRef);
+
+            instanceName = Convert.ToStringAndRelease(suStringRef);
+
+            // Get the definition name.
+
+            SU.ComponentDefinitionRef suComponentDefinitionRef = new SU.ComponentDefinitionRef();
+
+            SU.ComponentInstanceGetDefinition(suInstanceRef, suComponentDefinitionRef);
+
+            suStringRef = new SU.StringRef();
+            SU.StringCreate(suStringRef);
+
+            SU.ComponentDefinitionGetName(suComponentDefinitionRef, suStringRef);
+
+            definitionName = Convert.ToStringAndRelease(suStringRef);
+        }
+
         public void Pack(Model model, SU.EntitiesRef entitiesRef)
         {
             ComponentDefinition componentDefinition =

@@ -41,7 +41,7 @@ namespace ExLumina.SketchUp.Factory
         }
 
         /// <summary>
-        /// Construct a Face equivalent to a SketchUp face.
+        /// Construct a Face from a SketchUp face.
         /// </summary>
         /// <param name="suFaceRef"></param>
         public Face(SU.FaceRef suFaceRef) : this()
@@ -50,24 +50,48 @@ namespace ExLumina.SketchUp.Factory
 
             UVHelper uvh = new UVHelper(suFaceRef);
 
-            // Get the outer edge descriptions.
+            // Get the outer loop.
 
             RayList rayList = new RayList(suFaceRef);
 
             uvh.Assign(rayList);
 
-            outerLoop = new Loop(rayList.rays);
+            outerLoop = new Loop(rayList);
+
+            // Get any inner loops.
+
+            long count;
+
+            SU.FaceGetNumInnerLoops(suFaceRef, out count);
+
+            SU.LoopRef[] loopRefs = new SU.LoopRef[count];
+
+            long len = count;
+
+            SU.FaceGetInnerLoops(suFaceRef, len, loopRefs, out count);
+
+            foreach (SU.LoopRef loopRef in loopRefs)
+            {
+                innerLoops.Add(new Loop(new RayList(loopRef)));
+            }
 
             SU.MaterialRef suMaterialRef = new SU.MaterialRef();
 
-            SU.FaceGetFrontMaterial(suFaceRef, suMaterialRef);
+            try
+            {
+                SU.FaceGetFrontMaterial(suFaceRef, suMaterialRef);
 
-            SU.StringRef suStringRef = new SU.StringRef();
-            SU.StringCreate(suStringRef);
+                SU.StringRef suStringRef = new SU.StringRef();
+                SU.StringCreate(suStringRef);
 
-            SU.MaterialGetNameLegacyBehavior(suMaterialRef, suStringRef);
+                SU.MaterialGetNameLegacyBehavior(suMaterialRef, suStringRef);
 
-            materialName = Convert.ToStringAndRelease(suStringRef);
+                materialName = Convert.ToStringAndRelease(suStringRef);
+            }
+            catch (NoMaterialException)
+            {
+                // Not an error. It just has no material.
+            }
         }
 
         public static void Pack(Model model, SU.EntitiesRef SUEntitiesRef, IList<Face> faces)

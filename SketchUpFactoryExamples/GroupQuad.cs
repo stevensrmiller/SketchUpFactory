@@ -14,7 +14,9 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            Group group = new Group(model, "I am a group name", model.Entities);
+            Group group = new Group(model, "I am a group name");
+
+            model.Entities.Add(group);
 
             group.Entities.Add(
                 new Vector3(-1, 0, -1),

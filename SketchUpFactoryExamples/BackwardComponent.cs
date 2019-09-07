@@ -22,7 +22,7 @@ namespace ExLumina.SketchUp.Factory.Examples
                 pointy.Entities.Add(
                     new Vector3(-1, 0, -1),
                     new Vector3(1, 0, -1),
-                    new Vector3(0, 0, 1));
+                    new Vector3(0, 0, 3));
 
                 ComponentDefinition flat = new ComponentDefinition(
                     model,
@@ -41,10 +41,12 @@ namespace ExLumina.SketchUp.Factory.Examples
                     instanceName = "Tri the Angle"
                 };
 
-                ci2.transform.translation.y = 1;
-                ci2.transform.rotation.z = -20;
+                ci2.transform.translation.y = 10;
+                ci2.transform.rotation.x = 45;
+                ci2.transform.rotation.y = 90;
+                ci2.transform.rotation.z = -40;
 
-                flat.Entities.Add(ci2);
+            flat.Entities.Add(ci2);
 
                 ComponentInstance ci = new ComponentInstance
                 {

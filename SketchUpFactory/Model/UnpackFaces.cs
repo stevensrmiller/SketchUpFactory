@@ -1,11 +1,11 @@
-﻿using ExLumina.SketchUp.API;
-using System;
+﻿using System;
+using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
     public partial class Model
     {
-        public void ReadFaces(SU.EntitiesRef entitiesRef)
+        public void UnpackFaces(SU.EntitiesRef entitiesRef)
         {
             // Get the faces.
 
@@ -18,9 +18,11 @@ namespace ExLumina.SketchUp.Factory
 
             // Add each Face to the Geometry.
 
+            Console.WriteLine("# FACES = {0}", numFacesRetrieved);
+
             for (int face = 0; face < numFaces; ++face)
             {
-                //entities.Add(new Face(faceRefs[face]));
+                Entities.Add(new Face(faceRefs[face]));
             }
         }
     }

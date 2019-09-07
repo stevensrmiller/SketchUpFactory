@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0C864E60-D7AF-42E8-B12E-CF7A9AA45740}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExLumina.SketchUp.Factory</RootNamespace>
-    <AssemblyName>SketchUpFactory</AssemblyName>
+    <ProjectGuid>{30975180-3DC7-4A42-BDC7-C549CCFFB57D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SketchUpFactoryTransform</RootNamespace>
+    <AssemblyName>SketchUpFactoryTransform</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -20,9 +21,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,7 +37,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,37 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Color.cs" />
-    <Compile Include="IHasEntities.cs" />
-    <Compile Include="ImageBuffer.cs" />
-    <Compile Include="Model\UnpackComponentDefinitions.cs" />
-    <Compile Include="Model\UnpackMaterials.cs" />
-    <Compile Include="Model\UnpackFaces.cs" />
-    <Compile Include="Pixel.cs" />
-    <Compile Include="RayList.cs" />
-    <Compile Include="Convert.cs" />
-    <Compile Include="Transform.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="ComponentDefinition.cs" />
-    <Compile Include="ComponentInstance.cs" />
-    <Compile Include="Face\Face.cs" />
-    <Compile Include="Face\Pack.cs" />
-    <Compile Include="Model\WriteSketchUpFile.cs" />
-    <Compile Include="Loop.cs" />
-    <Compile Include="Material.cs" />
-    <Compile Include="Entities.cs" />
-    <Compile Include="Model\Model.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ray.cs" />
-    <Compile Include="Texture.cs" />
-    <Compile Include="UVHelper.cs" />
-    <Compile Include="Vector2.cs" />
-    <Compile Include="Vector3.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Base.style">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SketchUpFactory\SketchUpFactory.csproj">
+      <Project>{0c864e60-d7af-42e8-b12e-cf7a9aa45740}</Project>
+      <Name>SketchUpFactory</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

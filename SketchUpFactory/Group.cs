@@ -11,19 +11,16 @@ namespace ExLumina.SketchUp.Factory
 
         public Group(
             Model model,
-            string name = "<group name unset>",
-            Entities owner = null)
+            string name = "<group name unset>")
         {
             Entities = new Entities(model);
             this.name = name;
             transform = new Transform();
-            owner?.Add(this);
         }
 
         public Group(
             Model model,
-            SU.GroupRef suGroupRef,
-            Entities owner)
+            SU.GroupRef suGroupRef)
         {
             // Get the transform.
 
@@ -49,8 +46,6 @@ namespace ExLumina.SketchUp.Factory
             SU.GroupGetEntities(suGroupRef, suEntitiesRef);
 
             Entities = new Entities(model, suEntitiesRef);
-
-            owner.Add(this);
         }
 
         public void Pack(SU.EntitiesRef suEntitiesRef)

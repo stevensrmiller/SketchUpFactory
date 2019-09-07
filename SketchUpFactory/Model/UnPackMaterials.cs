@@ -6,7 +6,7 @@ namespace ExLumina.SketchUp.Factory
 {
     public partial class Model
     {
-        static IDictionary<string, Material> UnPackMaterials(SU.ModelRef suModelRef)
+        static IDictionary<string, Material> UnpackMaterials(SU.ModelRef suModelRef)
         {
             long count;
 
