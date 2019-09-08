@@ -1,4 +1,5 @@
 ﻿using ExLumina.SketchUp.API;
+using System;
 
 namespace ExLumina.SketchUp.Factory
 {
@@ -18,6 +19,8 @@ namespace ExLumina.SketchUp.Factory
         public string instanceName;
 
         public Transform transform;
+
+        public string materialName;
         
         // Note that a ComponentInstance can upcast into a DrawingElement.
         // As such, it can have an instance-wide Material set for it that
@@ -67,6 +70,37 @@ namespace ExLumina.SketchUp.Factory
             SU.ComponentDefinitionGetName(suComponentDefinitionRef, suStringRef);
 
             definitionName = Convert.ToStringAndRelease(suStringRef);
+
+            // Upcast to a DrawingElement and get the material name.
+
+            SU.DrawingElementRef drawingElementRef =
+                SU.ComponentInstanceToDrawingElement(suInstanceRef);
+
+            SU.MaterialRef suMaterialRef = new SU.MaterialRef();
+
+            try
+            {
+                SU.DrawingElementGetMaterial(drawingElementRef, suMaterialRef);
+
+                suStringRef = new SU.StringRef();
+                SU.StringCreate(suStringRef);
+
+                SU.MaterialGetNameLegacyBehavior(suMaterialRef, suStringRef);
+
+                materialName = Convert.ToStringAndRelease(suStringRef);
+            }
+            catch (SketchUpException e)
+            {
+                if (e.ErrorCode == SU.ErrorNoData)
+                {
+                    // Not an error. It just has no material.
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
         }
 
         public void Pack(Model model, SU.EntitiesRef entitiesRef)
@@ -101,6 +135,28 @@ namespace ExLumina.SketchUp.Factory
             SU.ComponentInstanceSetTransform(
                 componentInstanceRef,
                 transform.SUTransformation);
+
+            if (materialName != null)
+            {
+                Material material = null;
+
+                try
+                {
+                    material = model.materials[materialName];
+                }
+                catch (Exception e)
+                {
+                    string msg = "\nCould not find a material named " + materialName;
+                    throw new Exception(e.Message + msg);
+                }
+
+                SU.DrawingElementRef drawingElementRef =
+                    SU.ComponentInstanceToDrawingElement(componentInstanceRef);
+
+                SU.DrawingElementSetMaterial(
+                    drawingElementRef,
+                    material.suMaterialRef);
+            }
         }
     }
 }

@@ -88,9 +88,16 @@ namespace ExLumina.SketchUp.Factory
 
                 materialName = Convert.ToStringAndRelease(suStringRef);
             }
-            catch (NoMaterialException)
+            catch (SketchUpException e)
             {
-                // Not an error. It just has no material.
+                if (e.ErrorCode == SU.ErrorNoData)
+                {
+                    // Not an error. It just has no material.
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
 
