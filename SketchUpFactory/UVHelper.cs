@@ -2,7 +2,7 @@
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class UVHelper
+    internal class UVHelper
     {
         SU.UVHelperRef uvHelperRef;
 
@@ -20,23 +20,23 @@ namespace ExLumina.SketchUp.Factory
                 uvHelperRef);
         }
 
-        public void Assign(RayList rayList)
+        public void Assign(EdgePointList rayList)
         {
-            foreach (Ray ray in rayList.Rays)
+            foreach (EdgePoint ray in rayList.EdgePoints)
             {
-                ray.uvCoords = Coords(ray.vertex);
+                ray.UVCoords = Coords(ray.Vertex);
             }
         }
 
-        public Vector2 Coords(Vector3 v)
+        public Point2 Coords(Point3 v)
         {
-            SU.Point3D point = new SU.Point3D(v.x, v.y, v.z);
+            SU.Point3D point = new SU.Point3D(v.X, v.Y, v.Z);
 
             SU.UVQ uvq = new SU.UVQ();
             
             SU.UVHelperGetFrontUVQ(uvHelperRef, point, out uvq);
 
-            return new Vector2(uvq.u / uvq.q, uvq.v / uvq.q);
+            return new Point2(uvq.u / uvq.q, uvq.v / uvq.q);
         }
     }
 }

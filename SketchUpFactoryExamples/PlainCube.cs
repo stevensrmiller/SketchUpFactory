@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ExLumina.SketchUp.Factory;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a plain cube made of six quads.
+
     class PlainCube : Example
     {
         public PlainCube(string display) : base(display)
@@ -52,20 +53,18 @@ namespace ExLumina.SketchUp.Factory.Examples
 
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
-                IList<Vector3> corners = new List<Vector3>();
+                IList<Point3> corners = new List<Point3>();
 
                 for (int c = 0; c < perFace; ++c)
                 {
                     int offset = (f * perFace + c) * 3;
 
-                    corners.Add(new Vector3(coords[offset],
+                    corners.Add(new Point3(coords[offset],
                                             coords[offset + 1],
                                             coords[offset + 2]));
                 }
 
-                Face face = new Face(corners);
-
-                model.Entities.Add(face);
+                model.Add(corners);
             }
 
             model.WriteSketchUpFile(path + @"\PlainCube.skp");

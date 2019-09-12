@@ -1,8 +1,10 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using ExLumina.SketchUp.Factory;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a single textured quad that uses a material
+    // creted at run-time.
+
     class TexturedQuadSynth : Example
     {
         public TexturedQuadSynth(string display) : base(display)
@@ -14,15 +16,17 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            Face face = new Face(
-                new Ray(-1, 0, -1, false, 0, 0),
-                new Ray(1, 0, -1, false, 1, 0),
-                new Ray(1, 0, 1, false, 1, 1),
-                new Ray(-1, 0, 1, false, 0, 1));
+            EdgePoint[] facePoints =
+            {
+                new EdgePoint(-1, 0, -1, false, 0, 0),
+                new EdgePoint(1, 0, -1, false, 1, 0),
+                new EdgePoint(1, 0, 1, false, 1, 1),
+                new EdgePoint(-1, 0, 1, false, 0, 1)
+            };
 
-            face.materialName = "Synthetic Material";
+            Face face = new Face(facePoints, "Synthetic Material");
 
-            model.Entities.Add(face);
+            model.Add(face);
 
             ImageBuffer img = new ImageBuffer(256, 256, 32);
 
@@ -37,9 +41,6 @@ namespace ExLumina.SketchUp.Factory.Examples
             Texture tex = new Texture(img);
 
             model.Add(new Material("Synthetic Material", tex));
-
-            //Console.WriteLine(JsonConvert.SerializeObject(model,
-            //                    Newtonsoft.Json.Formatting.Indented));
 
             model.WriteSketchUpFile(path + @"\TexturedQuadSynth.skp");
         }

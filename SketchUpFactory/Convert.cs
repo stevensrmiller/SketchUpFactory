@@ -3,7 +3,7 @@ using System.Text;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public static class Convert
+    internal static class Convert
     {
         public static string ToString(SU.StringRef suStringRef)
         {

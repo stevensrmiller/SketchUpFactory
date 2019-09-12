@@ -1,8 +1,10 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using ExLumina.SketchUp.Factory;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a component definition with a reference back to
+    // another definition previously created.
+
     class BackwardComponent : Example
     {
         public BackwardComponent(string display) : base(display)
@@ -13,50 +15,84 @@ namespace ExLumina.SketchUp.Factory.Examples
         public override void Run(string path)
         {
             Model model = new Model();
-            
-                ComponentDefinition pointy = new ComponentDefinition(
-                    model,
-                    "Pointy",
-                    "A Triangle");
 
-                pointy.Entities.Add(
-                    new Vector3(-1, 0, -1),
-                    new Vector3(1, 0, -1),
-                    new Vector3(0, 0, 3));
+            // Create a definition in a triangle shape.
 
-                ComponentDefinition flat = new ComponentDefinition(
-                    model,
-                    "Flat",
-                    "A Square");
+            CompDef pointy = new CompDef("Pointy", "A Triangle");
 
-                flat.Entities.Add(
-                    new Vector3(-1, 0, -1),
-                    new Vector3(1, 0, -1),
-                    new Vector3(1, 0, 1),
-                    new Vector3(-1, 0, 1));
+            // Add the definition to the model.
 
-                ComponentInstance ci2 = new ComponentInstance
-                {
-                    definitionName = "Pointy",
-                    instanceName = "Tri the Angle"
-                };
+            model.Add(pointy);
 
-                ci2.transform.translation.y = 10;
-                ci2.transform.rotation.x = 45;
-                ci2.transform.rotation.y = 90;
-                ci2.transform.rotation.z = -40;
+            // Lay out the points of the triangle.
 
-            flat.Entities.Add(ci2);
+            Point3[] pointyPoints =
+            {
+                new Point3(-1, 0, -1),
+                new Point3(1, 0, -1),
+                new Point3(0, 0, 3)
+            };
 
-                ComponentInstance ci = new ComponentInstance
-                {
-                    definitionName = "Flat",
-                    instanceName = "Quad the First"
-                };
+            // Use them to add a face to the definition.
 
-                model.Entities.Add(ci);
+            pointy.Add(pointyPoints);
 
-                model.WriteSketchUpFile(path + @"\BackwardComponent.skp");
+            // Create a definition in a square shape.
+
+            CompDef flat = new CompDef(
+                "Flat",
+                "A Square");
+
+            // Add the definition to the model.
+
+            model.Add(flat);
+
+            // Lay out the points of a square.
+
+            Point3[] flatPoints =
+            {
+                new Point3(-1, 0, -1),
+                new Point3(1, 0, -1),
+                new Point3(1, 0, 1),
+                new Point3(-1, 0, 1)
+            };
+
+            // Use them to add a face to the definition.
+
+            flat.Add(flatPoints);
+
+            // Create an instance of the triangle.
+
+            CompInst ci2 = new CompInst
+            {
+                ComponentName = "Pointy",
+                InstanceName = "Tri the Angle"
+            };
+
+            // Move it away from the square.
+
+            ci2.Transform.Translation.Y = 10;
+            ci2.Transform.Rotation.X = 45;
+            ci2.Transform.Rotation.Y = 90;
+            ci2.Transform.Rotation.Z = -40;
+
+            // Add the instance of the triangle to the square's definition.
+
+            flat.Add(ci2);
+
+            // Create an instance of the square (which now includes the triangle).
+
+            CompInst ci = new CompInst
+            {
+                ComponentName = "Flat",
+                InstanceName = "Quad the First"
+            };
+
+            // Add that instance of the square to the model.
+
+            model.Add(ci);
+
+            model.WriteSketchUpFile(path + @"\BackwardComponent.skp");
         }
     }
 }

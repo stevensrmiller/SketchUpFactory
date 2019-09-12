@@ -1,8 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using ExLumina.SketchUp.Factory;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a group with a quad in it.
+
     class GroupQuad : Example
     {
         public GroupQuad(string display) : base(display)
@@ -14,18 +15,19 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            Group group = new Group(model, "I am a group name");
+            Group group = new Group("I am a group name");
 
-            model.Entities.Add(group);
+            model.Add(group);
 
-            group.Entities.Add(
-                new Vector3(-1, 0, -1),
-                new Vector3(1, 0, -1),
-                new Vector3(1, 0, 1),
-                new Vector3(-1, 0, 1));
+            Point3[] quadPoints =
+            {
+                new Point3(-1, 0, -1),
+                new Point3(1, 0, -1),
+                new Point3(1, 0, 1),
+                new Point3(-1, 0, 1)
+            };
 
-            //Console.WriteLine(JsonConvert.SerializeObject(model,
-            //                    Newtonsoft.Json.Formatting.Indented));
+            group.Add(quadPoints);
 
             model.WriteSketchUpFile(path + @"\GroupQuad.skp");
         }

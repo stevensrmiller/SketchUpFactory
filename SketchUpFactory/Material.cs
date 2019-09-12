@@ -3,16 +3,26 @@ using System;
 
 namespace ExLumina.SketchUp.Factory
 {
+    /// <summary>
+    /// Represents a color or texture for a Face, Group, or CompInst instance.
+    /// </summary>
     public class Material
     {
-        public string name;
-        public Color color;
+        /// <summary>
+        /// The Material's display name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// If this Material is a color, set/get it here. Do not alter this for textures.
+        /// </summary>
+        public Color Color { get; set; }
 
         /// <summary>
         /// null means no Texture set for this Material.
         /// </summary>
-        public Texture texture;
-
+        public Texture Texture { get; set; }
+        
         // Used when packing Faces.
 
         internal SU.MaterialRef suMaterialRef;
@@ -20,28 +30,42 @@ namespace ExLumina.SketchUp.Factory
         int suMaterialType;
         int suMaterialColorizeType;
 
+        /// <summary>
+        /// Create a black Material with no Texture.
+        /// </summary>
+        /// <param name="name"></param>
         public Material(string name)
         {
-            this.name = name;
-            this.color = new Color();
-            this.texture = null;
+            this.Name = name;
+            this.Color = new Color();
+            this.Texture = null;
 
             suMaterialType = SU.MaterialType_Colored;
             suMaterialColorizeType = SU.MaterialColorizeType_Shift;
         }
 
+        /// <summary>
+        /// Create a Material that has a Texture.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="texture"></param>
         public Material(string name, Texture texture) : this(name)
         {
-            this.texture = texture;
+            this.Texture = texture;
             suMaterialType = SU.MaterialType_Textured;
         }
 
+        /// <summary>
+        /// Create a Material with a color, but no Texture.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
         public Material(string name, Color color) : this(name)
         {
-            this.color = color;
+            this.Color = color;
         }
 
-        public Material(SU.MaterialRef suMaterialRef)
+        internal Material(SU.MaterialRef suMaterialRef)
         {
             // Get the name.
 
@@ -50,7 +74,7 @@ namespace ExLumina.SketchUp.Factory
 
             SU.MaterialGetNameLegacyBehavior(suMaterialRef, suStringRef);
 
-            name = Convert.ToStringAndRelease(suStringRef);
+            Name = Convert.ToStringAndRelease(suStringRef);
 
             // Get the types.
 
@@ -68,7 +92,7 @@ namespace ExLumina.SketchUp.Factory
 
                     SU.MaterialGetColor(suMaterialRef, out suColor);
 
-                    color = new Color(suColor);
+                    Color = new Color(suColor);
 
                     break;
 
@@ -78,7 +102,7 @@ namespace ExLumina.SketchUp.Factory
 
                     SU.MaterialGetTexture(suMaterialRef, suTextureRef);
 
-                    texture = new Texture(suTextureRef);
+                    Texture = new Texture(suTextureRef);
 
                     break;
 
@@ -86,13 +110,13 @@ namespace ExLumina.SketchUp.Factory
 
                     SU.MaterialGetColor(suMaterialRef, out suColor);
 
-                    color = new Color(suColor);
+                    Color = new Color(suColor);
 
                     suTextureRef = new SU.TextureRef();
 
                     SU.MaterialGetTexture(suMaterialRef, suTextureRef);
 
-                    texture = new Texture(suTextureRef);
+                    Texture = new Texture(suTextureRef);
 
                     break;
 
@@ -101,36 +125,36 @@ namespace ExLumina.SketchUp.Factory
             }
         }
 
-        public void Pack(SU.ModelRef suModelRef)
+        internal void Pack(SU.ModelRef suModelRef)
         {
 
             suMaterialRef = new SU.MaterialRef();
             SU.MaterialCreate(suMaterialRef);
 
-            SU.MaterialSetName(suMaterialRef, name);
+            SU.MaterialSetName(suMaterialRef, Name);
 
             switch (suMaterialType)
             {
                 case SU.MaterialType_Colored:
 
-                    SU.MaterialSetColor(suMaterialRef, color.SUColor);
+                    SU.MaterialSetColor(suMaterialRef, Color.SUColor);
 
                     break;
 
                 case SU.MaterialType_Textured:
 
-                    texture.Pack();
-                    SU.MaterialSetTexture(suMaterialRef, texture.suTextureRef);
+                    Texture.Pack();
+                    SU.MaterialSetTexture(suMaterialRef, Texture.textureRef);
 
                     break;
 
                 case SU.MaterialType_ColorizedTexture:
 
-                    SU.MaterialSetColor(suMaterialRef, color.SUColor);
+                    SU.MaterialSetColor(suMaterialRef, Color.SUColor);
                     SU.MaterialSetColorizeType(suMaterialRef, suMaterialColorizeType);
 
-                    texture.Pack();
-                    SU.MaterialSetTexture(suMaterialRef, texture.suTextureRef);
+                    Texture.Pack();
+                    SU.MaterialSetTexture(suMaterialRef, Texture.textureRef);
 
                     break;
 

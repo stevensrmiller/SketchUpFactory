@@ -1,34 +1,25 @@
 ﻿using ExLumina.SketchUp.API;
-using System;
-using System.Collections.Generic;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model
+    public partial class Model : Entities
     {
-        static IDictionary<string, Material> UnpackMaterials(SU.ModelRef suModelRef)
+        void UnpackMaterials(SU.ModelRef modelRef)
         {
-            long count;
+            SU.ModelGetNumMaterials(modelRef, out long count);
 
-            SU.ModelGetNumMaterials(suModelRef, out count);
-
-            SU.MaterialRef[] suMaterialRefs = new SU.MaterialRef[count];
+            SU.MaterialRef[] materialRefs = new SU.MaterialRef[count];
 
             long len = count;
 
-            SU.ModelGetMaterials(suModelRef, len, suMaterialRefs, out count);
+            SU.ModelGetMaterials(modelRef, len, materialRefs, out count);
 
-            Dictionary<string, Material> materials = 
-                new Dictionary<string, Material>();
-
-            foreach (SU.MaterialRef suMaterialRef in suMaterialRefs)
+            foreach (SU.MaterialRef materialRef in materialRefs)
             {
-                Material material = new Material(suMaterialRef);
+                Material material = new Material(materialRef);
 
-                materials.Add(material.name, material);
+                materials.Add(material.Name, material);
             }
-
-            return materials;
         }
     }
 }

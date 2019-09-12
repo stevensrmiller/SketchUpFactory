@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
     static class Program
     {

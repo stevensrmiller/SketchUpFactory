@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExLumina.SketchUp.Factory.Run.Properties {
+namespace ExLumina.Examples.SketchUp.Factory.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ExLumina.SketchUp.Factory.Run.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExLumina.SketchUp.Factory.Examples.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExLumina.Examples.SketchUp.Factory.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

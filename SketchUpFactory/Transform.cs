@@ -12,7 +12,7 @@ namespace ExLumina.SketchUp.Factory
         /// For Unity, x is to the right, y is up, and z is away.
         /// For SketchUp, x is to the right, y is away, and z is up.
         /// </remarks>
-        public Vector3 scale;
+        public Point3 Scale { get; set; }
 
         /// <summary>
         /// Rotation individually in world or parent coordinates.
@@ -21,7 +21,7 @@ namespace ExLumina.SketchUp.Factory
         /// For Unity, x is to the right, y is up, and z is away.
         /// For SketchUp, x is to the right, y is away, and z is up.
         /// </remarks>
-        public Vector3 rotation;
+        public Point3 Rotation { get; set; }
 
         /// <summary>
         /// Translation along world or parent coordinates.
@@ -30,50 +30,59 @@ namespace ExLumina.SketchUp.Factory
         /// For Unity, x is to the right, y is up, and z is away.
         /// For SketchUp, x is to the right, y is away, and z is up.
         /// </remarks>
-        public Vector3 translation;
+        public Point3 Translation { get; set; }
 
+        /// <summary>
+        /// Create an identity Transform
+        /// </summary>
         public Transform()
         {
-            scale = new Vector3(1, 1, 1);
-            rotation = new Vector3(0, 0, 0);
-            translation = new Vector3(0, 0, 0);
+            Scale = new Point3(1, 1, 1);
+            Rotation = new Point3(0, 0, 0);
+            Translation = new Point3(0, 0, 0);
         }
 
+        /// <summary>
+        /// Create a new Transform with specified scale, Euler angles, and translation.
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <param name="rotation"></param>
+        /// <param name="translation"></param>
         public Transform(
-            Vector3 scale,
-            Vector3 rotation,
-            Vector3 translation)
+            Point3 scale,
+            Point3 rotation,
+            Point3 translation)
         {
-            this.scale       = scale.Clone();
-            this.rotation    = rotation.Clone();
-            this.translation = translation.Clone();
+            this.Scale       = scale.Clone();
+            this.Rotation    = rotation.Clone();
+            this.Translation = translation.Clone();
         }
 
         /// <summary>
         /// Use an existing SketchUp transformation to initialize this Transform.
         /// </summary>
         /// <param name="t"></param>
-        public Transform(SU.Transformation t) :this()
+        internal Transform(SU.Transformation t) :this()
         {
             // Translation is a literal copy of column 3.
 
-            translation.x = t[0, 3];
-            translation.y = t[1, 3];
-            translation.z = t[2, 3];
+            Translation.X = t[0, 3];
+            Translation.Y = t[1, 3];
+            Translation.Z = t[2, 3];
 
             // Squared scales are sums of squares of left three columns.
 
-            scale.x = Math.Sqrt(
+            Scale.X = Math.Sqrt(
                 t[0, 0] * t[0, 0] +
                 t[1, 0] * t[1, 0] +
                 t[2, 0] * t[2, 0]);
 
-            scale.y = Math.Sqrt(
+            Scale.Y = Math.Sqrt(
                 t[0, 1] * t[0, 1] +
                 t[1, 1] * t[1, 1] +
                 t[2, 1] * t[2, 1]);
 
-            scale.z = Math.Sqrt(
+            Scale.Z = Math.Sqrt(
                 t[0, 2] * t[0, 2] +
                 t[1, 2] * t[1, 2] +
                 t[2, 2] * t[2, 2]);
@@ -84,18 +93,18 @@ namespace ExLumina.SketchUp.Factory
 
             for (int row = 0; row < 3; ++row)
             {
-                r[row, 0] = t[row, 0] / scale.x;
-                r[row, 1] = t[row, 1] / scale.y;
-                r[row, 2] = t[row, 2] / scale.z;
+                r[row, 0] = t[row, 0] / Scale.X;
+                r[row, 1] = t[row, 1] / Scale.Y;
+                r[row, 2] = t[row, 2] / Scale.Z;
             }
 
             // Negate the scales and the matrix if its determinant is negative.
 
             if (Determinant(r) < 0)
             {
-                scale.x = -scale.x;
-                scale.y = -scale.y;
-                scale.z = -scale.z;
+                Scale.X = -Scale.X;
+                Scale.Y = -Scale.Y;
+                Scale.Z = -Scale.Z;
 
                 for (int row = 0; row < 3; ++row)
                 {
@@ -108,28 +117,27 @@ namespace ExLumina.SketchUp.Factory
 
             // Use inverse trig to get the angles.
 
-            rotation.y = Math.Asin(-r[2, 0]) * 180 / Math.PI;
+            Rotation.Y = Math.Asin(-r[2, 0]) * 180 / Math.PI;
 
             // Edge case where y rotation is 90 degrees.
 
             if (1 - r[2, 0] * r[2, 0] == 0)
             {
-                rotation.x = Math.Atan2(-r[1, 2], r[1, 1]) * 180 / Math.PI;
-                rotation.z = 0;
+                Rotation.X = Math.Atan2(-r[1, 2], r[1, 1]) * 180 / Math.PI;
+                Rotation.Z = 0;
             }
             else
             {
-                rotation.x = Math.Atan2(r[2, 1], r[2, 2]) * 180 / Math.PI;
-                rotation.z = Math.Atan2(r[1, 0], r[0, 0]) * 180 / Math.PI;
+                Rotation.X = Math.Atan2(r[2, 1], r[2, 2]) * 180 / Math.PI;
+                Rotation.Z = Math.Atan2(r[1, 0], r[0, 0]) * 180 / Math.PI;
             }
         }
 
-        // TODO: make this internal
-        public SU.Transformation SUTransformation
+        internal SU.Transformation SUTransformation
         {
             get
             {
-                // Note that we use premultiply the running matrix with each
+                // Note that we must premultiply the running matrix with each
                 // successive transformation, so each will be in world space,
                 // not body space.
 
@@ -139,9 +147,9 @@ namespace ExLumina.SketchUp.Factory
 
                 SU.TransformationNonUniformScale(
                     ref transformationS,
-                    scale.x,
-                    scale.y,
-                    scale.z);
+                    Scale.X,
+                    Scale.Y,
+                    Scale.Z);
 
                 // Apply rotation in the YZ plane (around X/red axis). X * S => SX
 
@@ -151,7 +159,7 @@ namespace ExLumina.SketchUp.Factory
                     ref transformationX,
                     new SU.Point3D(0, 0, 0),
                     new SU.Vector3D(1, 0, 0),
-                    rotation.x * Math.PI / 180);
+                    Rotation.X * Math.PI / 180);
 
                 SU.Transformation transformationSX = new SU.Transformation();
 
@@ -168,7 +176,7 @@ namespace ExLumina.SketchUp.Factory
                     ref transformationY,
                     new SU.Point3D(0, 0, 0),
                     new SU.Vector3D(0, 1, 0),
-                    rotation.y * Math.PI / 180);
+                    Rotation.Y * Math.PI / 180);
 
                 SU.Transformation transformationSXY = new SU.Transformation();
 
@@ -185,7 +193,7 @@ namespace ExLumina.SketchUp.Factory
                     ref transformationZ,
                     new SU.Point3D(0, 0, 0),
                     new SU.Vector3D(0, 0, 1),
-                    rotation.z * Math.PI / 180);
+                    Rotation.Z * Math.PI / 180);
 
                 SU.Transformation transformationSXYZ = new SU.Transformation();
 
@@ -201,9 +209,9 @@ namespace ExLumina.SketchUp.Factory
                 SU.TransformationTranslation(
                     ref transformationT,
                     new SU.Vector3D(
-                        translation.x,
-                        translation.y,
-                        translation.z));
+                        Translation.X,
+                        Translation.Y,
+                        Translation.Z));
 
                 SU.Transformation transformationSXYZT = new SU.Transformation();
 

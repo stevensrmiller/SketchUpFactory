@@ -3,28 +3,35 @@
     /// <summary>
     /// Store a planar value. Use for any two doubles mapped to axes.
     /// </summary>
-    public class Vector2
+    public class Point2
     {
-        public double x;
-        public double y;
+        /// <summary>
+        /// X coordinate.
+        /// </summary>
+        public double X { get; set; }
+
+        /// <summary>
+        /// Y coordinate.
+        /// </summary>
+        public double Y { get; set; }
 
         /// <summary>
         /// Create a point in a plane with initial values.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Vector2(
+        public Point2(
             double x,
             double y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         /// <summary>
         /// Create a point in a plane at the origin.
         /// </summary>
-        public Vector2() : this(0, 0)
+        public Point2() : this(0, 0)
         {
 
         }

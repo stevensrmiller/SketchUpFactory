@@ -1,8 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using ExLumina.SketchUp.Factory;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a model with nothing in it.
+
     class EmptyModel : Example
     {
         public EmptyModel(string display) : base(display)

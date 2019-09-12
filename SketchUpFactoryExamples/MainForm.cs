@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
     public partial class MainForm : Form
     {
@@ -140,6 +140,7 @@ namespace ExLumina.SketchUp.Factory.Examples
             this.Controls.Add(this.btnRunExamples);
             this.Controls.Add(this.btnSetLocation);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SkecthUpFactory Examples";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);

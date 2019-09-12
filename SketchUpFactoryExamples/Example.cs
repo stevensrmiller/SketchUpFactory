@@ -1,5 +1,8 @@
-﻿namespace ExLumina.SketchUp.Factory.Examples
+﻿namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Parent class for examples to provide a uniform interface
+    // and display format for the list of checkboxes.
+
     abstract class Example
     {
         readonly string name;

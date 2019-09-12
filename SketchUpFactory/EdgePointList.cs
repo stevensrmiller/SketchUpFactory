@@ -1,37 +1,33 @@
-﻿using System;
+﻿using ExLumina.SketchUp.API;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class RayList
+    internal class EdgePointList
     {
-        IList<Ray> rays;
+        IList<EdgePoint> edgePoints;
 
-        public IList<Ray> Rays { get => rays; }
+        public IList<EdgePoint> EdgePoints { get => edgePoints; }
 
         /// <summary>
-        /// Extract the Rays for the outer loop.
+        /// Extract the EdgePoints for the outer loop.
         /// </summary>
         /// <param name="faceRef"></param>
-        public RayList(SU.FaceRef faceRef)
+        public EdgePointList(SU.FaceRef faceRef)
         {
             SU.LoopRef loopRef = new SU.LoopRef();
 
             SU.FaceGetOuterLoop(faceRef, loopRef);
 
-            RaysFromLoop(loopRef);
+            EdgePointsFromLoop(loopRef);
         }
 
-        public RayList(SU.LoopRef loopRef)
+        public EdgePointList(SU.LoopRef loopRef)
         {
-            RaysFromLoop(loopRef);
+            EdgePointsFromLoop(loopRef);
         }
 
-        void RaysFromLoop(SU.LoopRef loopRef)
+        void EdgePointsFromLoop(SU.LoopRef loopRef)
         {
             long count;
 
@@ -47,13 +43,13 @@ namespace ExLumina.SketchUp.Factory
 
             SU.LoopGetVertices(loopRef, len, vertexRefs, out count);
 
-            rays = new List<Ray>();
+            edgePoints = new List<EdgePoint>();
 
             // The dread pirate Parallel Arrays.
 
             for (int i = 0; i < len; ++i)
             {
-                rays.Add(new Ray(edgeRefs[i], vertexRefs[i]));
+                edgePoints.Add(new EdgePoint(edgeRefs[i], vertexRefs[i]));
             }
         }
     }

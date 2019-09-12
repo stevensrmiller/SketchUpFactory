@@ -2,46 +2,46 @@
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model
+    public partial class Model : Entities
     {
         public void WriteSketchUpFile(string path)
         {
             SU.Initialize();
 
-            SU.ModelRef suModelRef = new SU.ModelRef();
-            SU.ModelCreate(suModelRef);
+            SU.ModelRef modelRef = new SU.ModelRef();
+            SU.ModelCreate(modelRef);
 
             // Load the SketchUp structures for our materials.
 
             foreach (Material material in materials.Values)
             {
-                material.Pack(suModelRef);
+                material.Pack(modelRef);
             }
 
             // Load the SketchUp structures for our component definitions.
 
-            foreach (ComponentDefinition componentDefinition in componentDefinitions.Values)
+            foreach (CompDef componentDefinition in components.Values)
             {
-                componentDefinition.Pack(suModelRef);
+                componentDefinition.Pack(this, modelRef);
             }
 
             // Load the SketchUp structures for our entities.
 
-            SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
+            SU.EntitiesRef entitiesRef = new SU.EntitiesRef();
 
-            SU.ModelGetEntities(suModelRef, suEntitiesRef);
+            SU.ModelGetEntities(modelRef, entitiesRef);
 
-            Entities.Pack(suEntitiesRef);
-
+            //entities.Pack(this, entitiesRef);
+            Pack(this, entitiesRef);
             // Set style and camera.
 
             SU.StylesRef stylesRef = new SU.StylesRef();
-            SU.ModelGetStyles(suModelRef, stylesRef);
+            SU.ModelGetStyles(modelRef, stylesRef);
             SU.StylesAddStyle(stylesRef, "base.style", true);
 
             SU.CameraRef cameraRef = new SU.CameraRef();
 
-            SU.ModelGetCamera(suModelRef, cameraRef);
+            SU.ModelGetCamera(modelRef, cameraRef);
 
             SU.CameraSetOrientation(
                 cameraRef,
@@ -52,9 +52,9 @@ namespace ExLumina.SketchUp.Factory
                 new SU.Point3D(0, 0, 0),
                 new SU.Vector3D(0, 0, 1));
 
-            SU.ModelSaveToFileWithVersion(suModelRef, path, SU.ModelVersion_SU2017);
+            SU.ModelSaveToFileWithVersion(modelRef, path, SU.ModelVersion_SU2017);
 
-            SU.ModelRelease(suModelRef);
+            SU.ModelRelease(modelRef);
 
             SU.Terminate();
 
@@ -65,9 +65,9 @@ namespace ExLumina.SketchUp.Factory
                 material.suMaterialRef = null;
             }
 
-            foreach (ComponentDefinition componentDefinition in componentDefinitions.Values)
+            foreach (CompDef componentDefinition in components.Values)
             {
-                componentDefinition.suComponentDefinitionRef = null;
+                componentDefinition.componentDefinitionRef = null;
             }
         }
     }

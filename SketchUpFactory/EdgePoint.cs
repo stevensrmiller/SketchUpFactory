@@ -5,41 +5,41 @@ namespace ExLumina.SketchUp.Factory
     /// <summary>
     /// Defines an edge in a Loop.
     /// </summary>
-    public class Ray
+    public class EdgePoint
     {
         /// <summary>
         /// Starting point for the edge.
         /// </summary>
-        public Vector3 vertex;
+        public Point3 Vertex { get; set; }
 
         /// <summary>
         /// Marks the edge for smooth (curved) rendering.
         /// </summary>
-        public bool isSmooth;
+        public bool IsSmooth { get; set; }
 
         /// <summary>
         /// Index into a Material Texture, or null.
         /// </summary>
-        public Vector2 uvCoords;
+        public Point2 UVCoords { get; set; }
 
-        public Ray()
+        public EdgePoint()
         {
-            vertex = new Vector3();
+            Vertex = new Point3();
         }
 
-        public Ray(double x, double y, double z) : this()
+        public EdgePoint(double x, double y, double z) : this()
         {
-            vertex.x = x;
-            vertex.y = y;
-            vertex.z = z;
+            Vertex.X = x;
+            Vertex.Y = y;
+            Vertex.Z = z;
         }
 
-        public Ray(double x, double y, double z, bool isSmooth) : this(x, y, z)
+        public EdgePoint(double x, double y, double z, bool isSmooth) : this(x, y, z)
         {
-            this.isSmooth = isSmooth;
+            this.IsSmooth = isSmooth;
         }
 
-        public Ray(
+        public EdgePoint(
             double x,
             double y,
             double z,
@@ -47,7 +47,7 @@ namespace ExLumina.SketchUp.Factory
             double u,
             double v) : this(x, y, z, softEdge)
         {
-            uvCoords = new Vector2(u, v);
+            UVCoords = new Point2(u, v);
         }
 
         /// <summary>
@@ -55,31 +55,33 @@ namespace ExLumina.SketchUp.Factory
         /// </summary>
         /// <param name="vector"></param>
         /// <returns></returns>
-        public Ray(Vector3 vector) : this(vector.x, vector.y, vector.z)
+        public EdgePoint(Point3 vector) : this(vector.X, vector.Y, vector.Z)
         {
 
         }
 
-        public Ray(SU.EdgeRef edgeRef, SU.VertexRef vertexRef)
+        internal EdgePoint(SU.EdgeRef edgeRef, SU.VertexRef vertexRef)
         {
-            SU.EdgeGetSmooth(edgeRef, out isSmooth);
+            SU.EdgeGetSmooth(edgeRef, out bool isSmooth);
+
+            IsSmooth = IsSmooth;
 
             SU.Point3D point = new SU.Point3D();
 
             SU.VertexGetPosition(vertexRef, ref point);
 
-            vertex = new Vector3(point);
+            Vertex = new Point3(point);
         }
 
-        public Ray Clone()
+        public EdgePoint Clone()
         {
-            Ray ray = new Ray(vertex.x, vertex.y, vertex.z);
+            EdgePoint ray = new EdgePoint(Vertex.X, Vertex.Y, Vertex.Z);
 
-            ray.isSmooth = isSmooth;
+            ray.IsSmooth = IsSmooth;
 
-            if (uvCoords != null)
+            if (UVCoords != null)
             {
-                ray.uvCoords = new Vector2(uvCoords.x, uvCoords.y);
+                ray.UVCoords = new Point2(UVCoords.X, UVCoords.Y);
             }
 
             return ray;

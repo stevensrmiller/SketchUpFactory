@@ -1,8 +1,10 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using ExLumina.SketchUp.Factory;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a hierarchy of nested components, three
+    // plies deep.
+
     class ThreePlyTree : Example
     {
         public ThreePlyTree(string display) : base(display)
@@ -12,102 +14,115 @@ namespace ExLumina.SketchUp.Factory.Examples
 
         public override void Run(string path)
         {
-            ComponentInstance ci;
+            CompInst ci;
 
             Model model = new Model();
 
             // Define the root level.
 
-            ComponentDefinition def = new ComponentDefinition(
-                model,
+            CompDef def = new CompDef(
                 "Flat",
                 "A Square");
 
-            def.Entities.Add(
-                new Vector3(-1, 0, -1),
-                new Vector3(1, 0, -1),
-                new Vector3(1, 0, 1),
-                new Vector3(-1, 0, 1));
+            model.Add(def);
+
+            Point3[] flatPoints =
+            {
+                new Point3(-1, 0, -1),
+                new Point3(1, 0, -1),
+                new Point3(1, 0, 1),
+                new Point3(-1, 0, 1)
+            };
+
+            def.Add(flatPoints);
 
             // Two branches.
 
-            ci = new ComponentInstance
+            ci = new CompInst
             {
-                definitionName = "Pointy",
-                instanceName = "On the right."
+                ComponentName = "Pointy",
+                InstanceName = "On the right."
             };
 
-            ci.transform.translation.x = 3;
-            ci.transform.translation.z = 3;
+            ci.Transform.Translation.X = 3;
+            ci.Transform.Translation.Z = 3;
 
-            def.Entities.Add(ci);
+            def.Add(ci);
 
-            ci = new ComponentInstance
+            ci = new CompInst
             {
-                definitionName = "Pointy",
-                instanceName = "On the left."
+                ComponentName = "Pointy",
+                InstanceName = "On the left."
             };
 
-            ci.transform.translation.x = -3;
-            ci.transform.translation.z = 3;
+            ci.Transform.Translation.X = -3;
+            ci.Transform.Translation.Z = 3;
 
-            def.Entities.Add(ci);
+            def.Add(ci);
 
-            ci = new ComponentInstance
+            ci = new CompInst
             {
-                definitionName = "Flat",
-                instanceName = "At the origin."
+                ComponentName = "Flat",
+                InstanceName = "At the origin."
             };
 
-            model.Entities.Add(ci);
+            model.Add(ci);
 
-            ComponentDefinition pointy = new ComponentDefinition(
-                model,
+            CompDef pointy = new CompDef(
                 "Pointy",
                 "A Triangle");
 
-            pointy.Entities.Add(
-                new Vector3(-1, 0, -1),
-                new Vector3(1, 0, -1),
-                new Vector3(0, 0, 1));
+
+            Point3[] pointyPoints =
+            {
+                new Point3(-1, 0, -1),
+                new Point3(1, 0, -1),
+                new Point3(0, 0, 1)
+            };
+
+            pointy.Add(pointyPoints);
+
+            model.Add(pointy);
 
             // Two branches of its own.
 
-            ci = new ComponentInstance
+            ci = new CompInst
             {
-                definitionName = "Skinny",
-                instanceName = "On the far upper right."
+                ComponentName = "Skinny",
+                InstanceName = "On the far upper right."
             };
 
-            ci.transform.translation.x = 3;
-            ci.transform.translation.z = 3;
+            ci.Transform.Translation.X = 3;
+            ci.Transform.Translation.Z = 3;
 
-            pointy.Entities.Add(ci);
+            pointy.Add(ci);
 
-            ci = new ComponentInstance
+            ci = new CompInst
             {
-                definitionName = "Skinny",
-                instanceName = "On the far upper left."
+                ComponentName = "Skinny",
+                InstanceName = "On the far upper left."
             };
 
-            ci.transform.translation.x = -3;
-            ci.transform.translation.z = 3;
+            ci.Transform.Translation.X = -3;
+            ci.Transform.Translation.Z = 3;
 
-            pointy.Entities.Add(ci);
+            pointy.Add(ci);
 
-            //Console.WriteLine(JsonConvert.SerializeObject(model,
-            //                    Newtonsoft.Json.Formatting.Indented));
-
-            ComponentDefinition skinny = new ComponentDefinition(
-                model,
+            CompDef skinny = new CompDef(
                 "Skinny",
                 "A Slim Quad");
 
-            skinny.Entities.Add(
-                new Vector3(-.2, 0, -1),
-                new Vector3(.2, 0, -1),
-                new Vector3(.2, 0, 1),
-                new Vector3(-.2, 0, 1));
+            Point3[] pts =
+            {
+                new Point3(-.2, 0, -1),
+                new Point3(.2, 0, -1),
+                new Point3(.2, 0, 1),
+                new Point3(-.2, 0, 1)
+            };
+
+            skinny.Add(pts);
+
+            model.Add(skinny);
 
             model.WriteSketchUpFile(path + @"\ThreePlyTree.skp");
 

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using ExLumina.SketchUp.Factory;
+using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a torus. It can be plain, but this one is set
+    // to have a modulated surface.
+
     class PlainTorus : Example
     {
         const int ringSteps = 96;
@@ -22,13 +25,13 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             // Compute the ring.
 
-            Vector3[] ring = new Vector3[ringSteps];
+            Point3[] ring = new Point3[ringSteps];
 
             for (int ringStep = 0; ringStep < ringSteps; ++ringStep)
             {
                 double theta = ringStep * 2 * Math.PI / ringSteps;
 
-                ring[ringStep] = new Vector3(
+                ring[ringStep] = new Point3(
                     ringRadius * Math.Cos(theta) + pieRadius,
                     0,
                     ringRadius * Math.Sin(theta));
@@ -47,17 +50,15 @@ namespace ExLumina.SketchUp.Factory.Examples
 
                 for (int ringStep = 0; ringStep < ringSteps; ++ringStep)
                 {
-                    //Ray[] corners = new Ray[3];
-                    //Vector3[] corners = new Vector3[3];
-                    IList<Ray> corners = new List<Ray>();
+                    IList<EdgePoint> corners = new List<EdgePoint>();
 
-                    double x = ring[ringStep].x;
-                    double y = ring[ringStep].y;
-                    double z = ring[ringStep].z;
+                    double x = ring[ringStep].X;
+                    double y = ring[ringStep].Y;
+                    double z = ring[ringStep].Z;
 
-                    double xNext = ring[((ringStep + 1) % ringSteps)].x;
-                    double yNext = ring[((ringStep + 1) % ringSteps)].y;
-                    double zNext = ring[((ringStep + 1) % ringSteps)].z;
+                    double xNext = ring[((ringStep + 1) % ringSteps)].X;
+                    double yNext = ring[((ringStep + 1) % ringSteps)].Y;
+                    double zNext = ring[((ringStep + 1) % ringSteps)].Z;
 
                     double xMod;
                     double yMod;
@@ -99,18 +100,18 @@ namespace ExLumina.SketchUp.Factory.Examples
                     double y3 = xMod * Math.Sin(theta0) + yMod * Math.Cos(theta0);
                     double z3 = zMod;
 
-                    corners.Add(new Ray(x1, y1, z1, true));
-                    corners.Add(new Ray(x2, y2, z2, true));
-                    corners.Add(new Ray(x3, y3, z3, true));
+                    corners.Add(new EdgePoint(x1, y1, z1, true));
+                    corners.Add(new EdgePoint(x2, y2, z2, true));
+                    corners.Add(new EdgePoint(x3, y3, z3, true));
 
-                    model.Entities.Add(corners);
+                    model.Add(corners);
 
                     corners.Clear();
-                    corners.Add(new Ray(x0, y0, z0, true));
-                    corners.Add(new Ray(x1, y1, z1, true));
-                    corners.Add(new Ray(x3, y3, z3, true));
+                    corners.Add(new EdgePoint(x0, y0, z0, true));
+                    corners.Add(new EdgePoint(x1, y1, z1, true));
+                    corners.Add(new EdgePoint(x3, y3, z3, true));
 
-                    model.Entities.Add(corners);
+                    model.Add(corners);
                 }
             }
 

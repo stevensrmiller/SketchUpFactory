@@ -3,48 +3,70 @@ using System.Collections.Generic;
 
 namespace ExLumina.SketchUp.Factory
 {
+    /// <summary>
+    /// A polygon with one outer loop, zero to many inner loops.
+    /// </summary>
     public partial class Face
     {
-        public Loop outerLoop;
-        public IList<Loop> innerLoops;
+        /// <summary>
+        /// Name of the material to use on this face.
+        /// </summary>
+        /// <remarks>
+        /// null means no Material set for this Face (use the default material).
+        /// </remarks>
+        public string MaterialName { get; set; }
+
+        //Loop outerLoop = new Loop();
+        //IList<Loop> innerLoops = new List<Loop>();
+
+        IList<EdgePoint> outerLoop = new List<EdgePoint>();
+        IList<IList<EdgePoint>> innerLoops = new List<IList<EdgePoint>>();
 
         /// <summary>
-        /// null means no Material set for this Face.
+        /// Construct a Face from an array of Point3 objects.
         /// </summary>
-        public string materialName;
-
-        public Face(IHasEntities owner = null)
-        {
-            outerLoop = new Loop();
-            innerLoops = new List<Loop>();
-            owner?.Entities.Add(this);
-        }
-
-        public Face(params Vector3[] points) : this()
+        /// <param name="points"></param>
+        /// <param name="materialName">Optional.</param>
+        public Face(Point3[] points, string materialName = null)
         {
             AddPoints(points);
-        }
-
-        public Face(IList<Vector3> points) : this()
-        {
-            AddPoints(points);
-        }
-
-        public Face(params Ray[] rays) : this()
-        {
-            AddRays(rays);
-        }
-
-        public Face(IList<Ray> rays) : this()
-        {
-            AddRays(rays);
+            MaterialName = materialName;
         }
 
         /// <summary>
-        /// Construct a Face from a SketchUp face.
+        /// Construct a Face from a list of Point3 objects.
         /// </summary>
-        /// <param name="suFaceRef"></param>
-        public Face(SU.FaceRef suFaceRef) : this()
+        /// <param name="points"></param>
+        /// <param name="materialName">Optional.</param>
+        public Face(IList<Point3> points, string materialName = null)
+        {
+            AddPoints(points);
+            MaterialName = materialName;
+        }
+
+        /// <summary>
+        /// Construct a Face from an array of EdgePoints.
+        /// </summary>
+        /// <param name="edgePoints"></param>
+        /// <param name="materialName">Optional.</param>
+        public Face(EdgePoint[] edgePoints, string materialName = null)
+        {
+            AddEdgePoints(edgePoints);
+            MaterialName = materialName;
+        }
+
+        /// <summary>
+        /// Construct a Face from a list of EdgePoints.
+        /// </summary>
+        /// <param name="edgePoints"></param>
+        /// <param name="materialName">Optional.</param>
+        public Face(IList<EdgePoint> edgePoints, string materialName = null)
+        {
+            AddEdgePoints(edgePoints);
+            MaterialName = materialName;
+        }
+
+        internal Face(SU.FaceRef suFaceRef)
         {
             // Get its UVHelper for texture-mapping coordinates.
 
@@ -52,17 +74,15 @@ namespace ExLumina.SketchUp.Factory
 
             // Get the outer loop.
 
-            RayList rayList = new RayList(suFaceRef);
+            EdgePointList edgePointList = new EdgePointList(suFaceRef);
 
-            uvh.Assign(rayList);
+            uvh.Assign(edgePointList);
 
-            outerLoop = new Loop(rayList);
+            outerLoop = new Loop(edgePointList).edgePoints;
 
             // Get any inner loops.
 
-            long count;
-
-            SU.FaceGetNumInnerLoops(suFaceRef, out count);
+            SU.FaceGetNumInnerLoops(suFaceRef, out long count);
 
             SU.LoopRef[] loopRefs = new SU.LoopRef[count];
 
@@ -72,7 +92,8 @@ namespace ExLumina.SketchUp.Factory
 
             foreach (SU.LoopRef loopRef in loopRefs)
             {
-                innerLoops.Add(new Loop(new RayList(loopRef)));
+                innerLoops.Add(
+                    new Loop(new EdgePointList(loopRef)).edgePoints);
             }
 
             SU.MaterialRef suMaterialRef = new SU.MaterialRef();
@@ -86,7 +107,7 @@ namespace ExLumina.SketchUp.Factory
 
                 SU.MaterialGetNameLegacyBehavior(suMaterialRef, suStringRef);
 
-                materialName = Convert.ToStringAndRelease(suStringRef);
+                MaterialName = Convert.ToStringAndRelease(suStringRef);
             }
             catch (SketchUpException e)
             {
@@ -101,7 +122,7 @@ namespace ExLumina.SketchUp.Factory
             }
         }
 
-        public static void Pack(Model model, SU.EntitiesRef SUEntitiesRef, IList<Face> faces)
+        internal static void Pack(Model model, SU.EntitiesRef entitiesRef, IList<Face> faces)
         {
             SU.GeometryInputRef geometryInputRef = new SU.GeometryInputRef();
             SU.GeometryInputCreate(geometryInputRef);
@@ -115,25 +136,25 @@ namespace ExLumina.SketchUp.Factory
 
             if (faces.Count > 0)
             {
-                SU.EntitiesFill(SUEntitiesRef, geometryInputRef, true);
+                SU.EntitiesFill(entitiesRef, geometryInputRef, true);
             }
 
             SU.GeometryInputRelease(geometryInputRef);
         }
 
-        void AddPoints(IEnumerable<Vector3> points)
+        void AddPoints(IEnumerable<Point3> points)
         {
-            foreach (Vector3 point in points)
+            foreach (Point3 point in points)
             {
-                outerLoop.rays.Add(new Ray(point));
+                outerLoop.Add(new EdgePoint(point));
             }
         }
 
-        void AddRays(IEnumerable<Ray> rays)
+        void AddEdgePoints(IEnumerable<EdgePoint> edgePoints)
         {
-            foreach (Ray ray in rays)
+            foreach (EdgePoint edgePoint in edgePoints)
             {
-                outerLoop.rays.Add(ray.Clone());
+                outerLoop.Add(edgePoint.Clone());
             }
         }
     }

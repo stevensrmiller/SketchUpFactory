@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using ExLumina.SketchUp.Factory;
+using System.Collections.Generic;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create three cubes from six quads each, without asking them
+    // explicitly to be welded together. SketchUp will tend to weld
+    // them if you manipulate them in the editor anyway.
+
     class ThreeCubesApart : Example
     {
         public ThreeCubesApart(string display) : base(display)
@@ -48,58 +53,55 @@ namespace ExLumina.SketchUp.Factory.Examples
 
             Model model = new Model();
 
-            Entities entities = model.Entities;
-
-
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
-                IList<Vector3> corners = new List<Vector3>();
+                IList<Point3> corners = new List<Point3>();
 
                 for (int c = 0; c < perFace; ++c)
                 {
                     int offset = (f * perFace + c) * 3;
 
-                    corners.Add(new Vector3(coords[offset] + 2,
+                    corners.Add(new Point3(coords[offset] + 2,
                                             coords[offset + 1],
                                             coords[offset + 2]));
                 }
 
-                entities.Add(corners);
+                model.Add(corners);
             }
 
 
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
-                IList<Vector3> corners = new List<Vector3>();
+                IList<Point3> corners = new List<Point3>();
 
                 for (int c = 0; c < perFace; ++c)
                 {
                     int offset = (f * perFace + c) * 3;
 
-                    corners.Add(new Vector3(coords[offset],
+                    corners.Add(new Point3(coords[offset],
                                             coords[offset + 1] + 2,
                                             coords[offset + 2]));
                 }
 
-                entities.Add(corners);
+                model.Add(corners);
             }
 
 
 
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
-                IList<Vector3> corners = new List<Vector3>();
+                IList<Point3> corners = new List<Point3>();
 
                 for (int c = 0; c < perFace; ++c)
                 {
                     int offset = (f * perFace + c) * 3;
 
-                    corners.Add(new Vector3(coords[offset],
+                    corners.Add(new Point3(coords[offset],
                                             coords[offset + 1],
                                             coords[offset + 2] + 2));
                 }
 
-                entities.Add(corners);
+                model.Add(corners);
             }
 
 

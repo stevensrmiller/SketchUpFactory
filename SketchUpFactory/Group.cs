@@ -1,54 +1,108 @@
-﻿using System;
-using ExLumina.SketchUp.API;
+﻿using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public class Group : IHasEntities
+    /// <summary>
+    /// A collection of entities that can be part of a Model or Component.
+    /// </summary>
+    public class Group : Entities
     {
-        public string name;
-        public Transform transform;
-        public Entities Entities { get; set; }
+        const string defaultName = "<group name unset>";
 
-        public Group(
-            Model model,
-            string name = "<group name unset>")
+        /// <summary>
+        /// Display name for the Group.
+        /// </summary>
+        public string Name { get; set; } = defaultName;
+
+        /// <summary>
+        /// Orientation with respect to Group's parent.
+        /// </summary>
+        /// <remarks>
+        /// If the Group has no parent, orientation is with
+        /// respect to world coordinates.
+        /// </remarks>
+        public Transform Transform { get; set; } = new Transform();
+
+        /// <summary>
+        /// Override material for faces using default material in the Group.
+        /// </summary>
+        public string MaterialName { get; set; }
+
+        /// <summary>
+        /// Create an empty Group.
+        /// </summary>
+        /// <param name="name">Display name for the Group.</param>
+        public Group(string name = defaultName)
         {
-            Entities = new Entities(model);
-            this.name = name;
-            transform = new Transform();
+            Name = name;
         }
 
-        public Group(
-            Model model,
-            SU.GroupRef suGroupRef)
+        internal Group(
+            SU.GroupRef groupRef)
         {
             // Get the transform.
 
-            SU.Transformation suTransformation = new SU.Transformation();
+            SU.Transformation transformation = new SU.Transformation();
 
-            SU.GroupGetTransform(suGroupRef, out suTransformation);
+            SU.GroupGetTransform(groupRef, out transformation);
 
-            transform = new Transform(suTransformation);
+            Transform = new Transform(transformation);
 
             // Get the name.
 
-            SU.StringRef suStringRef = new SU.StringRef();
-            SU.StringCreate(suStringRef);
+            SU.StringRef stringRef = new SU.StringRef();
+            SU.StringCreate(stringRef);
 
-            SU.GroupGetName(suGroupRef, suStringRef);
+            SU.GroupGetName(groupRef, stringRef);
 
-            name = Convert.ToStringAndRelease(suStringRef);
+            Name = Convert.ToStringAndRelease(stringRef);
+
+            // Note that a Group can upcast into a DrawingElement.
+            // As such, it can have an instance-wide Material set for it that
+            // SketchUp will use on any Faces that use the defalt Material.
+            // But you cannot set the Group's material; you must
+            // upcast first.
+
+            // Upcast to a DrawingElement and get the material name.
+
+            SU.DrawingElementRef drawingElementRef =
+                SU.GroupToDrawingElement(groupRef);
+
+            SU.MaterialRef materialRef = new SU.MaterialRef();
+
+            try
+            {
+                SU.DrawingElementGetMaterial(drawingElementRef, materialRef);
+
+                stringRef = new SU.StringRef();
+                SU.StringCreate(stringRef);
+
+                SU.MaterialGetNameLegacyBehavior(materialRef, stringRef);
+
+                MaterialName = Convert.ToStringAndRelease(stringRef);
+            }
+            catch (SketchUpException e)
+            {
+                if (e.ErrorCode == SU.ErrorNoData)
+                {
+                    // Not an error. It just has no material.
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             // Get the entities.
 
-            SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
+            SU.EntitiesRef entitiesRef = new SU.EntitiesRef();
 
-            SU.GroupGetEntities(suGroupRef, suEntitiesRef);
+            SU.GroupGetEntities(groupRef, entitiesRef);
 
-            Entities = new Entities(model, suEntitiesRef);
+            UnpackEntities(entitiesRef);
         }
 
-        public void Pack(SU.EntitiesRef suEntitiesRef)
+        internal new void Pack(Model model, SU.EntitiesRef entitiesRef)
         {
             // The SketchUp API appears to add a "persistent ID" to vertices,
             // edges, and faces, as they are added to definitions and groups.
@@ -66,26 +120,27 @@ namespace ExLumina.SketchUp.Factory
             //
             // To prevent all this from happening, we add the reference first.
 
-            SU.GroupRef suGroupRef = new SU.GroupRef();
-            SU.GroupCreate(suGroupRef);
+            SU.GroupRef groupRef = new SU.GroupRef();
+            SU.GroupCreate(groupRef);
 
-            SU.EntitiesAddGroup(suEntitiesRef, suGroupRef);
+            SU.EntitiesAddGroup(entitiesRef, groupRef);
 
-            SU.EntitiesRef suMyEntitiesRef = new SU.EntitiesRef();
+            SU.EntitiesRef myEntitiesRef = new SU.EntitiesRef();
 
-            SU.GroupGetEntities(suGroupRef, suMyEntitiesRef);
+            SU.GroupGetEntities(groupRef, myEntitiesRef);
 
-            Entities.Pack(suMyEntitiesRef);
+            //entities.Pack(model, myEntitiesRef);
+            base.Pack(model, myEntitiesRef);
 
             // Set the group's name and transformation..
 
             SU.GroupSetName(
-                suGroupRef,
-                name);
+                groupRef,
+                Name);
 
             SU.GroupSetTransform(
-                suGroupRef,
-                transform.SUTransformation);
+                groupRef,
+                Transform.SUTransformation);
         }
     }
 }

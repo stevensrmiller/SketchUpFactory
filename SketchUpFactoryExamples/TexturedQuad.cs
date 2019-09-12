@@ -1,8 +1,11 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using ExLumina.SketchUp.Factory;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a model with material, and a quad textured with
+    // that material. The material is created from a file that
+    // must be in the start-up directory.
+
     class TexturedQuad : Example
     {
         public TexturedQuad(string display) : base(display)
@@ -14,16 +17,19 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            Face face = new Face(
-                new Ray(-1, 0, -1, false, 0, 0),
-                new Ray(1, 0, -1, false, 1, 0),
-                new Ray(1, 0, 1, false, 1, 1),
-                new Ray(-1, 0, 1, false, 0, 1));
+            EdgePoint[] facePoints =
+            {
+                new EdgePoint(-1, 0, -1, false, 0, 0),
+                new EdgePoint(1, 0, -1, false, 1, 0),
+                new EdgePoint(1, 0, 1, false, 1, 1),
+                new EdgePoint(-1, 0, 1, false, 0, 1)
+            };
 
-            face.materialName = "Place Holder";
+            Face face = new Face(facePoints);
 
-            model.Entities.Add(face);
+            face.MaterialName = "Place Holder";
 
+            model.Add(face);
 
             model.Add(new Material("Place Holder", new Texture("PlaceHolderRGBY.png")));
 

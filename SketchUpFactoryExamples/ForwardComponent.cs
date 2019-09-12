@@ -1,8 +1,10 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using ExLumina.SketchUp.Factory;
 
-namespace ExLumina.SketchUp.Factory.Examples
+namespace ExLumina.Examples.SketchUp.Factory
 {
+    // Create a component definition with a reference forward to
+    // another definition not yet created.
+
     class ForwardComponent : Example
     {
         public ForwardComponent(string display) : base(display)
@@ -14,46 +16,56 @@ namespace ExLumina.SketchUp.Factory.Examples
         {
             Model model = new Model();
 
-            ComponentDefinition flat = new ComponentDefinition(
-                model,
+            CompDef flat = new CompDef(
                 "Flat",
                 "A Square");
 
-            flat.Entities.Add(
-                new Vector3(-1, 0, -1),
-                new Vector3(1, 0, -1),
-                new Vector3(1, 0, 1),
-                new Vector3(-1, 0, 1));
-
-            ComponentInstance ci2 = new ComponentInstance
+            Point3[] flatPoints =
             {
-                definitionName = "Pointy",
-                instanceName = "Tri the Angle"
+                new Point3(-1, 0, -1),
+                new Point3(1, 0, -1),
+                new Point3(1, 0, 1),
+                new Point3(-1, 0, 1)
             };
 
-            ci2.transform.translation.y = 1;
-            ci2.transform.rotation.z = -20;
+            flat.Add(flatPoints);
 
-            flat.Entities.Add(ci2);
+            model.Add(flat);
 
-
-            ComponentInstance ci = new ComponentInstance
+            CompInst ci2 = new CompInst
             {
-                definitionName = "Flat",
-                instanceName = "Quad the First"
+                // Refer here to a Component we'll create later.
+
+                ComponentName = "Pointy",
+                InstanceName = "Tri the Angle"
             };
 
-            model.Entities.Add(ci);
+            ci2.Transform.Translation.Y = 1;
+            ci2.Transform.Rotation.Z = -20;
 
-            ComponentDefinition pointy = new ComponentDefinition(
-                model,
+            flat.Add(ci2);
+
+            CompInst ci = new CompInst
+            {
+                ComponentName = "Flat",
+                InstanceName = "Quad the First"
+            };
+
+            model.Add(ci);
+
+            CompDef pointy = new CompDef(
                 "Pointy",
                 "A Triangle");
 
-            pointy.Entities.Add(
-                new Vector3(-1, 0, -1),
-                new Vector3(1, 0, -1),
-                new Vector3(0, 0, 1));
+            Point3[] pointyPoints =
+            {
+                new Point3(-1, 0, -1),
+                new Point3(1, 0, -1),
+                new Point3(0, 0, 1)
+            };
+
+            pointy.Add(pointyPoints);
+            model.Add(pointy);
 
             model.WriteSketchUpFile(path + @"\ForwardComponent.skp");
         }

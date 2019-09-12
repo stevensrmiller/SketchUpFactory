@@ -5,7 +5,7 @@ namespace ExLumina.SketchUp.Factory
 {
     public partial class Face
     {
-        public void Pack(
+        void Pack(
             Model model,
             SU.GeometryInputRef geometryInputRef,
             ref int vertexIndex)
@@ -13,7 +13,7 @@ namespace ExLumina.SketchUp.Factory
             const int maxUVcoords = 4;
             SU.LoopInputRef loopInputRef = new SU.LoopInputRef();
             SU.LoopInputCreate(loopInputRef);
-            Vector2[] uvCoords = new Vector2[maxUVcoords];
+            Point2[] uvCoords = new Point2[maxUVcoords];
             int[] indices = new int[maxUVcoords];
             int numUVcoords = 0;
 
@@ -22,20 +22,20 @@ namespace ExLumina.SketchUp.Factory
 
             int edgeIndex = 0;
 
-            foreach (Ray ray in outerLoop.rays)
+            foreach (EdgePoint edgePoint in outerLoop)
             {
-                SU.GeometryInputAddVertex(geometryInputRef, ray.vertex.SUPoint3D);
+                SU.GeometryInputAddVertex(geometryInputRef, edgePoint.Vertex.SUPoint3D);
                 SU.LoopInputAddVertexIndex(loopInputRef, vertexIndex);
 
-                if (ray.isSmooth)
+                if (edgePoint.IsSmooth)
                 {
                     SU.LoopInputEdgeSetSmooth(loopInputRef, edgeIndex, true);
                     SU.LoopInputEdgeSetSoft(loopInputRef, edgeIndex, true);
                 }
 
-                if (ray.uvCoords != null && numUVcoords < maxUVcoords)
+                if (edgePoint.UVCoords != null && numUVcoords < maxUVcoords)
                 {
-                    uvCoords[numUVcoords] = ray.uvCoords;
+                    uvCoords[numUVcoords] = edgePoint.UVCoords;
                     indices[numUVcoords] = vertexIndex;
 
                     numUVcoords = numUVcoords + 1;
@@ -64,9 +64,9 @@ namespace ExLumina.SketchUp.Factory
                 loopInputRef = new SU.LoopInputRef();
                 SU.LoopInputCreate(loopInputRef);
 
-                foreach (Ray ray in loop.rays)
+                foreach (EdgePoint edgePoint in loop.edgePoints)
                 {
-                    SU.GeometryInputAddVertex(geometryInputRef, ray.vertex.SUPoint3D);
+                    SU.GeometryInputAddVertex(geometryInputRef, edgePoint.Vertex.SUPoint3D);
                     SU.LoopInputAddVertexIndex(loopInputRef, vertexIndex);
 
                     vertexIndex = vertexIndex + 1;
@@ -88,17 +88,17 @@ namespace ExLumina.SketchUp.Factory
                 }
             }
 
-            if (materialName != null)
+            if (MaterialName != null)
             {
                 Material material = null;
 
                 try
                 {
-                    material = model.materials[materialName];
+                    material = model.materials[MaterialName];
                 }
                 catch (Exception e)
                 {
-                    string msg = "\nCould not find a material named " + materialName;
+                    string msg = "\nCould not find a material named " + MaterialName;
                     throw new Exception(e.Message + msg);
                 }
 
@@ -109,8 +109,8 @@ namespace ExLumina.SketchUp.Factory
 
                 for (int i = 0; i < numUVcoords; ++i)
                 {
-                    materialInput.UVCoords[i].x = uvCoords[i].x;
-                    materialInput.UVCoords[i].y = uvCoords[i].y;
+                    materialInput.UVCoords[i].x = uvCoords[i].X;
+                    materialInput.UVCoords[i].y = uvCoords[i].Y;
                     materialInput.vertexIndices[i] = indices[i];
                 }
 

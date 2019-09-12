@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsharpSketchUpAPI">
-      <HintPath>C:\ProgramData\Shared Documents\Ex Lumina\Projects\SketchUpAPI\CsharpSketchUpAPI\CsharpSketchUpAPI\bin\Release\CsharpSketchUpAPI.dll</HintPath>
+    <Reference Include="CsharpSketchUpAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\ProgramData\Shared Documents\Ex Lumina\Projects\SketchUpAPI\CsharpSketchUpAPI\CsharpSketchUpAPI\bin\Debug\CsharpSketchUpAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,18 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Color.cs" />
-    <Compile Include="IHasEntities.cs" />
+    <Compile Include="CompDef.cs" />
+    <Compile Include="CompInst.cs" />
+    <Compile Include="EdgePoint.cs" />
+    <Compile Include="EdgePointList.cs" />
     <Compile Include="ImageBuffer.cs" />
-    <Compile Include="Model\UnpackComponentDefinitions.cs" />
+    <Compile Include="Model\UnpackComponents.cs" />
     <Compile Include="Model\UnpackMaterials.cs" />
-    <Compile Include="Model\UnpackFaces.cs" />
     <Compile Include="Pixel.cs" />
-    <Compile Include="RayList.cs" />
     <Compile Include="Convert.cs" />
+    <Compile Include="Point2.cs" />
+    <Compile Include="Point3.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Group.cs" />
-    <Compile Include="ComponentDefinition.cs" />
-    <Compile Include="ComponentInstance.cs" />
     <Compile Include="Face\Face.cs" />
     <Compile Include="Face\Pack.cs" />
     <Compile Include="Model\WriteSketchUpFile.cs" />
@@ -66,11 +68,8 @@
     <Compile Include="Entities.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ray.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="UVHelper.cs" />
-    <Compile Include="Vector2.cs" />
-    <Compile Include="Vector3.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Base.style">

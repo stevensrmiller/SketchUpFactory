@@ -6,29 +6,26 @@ namespace ExLumina.SketchUp.Factory
     /// <summary>
     /// Store a spatial value. Use for any three doubles mapped to axes.
     /// </summary>
-    public class Vector3
+    public class Point3
     {
         /// <summary>
-        /// Equivalent to new Vector3(0, 0, 0).
+        /// X coordinate.
         /// </summary>
-        public static readonly Vector3 Zero = new Vector3(0, 0, 0);
+        public double X { get; set; }
 
         /// <summary>
-        /// Equivalent to new Vector3(1, 1, 1).
+        /// Y coordinate.
         /// </summary>
-        /// <remarks>
-        /// Note that this Vector3's lenght is the square root of three
-        /// (about 1.732), not one.
-        /// </remarks>
-        public static readonly Vector3 One = new Vector3(1, 1, 1);
-
-        public double x;
-        public double y;
-        public double z;
+        public double Y { get; set; }
+        
+        /// <summary>
+        /// Z coordinate.
+        /// </summary>
+        public double Z { get; set; }
 
         internal SU.Point3D SUPoint3D
         {
-            get => new SU.Point3D { x = x, y = y, z = z };
+            get => new SU.Point3D { x = X, y = Y, z = Z };
         }
 
         /// <summary>
@@ -37,20 +34,20 @@ namespace ExLumina.SketchUp.Factory
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
-        public Vector3(
+        public Point3(
             double x,
             double y,
             double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         /// <summary>
         /// Create a point in space at the origin.
         /// </summary>
-        public Vector3() : this(0, 0, 0)
+        public Point3() : this(0, 0, 0)
         {
 
         }
@@ -59,7 +56,7 @@ namespace ExLumina.SketchUp.Factory
         /// Create a Vector3 from a SketchUp point.
         /// </summary>
         /// <param name="p"></param>
-        public Vector3(SU.Point3D p) : this (p.x, p.y, p.z)
+        public Point3(SU.Point3D p) : this (p.x, p.y, p.z)
         {
 
         }
@@ -68,9 +65,9 @@ namespace ExLumina.SketchUp.Factory
         /// Creates a new Vector3 object identical to itself.
         /// </summary>
         /// <returns></returns>
-        public Vector3 Clone()
+        public Point3 Clone()
         {
-            return new Vector3(x, y, z);
+            return new Point3(X, Y, Z);
         }
 
         /// <summary>
@@ -79,7 +76,7 @@ namespace ExLumina.SketchUp.Factory
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("Vector3 = x:{0} y:{1} z:{2}", x, y, z);
+            return String.Format("Point3 = x:{0} y:{1} z:{2}", X, Y, Z);
         }
     }
 }

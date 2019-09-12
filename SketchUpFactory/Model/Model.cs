@@ -1,30 +1,56 @@
-﻿using System;
+﻿using ExLumina.SketchUp.API;
 using System.Collections.Generic;
-using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
-    public partial class Model : IHasEntities
+    /// <summary>
+    /// The root of the document object model.
+    /// </summary>
+    /// <remarks>
+    /// All faces, definitions, instances, and textures must
+    /// be part of one Model object in order to write it to
+    /// a file.
+    /// </remarks>
+    public partial class Model : Entities
     {
-        public string name;
-        public string description;
-        public Entities Entities { get; set; }
+        /// <summary>
+        /// An internal name. Need not be the filename.
+        /// </summary>
+        public string Name { get; set; }
 
-        internal IDictionary<string, ComponentDefinition> componentDefinitions;
-        internal IDictionary<string, Material> materials;
+        /// <summary>
+        /// An internal description.
+        /// </summary>
+        public string Description { get; set; }
 
+        internal IDictionary<string, CompDef> components =
+            new Dictionary<string, CompDef>();
+
+        internal IDictionary<string, Material> materials =
+            new Dictionary<string, Material>();
+
+        /// <summary>
+        /// An empty model with a default name and description.
+        /// </summary>
         public Model() : this("<model name unset>", "<model description unset>")
         {
 
         }
 
+        /// <summary>
+        /// An empty model.
+        /// </summary>
+        /// <remarks>
+        /// Note that neither the model's Name nor Description must
+        /// match the filename if you later write the Model to a
+        /// file.
+        /// </remarks>
+        /// <param name="name">The internal name of the model.</param>
+        /// <param name="description">An internal description of the model.</param>
         public Model(string name, string description)
         {
-            this.name = name;
-            this.description = description;
-            Entities = new Entities(this);
-            materials = new Dictionary<string, Material>();
-            componentDefinitions = new Dictionary<string, ComponentDefinition>();
+            this.Name = name;
+            this.Description = description;
         }
 
         /// <summary>
@@ -35,31 +61,45 @@ namespace ExLumina.SketchUp.Factory
         {
             SU.Initialize();
 
-            // Creating this as a local variable insures it won't survive
-            // beyond this method.
+            SU.ModelRef modelRef = new SU.ModelRef();
 
-            SU.ModelRef suModelRef = new SU.ModelRef();
+            SU.ModelCreateFromFile(modelRef, path);
 
-            SU.ModelCreateFromFile(suModelRef, path);
+            UnpackMaterials(modelRef);
 
-            materials = UnpackMaterials(suModelRef);
+            UnpackComponents(modelRef);
 
-            componentDefinitions = UnpackComponentDefinitions(this, suModelRef);
+            SU.EntitiesRef entitiesRef = new SU.EntitiesRef();
 
-            SU.EntitiesRef suEntitiesRef = new SU.EntitiesRef();
+            SU.ModelGetEntities(modelRef, entitiesRef);
 
-            SU.ModelGetEntities(suModelRef, suEntitiesRef);
+            UnpackEntities(entitiesRef);
 
-            Entities = new Entities(this, suEntitiesRef);
-
-            SU.ModelRelease(suModelRef);
+            SU.ModelRelease(modelRef);
 
             SU.Terminate();
         }
 
+        /// <summary>
+        /// Include a Material in a Model.
+        /// </summary>
+        /// <param name="material"></param>
         public void Add(Material material)
         {
-            materials.Add(material.name, material);
+            materials.Add(
+                material.Name,
+                material);
+        }
+
+        /// <summary>
+        /// Include a ComponentDefinition in a Model.
+        /// </summary>
+        /// <param name="componentDefinition"></param>
+        public void Add(CompDef componentDefinition)
+        {
+            components.Add(
+                componentDefinition.Name,
+                componentDefinition);
         }
     }
 }
