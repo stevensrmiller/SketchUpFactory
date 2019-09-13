@@ -3,7 +3,7 @@
 namespace ExLumina.Examples.SketchUp.Factory
 {
     // Create a component definition with a reference forward to
-    // another definition not yet created.
+    // another definition that will be created later.
 
     class ForwardComponent : Example
     {
@@ -16,11 +16,15 @@ namespace ExLumina.Examples.SketchUp.Factory
         {
             Model model = new Model();
 
-            CompDef flat = new CompDef(
+            // Create a definition of a square shape.
+
+            CompDef square = new CompDef(
                 "Flat",
                 "A Square");
 
-            Point3[] flatPoints =
+            // Add a square polygon to the definition.
+
+            Point3[] squarePoints =
             {
                 new Point3(-1, 0, -1),
                 new Point3(1, 0, -1),
@@ -28,34 +32,51 @@ namespace ExLumina.Examples.SketchUp.Factory
                 new Point3(-1, 0, 1)
             };
 
-            flat.Add(flatPoints);
+            square.Add(squarePoints);
 
-            model.Add(flat);
+            // Add the square definition to the model.
 
-            CompInst ci2 = new CompInst
+            model.Add(square);
+
+            // Create an instance of a definition that does not
+            // yet exist in the model.
+
+            CompInst pointyInstance = new CompInst
             {
-                // Refer here to a Component we'll create later.
+                // Refer here to a definition we'll create later.
 
                 ComponentName = "Pointy",
                 InstanceName = "Tri the Angle"
             };
 
-            ci2.Transform.Translation.Y = 1;
-            ci2.Transform.Rotation.Z = -20;
+            // Move the instance away from the origin a bit.
 
-            flat.Add(ci2);
+            pointyInstance.Transform.Translation.Y = 1;
+            pointyInstance.Transform.Rotation.Z = -20;
 
-            CompInst ci = new CompInst
+            // Add the instance to the square's definition.
+
+            square.Add(pointyInstance);
+
+            // Instantiate the square definition.
+
+            CompInst squareInstance = new CompInst
             {
                 ComponentName = "Flat",
                 InstanceName = "Quad the First"
             };
 
-            model.Add(ci);
+            // Add the instance to the model.
+
+            model.Add(squareInstance);
+
+            // Now create the "Pointy" definition (a triangle).
 
             CompDef pointy = new CompDef(
                 "Pointy",
                 "A Triangle");
+
+            // Define a triangular shape.
 
             Point3[] pointyPoints =
             {
@@ -64,7 +85,12 @@ namespace ExLumina.Examples.SketchUp.Factory
                 new Point3(0, 0, 1)
             };
 
+            // Add the shape to the defintion.
+
             pointy.Add(pointyPoints);
+
+            // Add the definition to the model.
+
             model.Add(pointy);
 
             model.WriteSketchUpFile(path + @"\ForwardComponent.skp");

@@ -8,6 +8,8 @@ namespace ExLumina.Examples.SketchUp.Factory
 
     class TexturedQuad : Example
     {
+        const string materialName = "2x2 Texture";
+
         public TexturedQuad(string display) : base(display)
         {
 
@@ -17,7 +19,11 @@ namespace ExLumina.Examples.SketchUp.Factory
         {
             Model model = new Model();
 
-            EdgePoint[] facePoints =
+            // Define a quad with EdgePoints. These accept spatial coordinates,
+            // a "soft edge" flag for shading, and UV coordinates in texture 
+            // space.
+
+            EdgePoint[] edgePoints =
             {
                 new EdgePoint(-1, 0, -1, false, 0, 0),
                 new EdgePoint(1, 0, -1, false, 1, 0),
@@ -25,13 +31,14 @@ namespace ExLumina.Examples.SketchUp.Factory
                 new EdgePoint(-1, 0, 1, false, 0, 1)
             };
 
-            Face face = new Face(facePoints);
+            // Add the quad to the model, along with the name we will assign to
+            // the material used to provide its texture.
 
-            face.MaterialName = "Place Holder";
+            model.Add(edgePoints, materialName);
 
-            model.Add(face);
+            // Create a texture from a file and add it to the model.
 
-            model.Add(new Material("Place Holder", new Texture("PlaceHolderRGBY.png")));
+            model.Add(new Material(materialName, new Texture("PlaceHolderRGBY.png")));
 
             model.WriteSketchUpFile(path + @"\TexturedQuad.skp");
         }

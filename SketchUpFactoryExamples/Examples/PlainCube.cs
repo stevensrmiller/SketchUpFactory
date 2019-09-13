@@ -16,6 +16,9 @@ namespace ExLumina.Examples.SketchUp.Factory
         {
             const int perFace = 4;
 
+            // Define all of the coordinates needed for six faces
+            // of a cube.
+
             int[] coords =
             {
                 1, -1, 1,
@@ -51,9 +54,13 @@ namespace ExLumina.Examples.SketchUp.Factory
 
             Model model = new Model();
 
+            // Convert the coordinates to sets that each define a quad.
+
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
                 IList<Point3> corners = new List<Point3>();
+
+                // Extract four coordinates at a time into a list.
 
                 for (int c = 0; c < perFace; ++c)
                 {
@@ -63,6 +70,8 @@ namespace ExLumina.Examples.SketchUp.Factory
                                             coords[offset + 1],
                                             coords[offset + 2]));
                 }
+
+                // Add another quad to the model.
 
                 model.Add(corners);
             }

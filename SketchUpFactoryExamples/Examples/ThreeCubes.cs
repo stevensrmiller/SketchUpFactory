@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace ExLumina.Examples.SketchUp.Factory
 {
-    // Create three cubes of six quads each, and explicitly
-    // ask SketchUp to weld their common vertexes.
+    // Create three cubes of six quads each. Note
+    // that SketchUp will "weld" their common vertexes
+    // and edges.
 
     class ThreeCubes : Example
     {
