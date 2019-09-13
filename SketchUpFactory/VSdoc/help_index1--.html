@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Index</title>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<style>
+		html,body {
+			margin: 0; padding: 0px;
+			height:100%; 
+			min-height:100%;
+			background-color: rgb(233,232,220);
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-style: normal;
+			font-weight: normal;
+			color: black;
+		}
+
+		body {font-size:75%;position:relative; margin-top:-1px; border-style: solid solid solid solid;	border-color: rgb(172,168,153);	border-width: 0px 0px 1px 0px;}
+		a { text-decoration:none; color:#06c }
+		form {padding:5px; margin:0px;}
+	</style>
+</head>
+<body style="direction: ltr;">
+	<form>
+	Look for:<br /><input style="width:100%" onKeyDown="check_input(this.value,get_match)" onKeyUp="check_input(this.value,get_match)"/>
+	</form>
+
+	<script>
+		var words = new Array(
+"Add (CompDef) Method {ExLumina.SketchUp.Factory.Model}","Add (CompInst()) Method","Add (EdgePoint(), String) Method","Add (Face()) Method","Add (Group()) Method {ExLumina.SketchUp.Factory.Entities}","Add (IList&lt;CompInst&gt;) Method","Add (IList&lt;EdgePoint&gt;, String) Method","Add (IList&lt;Face&gt;) Method","Add (IList&lt;Group&gt;) Method","Add (IList&lt;Point3&gt;, String) Method","Add (Material) Method {ExLumina.SketchUp.Factory.Model}","Add (Point3(), String) Method","Alpha Property {ExLumina.SketchUp.Factory.Color}","Alpha Property {ExLumina.SketchUp.Factory.Pixel}","Blue Property {ExLumina.SketchUp.Factory.Color}","Blue Property {ExLumina.SketchUp.Factory.Pixel}","Clone Method {ExLumina.SketchUp.Factory.EdgePoint}","Clone Method {ExLumina.SketchUp.Factory.Point3}","Color  Constructor","Color (Byte, Byte, Byte, Byte) Constructor","Color Class","Color Property","CompDef Class","CompDef Constructor","CompInst Class","CompInst Constructor","ComponentName Property","Description Property {ExLumina.SketchUp.Factory.CompDef}","Description Property {ExLumina.SketchUp.Factory.Model}","EdgePoint  Constructor","EdgePoint (Double, Double, Double) Constructor","EdgePoint (Double, Double, Double, Boolean) Constructor","EdgePoint (Double, Double, Double, Boolean, Double, Double) Constructor","EdgePoint (Point3) Constructor","EdgePoint Class","Entities Class","ExLumina.SketchUp.Factory Namespace","Face (EdgePoint(), String) Constructor","Face (IList&lt;EdgePoint&gt;, String) Constructor","Face (IList&lt;Point3&gt;, String) Constructor","Face (Point3(), String) Constructor","Face Class","Faces Property","Green Property {ExLumina.SketchUp.Factory.Color}","Green Property {ExLumina.SketchUp.Factory.Pixel}","Group Class","Group Constructor","Groups Property","ImageBuffer Class","ImageBuffer Constructor","InstanceName Property","Instances Property","IsSmooth Property","Item (System.Int64) Property {ExLumina.SketchUp.Factory.ImageBuffer}","Item (System.Int64, System.Int64) Property","Item (System.Int64, System.Int64, System.Int32) Property","Item Property {ExLumina.SketchUp.Factory.Pixel}","Material (String) Constructor","Material (String, Color) Constructor","Material (String, Texture) Constructor","Material Class","MaterialName Property {ExLumina.SketchUp.Factory.CompInst}","MaterialName Property {ExLumina.SketchUp.Factory.Face}","MaterialName Property {ExLumina.SketchUp.Factory.Group}","Model  Constructor","Model (String) Constructor","Model (String, String) Constructor","Model Class","Name Property {ExLumina.SketchUp.Factory.CompDef}","Name Property {ExLumina.SketchUp.Factory.Group}","Name Property {ExLumina.SketchUp.Factory.Material}","Name Property {ExLumina.SketchUp.Factory.Model}","Pixel Class","Point2  Constructor","Point2 (Double, Double) Constructor","Point2 Class","Point3  Constructor","Point3 (Double, Double, Double) Constructor","Point3 (Point3D) Constructor","Point3 Class","Red Property {ExLumina.SketchUp.Factory.Color}","Red Property {ExLumina.SketchUp.Factory.Pixel}","Rotation Property","Scale Property","SketchUpFactory Reference","Texture (ImageBuffer) Constructor","Texture (String) Constructor","Texture (String, Double, Double) Constructor","Texture Class","Texture Property","ToString Method","Transform  Constructor","Transform (Point3, Point3, Point3) Constructor","Transform Class","Transform Property {ExLumina.SketchUp.Factory.CompInst}","Transform Property {ExLumina.SketchUp.Factory.Group}","Translation Property","UVCoords Property","UnpackEntities Method","Vertex Property","WriteSketchUpFile Method","X Property {ExLumina.SketchUp.Factory.Point2}","X Property {ExLumina.SketchUp.Factory.Point3}","Y Property {ExLumina.SketchUp.Factory.Point2}","Y Property {ExLumina.SketchUp.Factory.Point3}","Z Property","bitsPerPixel Field","dataSize Field","height Field","pixelData Field","rowPadding Field","width Field"
+		);
+		
+		
+		var oldHighlight = 0;
+		var oldKey = "";
+		
+		function get_match(text) {
+		    var ltext = text.toLowerCase();
+		    for(i in words) {
+		        if(words[i].toLowerCase().indexOf(ltext) == "0") {
+		            return words[i];
+		        }
+		    }
+		    return "";
+		}
+		
+		function highlight(keyword) {
+		    if(oldHighlight) oldHighlight.className = "";
+		    var el = parent.frames['zindex'].document.getElementById("w_"+keyword);
+		    el.className="highlighted";
+		    oldHighlight = el;
+		}
+		
+		function check_input(text, matchfun) {
+		    if(text!=oldKey) {
+		        var keyword = matchfun(text);
+		        if(keyword) {       
+		            highlight(keyword);
+		            parent.frames['zindex'].document.getElementById('w_'+keyword).scrollIntoView();
+		        }
+		        oldKey = text;
+		    }
+		}
+	</script>
+</body>
+</html>
+

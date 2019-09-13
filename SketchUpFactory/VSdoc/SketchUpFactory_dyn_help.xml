@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="SketchUpFactory" Title="SketchUpFactory Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000004F_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000022_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000028_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000026_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000020_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000023_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000029_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000027_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000021_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000024_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000004E_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Add" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000025_overloads--.html" LinkGroup="SketchUpFactory">Add Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Color.Alpha" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000005.html" LinkGroup="SketchUpFactory">Alpha Property {ExLumina.SketchUp.Factory.Color}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Pixel.Alpha" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000055.html" LinkGroup="SketchUpFactory">Alpha Property {ExLumina.SketchUp.Factory.Pixel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Color.Blue" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000004.html" LinkGroup="SketchUpFactory">Blue Property {ExLumina.SketchUp.Factory.Color}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Pixel.Blue" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000054.html" LinkGroup="SketchUpFactory">Blue Property {ExLumina.SketchUp.Factory.Pixel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.Clone" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000001B.html" LinkGroup="SketchUpFactory">Clone Method {ExLumina.SketchUp.Factory.EdgePoint}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.Clone" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000063.html" LinkGroup="SketchUpFactory">Clone Method {ExLumina.SketchUp.Factory.Point3}</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Color.Color" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000006_overloads--.html" LinkGroup="SketchUpFactory">Color Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Color.Color" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000007_overloads--.html" LinkGroup="SketchUpFactory">Color Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Color" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000001.html" LinkGroup="SketchUpFactory">Color Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Material.Color" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000043.html" LinkGroup="SketchUpFactory">Color Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompDef" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000008.html" LinkGroup="SketchUpFactory">CompDef Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompDef.CompDef" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000000B.html" LinkGroup="SketchUpFactory">CompDef Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompInst" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000000C.html" LinkGroup="SketchUpFactory">CompInst Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompInst.CompInst" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000011.html" LinkGroup="SketchUpFactory">CompInst Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompInst.ComponentName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000000D.html" LinkGroup="SketchUpFactory">ComponentName Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompDef.Description" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000000A.html" LinkGroup="SketchUpFactory">Description Property {ExLumina.SketchUp.Factory.CompDef}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.Description" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000004A.html" LinkGroup="SketchUpFactory">Description Property {ExLumina.SketchUp.Factory.Model}</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.EdgePoint" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000016_overloads--.html" LinkGroup="SketchUpFactory">EdgePoint Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.EdgePoint" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000017_overloads--.html" LinkGroup="SketchUpFactory">EdgePoint Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.EdgePoint" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000018_overloads--.html" LinkGroup="SketchUpFactory">EdgePoint Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.EdgePoint" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000019_overloads--.html" LinkGroup="SketchUpFactory">EdgePoint Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.EdgePoint" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000001A_overloads--.html" LinkGroup="SketchUpFactory">EdgePoint Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000012.html" LinkGroup="SketchUpFactory">EdgePoint Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000001C.html" LinkGroup="SketchUpFactory">Entities Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000000.html" LinkGroup="SketchUpFactory">ExLumina.SketchUp.Factory Namespace</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Face.Face" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000002F_overloads--.html" LinkGroup="SketchUpFactory">Face Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Face.Face" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000030_overloads--.html" LinkGroup="SketchUpFactory">Face Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Face.Face" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000002E_overloads--.html" LinkGroup="SketchUpFactory">Face Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Face.Face" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000002D_overloads--.html" LinkGroup="SketchUpFactory">Face Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Face" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000002B.html" LinkGroup="SketchUpFactory">Face Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Faces" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000001D.html" LinkGroup="SketchUpFactory">Faces Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Color.Green" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000003.html" LinkGroup="SketchUpFactory">Green Property {ExLumina.SketchUp.Factory.Color}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Pixel.Green" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000053.html" LinkGroup="SketchUpFactory">Green Property {ExLumina.SketchUp.Factory.Pixel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Group" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000031.html" LinkGroup="SketchUpFactory">Group Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Group.Group" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000035.html" LinkGroup="SketchUpFactory">Group Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Groups" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000001E.html" LinkGroup="SketchUpFactory">Groups Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000036.html" LinkGroup="SketchUpFactory">ImageBuffer Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.ImageBuffer" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000003D.html" LinkGroup="SketchUpFactory">ImageBuffer Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompInst.InstanceName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000000E.html" LinkGroup="SketchUpFactory">InstanceName Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.Instances" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000001F.html" LinkGroup="SketchUpFactory">Instances Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.IsSmooth" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000014.html" LinkGroup="SketchUpFactory">IsSmooth Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.Item" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000003E_overloads--.html" LinkGroup="SketchUpFactory">Item Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.Item" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000003F_overloads--.html" LinkGroup="SketchUpFactory">Item Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.Item" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000040_overloads--.html" LinkGroup="SketchUpFactory">Item Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Pixel.Item" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000056.html" LinkGroup="SketchUpFactory">Item Property {ExLumina.SketchUp.Factory.Pixel}</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Material.Material" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000045_overloads--.html" LinkGroup="SketchUpFactory">Material Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Material.Material" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000047_overloads--.html" LinkGroup="SketchUpFactory">Material Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Material.Material" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000046_overloads--.html" LinkGroup="SketchUpFactory">Material Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Material" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000041.html" LinkGroup="SketchUpFactory">Material Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompInst.MaterialName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000010.html" LinkGroup="SketchUpFactory">MaterialName Property {ExLumina.SketchUp.Factory.CompInst}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Face.MaterialName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000002C.html" LinkGroup="SketchUpFactory">MaterialName Property {ExLumina.SketchUp.Factory.Face}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Group.MaterialName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000034.html" LinkGroup="SketchUpFactory">MaterialName Property {ExLumina.SketchUp.Factory.Group}</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.Model" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000004B_overloads--.html" LinkGroup="SketchUpFactory">Model Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.Model" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000004D_overloads--.html" LinkGroup="SketchUpFactory">Model Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.Model" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000004C_overloads--.html" LinkGroup="SketchUpFactory">Model Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000048.html" LinkGroup="SketchUpFactory">Model Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompDef.Name" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000009.html" LinkGroup="SketchUpFactory">Name Property {ExLumina.SketchUp.Factory.CompDef}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Group.Name" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000032.html" LinkGroup="SketchUpFactory">Name Property {ExLumina.SketchUp.Factory.Group}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Material.Name" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000042.html" LinkGroup="SketchUpFactory">Name Property {ExLumina.SketchUp.Factory.Material}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.Name" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000049.html" LinkGroup="SketchUpFactory">Name Property {ExLumina.SketchUp.Factory.Model}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Pixel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000051.html" LinkGroup="SketchUpFactory">Pixel Class</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point2.Point2" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000005B_overloads--.html" LinkGroup="SketchUpFactory">Point2 Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point2.Point2" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000005A_overloads--.html" LinkGroup="SketchUpFactory">Point2 Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point2" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000057.html" LinkGroup="SketchUpFactory">Point2 Class</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.Point3" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000061_overloads--.html" LinkGroup="SketchUpFactory">Point3 Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.Point3" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000060_overloads--.html" LinkGroup="SketchUpFactory">Point3 Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.Point3" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000062_overloads--.html" LinkGroup="SketchUpFactory">Point3 Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000005C.html" LinkGroup="SketchUpFactory">Point3 Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Color.Red" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000002.html" LinkGroup="SketchUpFactory">Red Property {ExLumina.SketchUp.Factory.Color}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Pixel.Red" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000052.html" LinkGroup="SketchUpFactory">Red Property {ExLumina.SketchUp.Factory.Pixel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Transform.Rotation" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000006B.html" LinkGroup="SketchUpFactory">Rotation Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Transform.Scale" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000006A.html" LinkGroup="SketchUpFactory">Scale Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="SketchUpFactory Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000006F.html" LinkGroup="SketchUpFactory">SketchUpFactory Reference</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Texture.Texture" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000068_overloads--.html" LinkGroup="SketchUpFactory">Texture Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Texture.Texture" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000066_overloads--.html" LinkGroup="SketchUpFactory">Texture Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Texture.Texture" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000067_overloads--.html" LinkGroup="SketchUpFactory">Texture Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Texture" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000065.html" LinkGroup="SketchUpFactory">Texture Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Material.Texture" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000044.html" LinkGroup="SketchUpFactory">Texture Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.ToString" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000064.html" LinkGroup="SketchUpFactory">ToString Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Transform.Transform" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000006D_overloads--.html" LinkGroup="SketchUpFactory">Transform Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Transform.Transform" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000006E_overloads--.html" LinkGroup="SketchUpFactory">Transform Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Transform" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000069.html" LinkGroup="SketchUpFactory">Transform Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.CompInst.Transform" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000000F.html" LinkGroup="SketchUpFactory">Transform Property {ExLumina.SketchUp.Factory.CompInst}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Group.Transform" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000033.html" LinkGroup="SketchUpFactory">Transform Property {ExLumina.SketchUp.Factory.Group}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Transform.Translation" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000006C.html" LinkGroup="SketchUpFactory">Translation Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.UVCoords" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000015.html" LinkGroup="SketchUpFactory">UVCoords Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Entities.UnpackEntities" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000002A.html" LinkGroup="SketchUpFactory">UnpackEntities Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.EdgePoint.Vertex" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000013.html" LinkGroup="SketchUpFactory">Vertex Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Model.WriteSketchUpFile" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000050.html" LinkGroup="SketchUpFactory">WriteSketchUpFile Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point2.X" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000058.html" LinkGroup="SketchUpFactory">X Property {ExLumina.SketchUp.Factory.Point2}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.X" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000005D.html" LinkGroup="SketchUpFactory">X Property {ExLumina.SketchUp.Factory.Point3}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point2.Y" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000059.html" LinkGroup="SketchUpFactory">Y Property {ExLumina.SketchUp.Factory.Point2}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.Y" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000005E.html" LinkGroup="SketchUpFactory">Y Property {ExLumina.SketchUp.Factory.Point3}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.Point3.Z" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000005F.html" LinkGroup="SketchUpFactory">Z Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.bitsPerPixel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000039.html" LinkGroup="SketchUpFactory">bitsPerPixel Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.dataSize" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000003C.html" LinkGroup="SketchUpFactory">dataSize Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.height" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000038.html" LinkGroup="SketchUpFactory">height Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.pixelData" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000003B.html" LinkGroup="SketchUpFactory">pixelData Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.rowPadding" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_000000000000003A.html" LinkGroup="SketchUpFactory">rowPadding Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="ExLumina.SketchUp.Factory.ImageBuffer.width" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:SketchUpFactory.chm::/topic_0000000000000037.html" LinkGroup="SketchUpFactory">width Field</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

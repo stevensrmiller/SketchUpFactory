@@ -3,6 +3,9 @@ using ExLumina.SketchUp.API;
 
 namespace ExLumina.SketchUp.Factory
 {
+    /// <summary>
+    /// Allow scaling, rotation, and translation of Groups and CompInsts.
+    /// </summary>
     public class Transform
     {
         /// <summary>
