@@ -52,22 +52,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Example.cs" />
-    <Compile Include="BackwardComponent.cs" />
-    <Compile Include="ForwardComponent.cs" />
+    <Compile Include="Examples\BackwardComponent.cs" />
+    <Compile Include="Examples\ForwardComponent.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GroupQuad.cs" />
-    <Compile Include="EmptyModel.cs" />
-    <Compile Include="CopyModel.cs" />
-    <Compile Include="TexturedQuadSynth.cs" />
-    <Compile Include="TexturedQuad.cs" />
-    <Compile Include="ThreePlyTree.cs" />
-    <Compile Include="ThreeCubesWelded.cs" />
-    <Compile Include="ThreeCubesApart.cs" />
-    <Compile Include="PlainTorus.cs" />
-    <Compile Include="PlainCube.cs" />
-    <Compile Include="PlainQuad.cs" />
+    <Compile Include="Examples\GroupQuad.cs" />
+    <Compile Include="Examples\EmptyModel.cs" />
+    <Compile Include="Examples\CopyModel.cs" />
+    <Compile Include="Examples\TexturedQuadSynth.cs" />
+    <Compile Include="Examples\TexturedQuad.cs" />
+    <Compile Include="Examples\ThreePlyTree.cs" />
+    <Compile Include="Examples\ThreeCubes.cs" />
+    <Compile Include="Examples\PlainTorus.cs" />
+    <Compile Include="Examples\PlainCube.cs" />
+    <Compile Include="Examples\PlainQuad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">

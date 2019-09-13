@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 namespace ExLumina.Examples.SketchUp.Factory
 {
-    // Create three cubes from six quads each, without asking them
-    // explicitly to be welded together. SketchUp will tend to weld
-    // them if you manipulate them in the editor anyway.
+    // Create three cubes of six quads each, and explicitly
+    // ask SketchUp to weld their common vertexes.
 
-    class ThreeCubesApart : Example
+    class ThreeCubes : Example
     {
-        public ThreeCubesApart(string display) : base(display)
+        public ThreeCubes(string display) : base(display)
         {
 
         }
@@ -69,7 +68,6 @@ namespace ExLumina.Examples.SketchUp.Factory
                 model.Add(corners);
             }
 
-
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
                 IList<Point3> corners = new List<Point3>();
@@ -85,8 +83,6 @@ namespace ExLumina.Examples.SketchUp.Factory
 
                 model.Add(corners);
             }
-
-
 
             for (int f = 0; f < coords.Length / (perFace * 3); ++f)
             {
@@ -104,8 +100,7 @@ namespace ExLumina.Examples.SketchUp.Factory
                 model.Add(corners);
             }
 
-
-            model.WriteSketchUpFile(path + @"\ThreeCubesApart.skp");
+            model.WriteSketchUpFile(path + @"\ThreeCubesWelded.skp");
         }
     }
 }

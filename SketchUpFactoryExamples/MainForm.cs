@@ -1,11 +1,17 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ExLumina.Examples.SketchUp.Factory
 {
     public partial class MainForm : Form
     {
-        string location;
+        const string outputDirectory = @"\Factory Output";
+
+        string location =
+            Environment.GetFolderPath(
+                Environment.SpecialFolder.UserProfile);
+
         private Button btnSetLocation;
         private Button btnRunExamples;
         private Label lblLocation;
@@ -17,8 +23,7 @@ namespace ExLumina.Examples.SketchUp.Factory
             new PlainQuad("Plain Quad"),
             new PlainCube("Plain Cube"),
             new PlainTorus("Plain Torus"),
-            new ThreeCubesWelded("Three Cubes Welded"),
-            new ThreeCubesApart("Three Cubes Apart"),
+            new ThreeCubes("Three Cubes Welded"),
             new BackwardComponent("Backward Component"),
             new ForwardComponent("Forward Component"),
             new ThreePlyTree("Three Ply Tree"),
@@ -41,6 +46,11 @@ namespace ExLumina.Examples.SketchUp.Factory
             {
                 clbList.SetItemChecked(index, false);
             }
+
+            if (Directory.Exists(location + outputDirectory))
+            {
+                location += outputDirectory;
+            }
         }
 
         private void btnRunExamples_Click(object sender, EventArgs e)
@@ -54,7 +64,7 @@ namespace ExLumina.Examples.SketchUp.Factory
             fd.Description = "Select the location where you want the example " +
                              "programs to create their SketchUp output files.";
 
-            fd.SelectedPath = @"C:\Users\smiller\Factory Output";
+            fd.SelectedPath = location;
 
             if (fd.ShowDialog() == DialogResult.OK)
             {
