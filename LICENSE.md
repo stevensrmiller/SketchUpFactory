@@ -25,12 +25,12 @@ SOFTWARE.
 
 Modifications
 
-Copyrights to the following files, if included in with the software, belong to
+Copyrights to the following files, if included with the software, belong to
 the specified entities. You may use the files as necessary to operate the
 software. You may not make other use of the files, nor may you distribute them
 to others, without the permission of the copyright holder.
 
-SketchUpAPI.dll (Copyright held by Trimble, Inc.)
-SketchUpCommonPreferences.dll (Copyright held by Trimble, Inc.)
-msvcp140.dll (Copyright held by Microsoft Corp.)
-msvcr140.dll (Copyright held by Microsoft Corp.)
+- SketchUpAPI.dll (Copyright held by Trimble, Inc.)
+- SketchUpCommonPreferences.dll (Copyright held by Trimble, Inc.)
+- msvcp140.dll (Copyright held by Microsoft Corp.)
+- msvcr140.dll (Copyright held by Microsoft Corp.)
