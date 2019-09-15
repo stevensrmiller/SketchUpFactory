@@ -34,3 +34,4 @@ to others, without the permission of the copyright holder.
 - SketchUpCommonPreferences.dll (Copyright held by Trimble, Inc.)
 - msvcp140.dll (Copyright held by Microsoft Corp.)
 - msvcr140.dll (Copyright held by Microsoft Corp.)
+- vc_redist.x64.exe (Copyright held by Microsoft Corp.)
